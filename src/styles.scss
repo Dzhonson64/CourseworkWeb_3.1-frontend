@@ -11,8 +11,11 @@ body {
     font-size: 100%;
     background: #fff;
     font-family: 'Open Sans', sans-serif;
+    
 }
-
+button:focus {
+    outline: none;
+}
 body a {
     text-decoration: none;
     transition: 0.5s all;
@@ -3174,3 +3177,5 @@ div#testimonials h4.m-title {
 }
 
 /*--//responsive--*/
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

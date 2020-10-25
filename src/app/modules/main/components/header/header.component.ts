@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MenuComponent } from '../menu/menu.component';
+
 declare var $: any;
 @Component({
   selector: 'app-header',
@@ -6,7 +8,8 @@ declare var $: any;
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  @ViewChild(MenuComponent, {static: false})
+  public menuComponent: MenuComponent;
   constructor() { }
 
   ngOnInit(): void {

@@ -1,0 +1,19 @@
+.padding {
+    margin: 10px 15px;
+}
+mat-drawer {
+    width: 300px;
+}
+mat-drawer-container {
+    height: calc(100% - 64px);
+}
+
+.menu-toggle {
+    padding: 10px 15px;
+}
+.begin-menu-trigger {
+    font-size: 16px;
+}
+.begin-menu-trigger svg {
+    margin-left: 10px;
+}

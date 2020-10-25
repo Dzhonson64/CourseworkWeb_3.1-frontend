@@ -1,3 +1,19 @@
+.menu-burger {
+    outline: none;
+}
+.menu-content {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.navbar-nav {
+    align-items: center;
+}
+nav {
+    width: 100%;
+}
+
 .cd-dropdown-wrapper {
     display: inline-block;
     position: relative;
