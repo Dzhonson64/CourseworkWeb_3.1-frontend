@@ -11,11 +11,12 @@ import { HttpClient, HttpParams, HttpClientModule, HttpClientJsonpModule } from 
 import {MatButtonModule} from '@angular/material/button';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MenuComponent } from './components/menu/menu.component';
 
 
 
 @NgModule({
-  declarations: [HomeComponent,LayoutComponent,HeaderComponent, FirstScreenComponent
+  declarations: [HomeComponent,LayoutComponent,HeaderComponent, FirstScreenComponent, MenuComponent
     ],
   imports: [
     CommonModule,RouterModule,MainRoutingModule, FormsModule, ReactiveFormsModule, MatButtonModule, HttpClientJsonpModule, MatFormFieldModule
