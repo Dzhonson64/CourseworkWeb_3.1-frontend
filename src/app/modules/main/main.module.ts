@@ -15,12 +15,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSelectModule} from '@angular/material/select';
-import { HeaderComponent } from './components/header/header.component';
-import { HeaderTopComponent } from './components/header-top/header-top.component';
-import { MenuComponent } from './components/menu/menu.component';
+import { HeaderModule } from './components/header/header.module';
 
 @NgModule({
-  declarations: [HomeComponent,LayoutComponent, FirstScreenComponent, HeaderComponent, HeaderTopComponent, MenuComponent
+  declarations: [HomeComponent,LayoutComponent, FirstScreenComponent
 
     ],
   imports: [
@@ -28,7 +26,8 @@ import { MenuComponent } from './components/menu/menu.component';
     MatIconModule, MatToolbarModule,
     MatMenuModule, MatListModule,
     MatSidenavModule,
-    MatSelectModule
+    MatSelectModule,
+    HeaderModule
   ],
   providers: []
 })

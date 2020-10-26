@@ -1,7 +1,7 @@
 <div class="navbar-inner">
     <div class="container">
         <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
                 <button mat-icon-button class="menu-burger" aria-label="Example icon-button with menu icon"
                     (click)="drawer.toggle()">
 
@@ -51,14 +51,7 @@
                             </li>
 
                         </ul>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Panel color</mat-label>
-                            <mat-select [(ngModel)]="selectedValue" name="categories">
-                                    <mat-option value="Televisions">Телевизоры</mat-option>
-                                    <mat-option value="Headphones">Наушники</mat-option>
-                                    <mat-option value="Computers">Компьютеры</mat-option>
-                            </mat-select>
-                          </mat-form-field>
+                        
 
                         <!-- <div class="agileits-navi_search">
                             <form action="#" method="post">
@@ -71,7 +64,14 @@
                             </form>
                         </div> -->
                     </div>
-
+                    <mat-form-field appearance="fill">
+                        <mat-label>Panel color</mat-label>
+                        <mat-select [(ngModel)]="selectedValue" name="categories">
+                                <mat-option value="Televisions">Телевизоры</mat-option>
+                                <mat-option value="Headphones">Наушники</mat-option>
+                                <mat-option value="Computers">Компьютеры</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                 </div>
             </nav>
         </div>
