@@ -1,4 +1,95 @@
-<div class="conatainer-block">
-<app-header></app-header>
-    <router-outlet></router-outlet>
-</div>
+<mat-drawer-container class="example-container">
+    <mat-drawer #drawer class="menu-toggle" mode="side">
+        <h1 class="text-center">
+            <a href="index.html" class="font-weight-bold font-italic">
+                <i class="fas fa-cogs"></i>
+                RusElectro
+            </a>
+        </h1>
+        <button class = "begin-menu-trigger" mat-menu-item [matMenuTriggerFor]="electronics">Электроника <i class="fas fa-caret-right"></i></button>
+        <button class = "begin-menu-trigger" mat-menu-item [matMenuTriggerFor]="apparatus">Приборы <i class="fas fa-caret-right"></i></button>
+        <mat-menu #electronics="matMenu">
+            <button mat-menu-item [matMenuTriggerFor]="smartphone">Смартфоны</button>
+            <button mat-menu-item [matMenuTriggerFor]="computeres">Компьютеры</button>
+        </mat-menu>
+
+        <mat-menu #smartphone="matMenu">
+            <button mat-menu-item>Все мобильные смартфоны</button>
+            <button mat-menu-item>Все мобильные аксессуары</button>
+            <button mat-menu-item>Защитные чехлы</button>
+            <button mat-menu-item>Защитные стёкла</button>
+            <button mat-menu-item>Power Banks</button>
+            <button mat-menu-item>Планшеты</button>
+            <button mat-menu-item>Носимые устройства</button>
+            <button mat-menu-item>Умный дом</button>
+        </mat-menu>
+
+        <mat-menu #computeres="matMenu">
+            <button mat-menu-item>Ноутбуки</button>
+            <button mat-menu-item>Накопители</button>
+            <button mat-menu-item>Принтеры</button>
+            <button mat-menu-item>Сетевые устройства</button>
+            <button mat-menu-item>Компьютерные аксессуары</button>
+            <button mat-menu-item>Игровая зона</button>
+            <button mat-menu-item>Программное обеспечение</button>
+        </mat-menu>
+
+        <mat-menu #tv="matMenu">
+            <button mat-menu-item>Телевизоры</button>
+            <button mat-menu-item>Домашняя развлекательная система</button>
+            <button mat-menu-item>Наушники</button>
+            <button mat-menu-item>Микрофоны</button>
+            <button mat-menu-item>КMP3, Медиа устройства</button>
+            <button mat-menu-item>Аудио и видео приборы</button>
+            <button mat-menu-item>Камеры</button>
+            <button mat-menu-item>Аксессуары к камере</button>
+        </mat-menu>
+
+        <mat-menu #apparatus="matMenu">
+            <button mat-menu-item [matMenuTriggerFor]="tv">Телевизоры</button>
+            <button mat-menu-item [matMenuTriggerFor]="other">Другое</button>
+        </mat-menu>
+
+        <mat-menu #tv="matMenu">
+            <button mat-menu-item>Телевизоры</button>
+            <button mat-menu-item>Домашняя развлекательная система</button>
+            <button mat-menu-item>Наушники</button>
+            <button mat-menu-item>Микрофоны</button>
+            <button mat-menu-item>КMP3, Медиа устройства</button>
+            <button mat-menu-item>Аудио и видео приборы</button>
+            <button mat-menu-item>Камеры</button>
+            <button mat-menu-item>Аксессуары к камере</button>
+        </mat-menu>
+
+        <mat-menu #other="matMenu">
+            <button mat-menu-item>Музыкальные инструменты</button>
+            <button mat-menu-item>Игровые консоли</button>
+            <button mat-menu-item>Воздушные кондиционеры</button>
+            <button mat-menu-item>Холодильники</button>
+            <button mat-menu-item>Стиральная машини</button>
+            <button mat-menu-item>Кухонные и домашнии приборы</button>
+            <button mat-menu-item>Нагревательрные и охлаждающие приборы</button>
+            <button mat-menu-item>Все приборы</button>
+        </mat-menu>
+
+        <!-- <mat-selection-list #shoes [multiple]="false">
+            <mat-list-option routerLink="supportRequests">
+                Запросы
+            </mat-list-option>
+            <mat-list-option class="" routerLink="projects">
+                Проекты
+            </mat-list-option>
+            <mat-list-option class="" routerLink="vacancy">
+                Вакансии
+            </mat-list-option>
+        </mat-selection-list> -->
+    </mat-drawer>
+
+    <div class="conatainer-block">
+
+        <app-header></app-header>
+        <router-outlet></router-outlet>
+
+    </div>
+
+</mat-drawer-container>
