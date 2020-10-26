@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MenuComponent } from '../menu/menu.component';
-
 declare var $: any;
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: 'app-main-header',
+  templateUrl: './main-header.component.html',
+  styleUrls: ['./main-header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+
+
+export class MainHeaderComponent implements OnInit {
   @ViewChild(MenuComponent, {static: false})
   public menuComponent: MenuComponent;
   constructor() { }

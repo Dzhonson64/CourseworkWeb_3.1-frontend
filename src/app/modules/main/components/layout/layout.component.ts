@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
+import { MainHeaderComponent } from '../header/main-header/main-header.component';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -7,8 +7,8 @@ import { HeaderComponent } from '../header/header.component';
 })
 export class LayoutComponent implements OnInit, AfterViewInit {
   @ViewChild('drawer') btnRef: any;
-  @ViewChild(HeaderComponent, { static: false })
-  private counterComponent: HeaderComponent;
+  @ViewChild(MainHeaderComponent, { static: false })
+  private counterComponent: MainHeaderComponent;
   constructor() { }
 
   ngOnInit(): void {
