@@ -4,14 +4,15 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
-
+@import "./assets/css/owl.carousel.css";
+@import "./assets/css/owl.theme.default.min.css";
 html,
 body {
     margin: 0;
     font-size: 100%;
     background: #fff;
     font-family: 'Open Sans', sans-serif;
-    
+
 }
 button:focus {
     outline: none;
@@ -2189,19 +2190,19 @@ div#testimonials h4.m-title {
 	display: inherit;
 }
 
-/*-- placeholder-color 
+/*-- placeholder-color
 
 ::-webkit-input-placeholder {
     color: #fff;
 }
 
 :-moz-placeholder {
-    /* Firefox 18- 
+    /* Firefox 18-
     color: #fff;
 }
 
 ::-moz-placeholder {
-    /* Firefox 19+ 
+    /* Firefox 19+
     color: #fff;
 }
 
