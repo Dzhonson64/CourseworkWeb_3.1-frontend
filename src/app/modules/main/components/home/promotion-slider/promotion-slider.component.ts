@@ -18,7 +18,7 @@ export class PromotionSliderComponent implements OnInit {
       // Owl Carousel
       var owl = $('.promotion-slider');
       owl.owlCarousel({
-        items: 3,
+        items: 1,
         margin: 0,
         loop: true,
         nav: true,

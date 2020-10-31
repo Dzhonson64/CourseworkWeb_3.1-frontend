@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 
 declare var $: any;
+
 @Component({
   selector: 'app-popular-products',
   templateUrl: './popular-products.component.html',
@@ -14,33 +15,23 @@ export class PopularProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    var carousel = $(function() {
-      // Owl Carousel
-      var owl = $('.popular-product-slider');
-      owl.owlCarousel({
-        items: 6,
-        margin: 15,
+    // $(document).ready(function() {
+    //   $('.your-class').slick({
+    //     arrows: true
+    //   });
+    // });
+    $(document).ready(function() {
+      $('.sd').owlCarousel({
         loop: true,
+        margin: 10,
         nav: true,
         dots: false,
-        autoplay: true,
-        navText: ['<i class="fas fa-chevron-left"></i>',
-          '<i class="fas fa-chevron-right"></i>'],
+        items: 2,
+        navText: ['<i class="fas fa-arrow-left"></i>',
+          '<i class="fas fa-arrow-right"></i>'],
       });
     });
-
-    carousel.on('click', '.owl-item', function() {
-      //получить индекс
-      var click = $(this).index();
-      //по клику листаем к слайду на который кликнули
-      carousel.trigger('to.owl.carousel', [click]);
-      // Или добавляем свою функцию вместо листания
-    });
   }
 
-  public counter(i: number) {
-    return new Array(i);
-  }
 
 }
