@@ -15,9 +15,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSelectModule} from '@angular/material/select';
 import {HeaderModule} from './components/header/header.module';
 import {HomeModule} from './components/home/home.module';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [LayoutComponent
+  declarations: [LayoutComponent, FooterComponent
 
     ],
   imports: [

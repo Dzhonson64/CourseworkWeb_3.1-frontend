@@ -1,0 +1,50 @@
+.margin-block {
+  margin-bottom: 9.6rem;
+}
+.brands{
+  margin-bottom: 9.6rem;
+}
+
+ul li {
+  text-decoration: none;
+  list-style-type: none;
+  display: inline-block;
+}
+
+.brand-item {
+  width: 12rem;
+  height: 6rem;
+  position: relative;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+}
+.brand-item__link{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+  z-index: 2;
+  top: 0;
+  left: 0;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: .4rem;
+  background: #f5f5f6;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1.6rem;
+}
+
+img{
+  position: static;
+  top: auto;
+  left: auto;
+  width: 100%;
+  height: auto;
+  background: 0 0;
+  margin: 0 auto;
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
