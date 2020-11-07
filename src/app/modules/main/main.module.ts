@@ -15,12 +15,16 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSelectModule} from '@angular/material/select';
 import {HeaderModule} from './components/header/header.module';
 import {HomeModule} from './components/home/home.module';
-import { FooterComponent } from './components/footer/footer.component';
-
+import {FooterComponent} from './components/footer/footer.component';
+import {ContactComponent} from './components/contact/contact.component';
+import {AppRoutingModule} from '../../app-routing.module';
+import { LoginComponent } from './components/auth/login/login.component';
+import { MatInputModule } from '@angular/material/input';
+import { RegistrationComponent } from './components/auth/registration/registration.component';
 @NgModule({
-  declarations: [LayoutComponent, FooterComponent
+  declarations: [LayoutComponent, FooterComponent, ContactComponent, LoginComponent, RegistrationComponent
 
-    ],
+  ],
   imports: [
     // tslint:disable-next-line:max-line-length
     CommonModule, RouterModule, MainRoutingModule, FormsModule, ReactiveFormsModule, MatButtonModule, HttpClientJsonpModule, MatFormFieldModule,
@@ -28,9 +32,12 @@ import { FooterComponent } from './components/footer/footer.component';
     MatMenuModule, MatListModule,
     MatSidenavModule,
     MatSelectModule,
+    MatInputModule,
     HeaderModule,
-    HomeModule
+    HomeModule,
   ],
-  providers: []
+  providers: [],
+  exports: [HeaderModule]
 })
-export class MainModule { }
+export class MainModule {
+}

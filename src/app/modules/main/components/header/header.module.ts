@@ -12,6 +12,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {RouterLink, RouterModule} from '@angular/router';
+import {AppRoutingModule} from '../../../../app-routing.module';
 
 
 @NgModule({
@@ -21,7 +23,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatIconModule, MatToolbarModule,
     MatMenuModule, MatListModule,
     MatSidenavModule,
-    MatSelectModule
+    MatSelectModule, RouterModule
   ],
   exports: [MainHeaderComponent, HeaderTopComponent, MenuComponent]
 })

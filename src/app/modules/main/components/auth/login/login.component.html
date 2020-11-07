@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="login-block d-flex justify-content-center">
+    <div class="login-content">
+      <div class="form-panel">
+        <div class="form-header">
+          Логин
+        </div>
+        <div class="form-content">
+          <mat-form-field appearance="fill" class="form-group">
+            <mat-label>Логин</mat-label>
+            <input matInput>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-group">
+            <mat-label>Введите пароль</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Скрыть пароль'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <div class="d-flex align-items-center justify-content-between flex-row">
+              <button mat-flat-button color="primary">Войти</button>
+              <a routerLink="/registration">Зарегестрироваться</a>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
