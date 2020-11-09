@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="login-block d-flex justify-content-center">
+    <div class="login-content">
+      <div class="form-panel">
+        <div class="form-header">
+          Логин
+        </div>
+        <div class="form-content" [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+          <mat-form-field appearance="fill" class="form-group">
+            <mat-label>Логин</mat-label>
+            <input matInput formControlName="userName" >
+          </mat-form-field>
+          <div class="alert alert-danger"
+               *ngIf="myForm.controls['userName'].invalid && myForm.controls['userName'].touched">
+            Не указан логин
+          </div>
+          <mat-form-field appearance="fill" class="form-group">
+            <mat-label>Введите пароль</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Скрыть пароль'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <div class="alert alert-danger"
+               *ngIf="myForm.controls['password'].invalid">
+            Пароль неверный. Пароль должен содержить хотя бы одно число
+          </div>
+          <div class="alert alert-danger"
+            *ngIf="myForm.controls['password'].touched">
+            Введите пароль
+          </div>
+          <div class="d-flex align-items-center justify-content-between flex-row">
+              <button mat-flat-button color="primary" [disabled]="myForm.invalid">Войти</button>
+              <a routerLink="/registration">Зарегестрироваться</a>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
