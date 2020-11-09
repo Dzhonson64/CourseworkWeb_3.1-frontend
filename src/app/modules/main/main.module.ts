@@ -18,23 +18,24 @@ import {HomeModule} from './components/home/home.module';
 import {FooterComponent} from './components/footer/footer.component';
 import {ContactComponent} from './components/contact/contact.component';
 import {AppRoutingModule} from '../../app-routing.module';
-import { LoginComponent } from './components/auth/login/login.component';
+import { LoginComponent } from '../auth/login/login.component';
 import { MatInputModule } from '@angular/material/input';
-import { RegistrationComponent } from './components/auth/registration/registration.component';
+import { RegistrationComponent } from '../auth/registration/registration.component';
+import {MatFieldCommonModule} from '../common-modules/mat-field/mat-field-common.module';
+import {FormCommonModule} from '../common-modules/forms/form-common.module';
 @NgModule({
-  declarations: [LayoutComponent, FooterComponent, ContactComponent, LoginComponent, RegistrationComponent
+  declarations: [LayoutComponent, FooterComponent, ContactComponent
 
   ],
   imports: [
     // tslint:disable-next-line:max-line-length
-    CommonModule, RouterModule, MainRoutingModule, FormsModule, ReactiveFormsModule, MatButtonModule, HttpClientJsonpModule, MatFormFieldModule,
-    MatIconModule, MatToolbarModule,
-    MatMenuModule, MatListModule,
-    MatSidenavModule,
-    MatSelectModule,
-    MatInputModule,
+    CommonModule,
+    RouterModule,
+    MainRoutingModule,
+    MatFieldCommonModule,
     HeaderModule,
     HomeModule,
+    FormCommonModule
   ],
   providers: [],
   exports: [HeaderModule]
