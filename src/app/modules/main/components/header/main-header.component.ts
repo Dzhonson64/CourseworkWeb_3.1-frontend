@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MenuComponent } from '../menu/menu.component';
+import { MenuComponent } from './menu/menu.component';
 declare var $: any;
 @Component({
   selector: 'app-main-header',
@@ -11,6 +11,7 @@ declare var $: any;
 export class MainHeaderComponent implements OnInit {
   @ViewChild(MenuComponent, {static: false})
   public menuComponent: MenuComponent;
+
   constructor() { }
 
   ngOnInit(): void {

@@ -24,7 +24,7 @@ import { RegistrationComponent } from '../auth/registration/registration.compone
 import {MatFieldCommonModule} from '../common-modules/mat-field/mat-field-common.module';
 import {FormCommonModule} from '../common-modules/forms/form-common.module';
 @NgModule({
-  declarations: [LayoutComponent, FooterComponent, ContactComponent
+  declarations: [FooterComponent, ContactComponent, LayoutComponent
 
   ],
   imports: [
@@ -38,7 +38,7 @@ import {FormCommonModule} from '../common-modules/forms/form-common.module';
     FormCommonModule
   ],
   providers: [],
-  exports: [HeaderModule]
+  exports: [HeaderModule, HomeModule, FooterComponent, ContactComponent]
 })
 export class MainModule {
 }

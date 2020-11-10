@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MainHeaderComponent } from '../header/main-header/main-header.component';
+import { MainHeaderComponent } from '../header/main-header.component';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',

@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
+import {ProfileService} from '../../../../profile/services/profile.service';
 
 @Component({
   selector: 'app-menu',
@@ -6,13 +7,26 @@ import { Component, ElementRef, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  public drawer: any
+  public drawer: any;
+  private _isVisibleToggleMenu: boolean;
 
-  public selectedValue: string = "Все категории";
+  public selectedValue: string = 'Все категории';
 
-  constructor() { }
+
+
+  constructor(private profileService: ProfileService) {
+    this.isVisibleToggleMenu = profileService.isVisibleToggleMenu;
+  }
 
   ngOnInit(): void {
   }
 
+
+  get isVisibleToggleMenu(): boolean {
+    return this._isVisibleToggleMenu;
+  }
+
+  set isVisibleToggleMenu(value: boolean) {
+    this._isVisibleToggleMenu = value;
+  }
 }
