@@ -9,7 +9,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -26,7 +27,9 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSidenavModule,
     MatSelectModule,
     MatInputModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDatepickerModule,
+    MatRadioModule
   ]
 })
 export class MatFieldCommonModule { }

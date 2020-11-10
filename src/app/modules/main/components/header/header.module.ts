@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MainHeaderComponent} from './main-header/main-header.component';
+import {MainHeaderComponent} from './main-header.component';
 import {HeaderTopComponent} from './header-top/header-top.component';
 import {MenuComponent} from './menu/menu.component';
 import {MatIconModule} from '@angular/material/icon';
@@ -12,8 +12,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {RouterLink, RouterModule} from '@angular/router';
-import {AppRoutingModule} from '../../../../app-routing.module';
+import {RouterModule} from '@angular/router';
+import {ProfileService} from '../../../profile/services/profile.service';
 
 
 @NgModule({
@@ -25,7 +25,8 @@ import {AppRoutingModule} from '../../../../app-routing.module';
     MatSidenavModule,
     MatSelectModule, RouterModule
   ],
-  exports: [MainHeaderComponent, HeaderTopComponent, MenuComponent]
+  exports: [MainHeaderComponent, HeaderTopComponent, MenuComponent],
+  providers: [ProfileService]
 })
 export class HeaderModule {
 }

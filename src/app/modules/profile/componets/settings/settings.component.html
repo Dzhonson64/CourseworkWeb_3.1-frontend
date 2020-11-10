@@ -1,0 +1,89 @@
+<div class="settings">
+
+  <div class="container">
+    <div class="content">
+      <h3>Персональные данные</h3>
+
+      <form class="content-block d-flex flex-column"  [formGroup]="personalDataForm" novalidate
+            (ngSubmit)="submit()">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="avatar">
+              <img src="#" alt="">
+              <button mat-mini-fab color="primary">
+                <i class="fas fa-upload"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="first-data d-flex flex-column">
+              <mat-form-field appearance="outline">
+                <mat-label>Имя</mat-label>
+                <input matInput placeholder="Имя" formControlName="userName" required>
+                <mat-error *ngIf="userName.invalid">{{getErrorMessage("Имя")}}</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Фамилия</mat-label>
+                <input matInput placeholder="Фамилия" formControlName="userSurname" required>
+                <mat-error *ngIf="userSurname.invalid">{{getErrorMessage("Фамилия")}}</mat-error>
+
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Отчество</mat-label>
+                <input matInput placeholder="Отчество" formControlName="userPatronymic" required>
+                <mat-error *ngIf="userPatronymic.invalid">{{getErrorMessage("Отчество")}}</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Телефон</mat-label>
+                <input matInput placeholder="Телефон" formControlName="userPhone" required>
+                <mat-error *ngIf="userPhone.invalid">{{getErrorMessage("Телефон")}}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Отображаемый никнейм</mat-label>
+          <input matInput placeholder="Никнейм" formControlName="userNickname" required>
+          <mat-error *ngIf="userNickname.invalid">{{getErrorMessage("Никнейм")}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Пароль</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="userPassword">
+          <mat-error *ngIf="userPassword.invalid">{{getErrorMessage("Пароль")}}</mat-error>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Скрыть пароль'"
+                  [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+          </button>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Дата рождения</mat-label>
+          <input matInput [matDatepicker]="dp" formControlName="userBirthday">
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker #dp></mat-datepicker>
+        </mat-form-field>
+        <div class="row justify-content-around">
+          <div class="example-container">
+            <mat-form-field appearance="fill">
+              <mat-label>E-mail</mat-label>
+              <input matInput placeholder="pat@example.com" formControlName="userEmail" required>
+              <mat-error *ngIf="userEmail.invalid">{{getErrorMessage("E-mail")}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="userSex">
+            <mat-label>Пол</mat-label>
+            <mat-radio-group formControlName="userSex" class="radio-group-userSex" formControlName="userSex">
+              <mat-radio-button value="Мужской" [checked]=true>Мужской</mat-radio-button>
+              <mat-radio-button value="Женский">Женский</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+
+
+        <button type="submit" mat-flat-button color="primary" [disabled]="personalDataForm.invalid">Сохранить</button>
+      </form>
+
+    </div>
+  </div>
+</div>
