@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {User} from '../../../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -6,8 +8,13 @@ import { Injectable } from '@angular/core';
 export class ProfileService {
   private _isVisibleToggleMenu: boolean;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.isVisibleToggleMenu = true;
+  }
+
+
+  public sendUserData(user: User){
+    return this.http.get("/api/courseworkWeb/user")
   }
 
   get isVisibleToggleMenu(): boolean {

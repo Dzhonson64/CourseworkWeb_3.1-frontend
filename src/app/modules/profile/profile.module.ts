@@ -9,13 +9,16 @@ import {MenuComponent} from '../main/components/header/menu/menu.component';
 import {ProfileService} from './services/profile.service';
 import {MatFieldCommonModule} from '../common-modules/mat-field/mat-field-common.module';
 import {FormCommonModule} from '../common-modules/forms/form-common.module';
+import { LeftMenuComponent } from './componets/left-menu/left-menu.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 
 @NgModule({
   declarations: [
     SettingsComponent,
-    LayoutComponent
+    LayoutComponent,
+    LeftMenuComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +26,8 @@ import {FormCommonModule} from '../common-modules/forms/form-common.module';
     HeaderModule,
     RoutingModule,
     MatFieldCommonModule,
-    FormCommonModule
+    FormCommonModule,
+    HttpClientModule
   ],
   providers: [ProfileService]
 })

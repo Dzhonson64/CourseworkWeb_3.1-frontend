@@ -1,0 +1,30 @@
+.left-menu{
+  background-color: #fff;
+  width: 100%;
+}
+.block-left-menu{
+  position: static;
+}
+li {
+  padding: 10px 20px 10px 16px;
+  text-decoration: none;
+  list-style-type: none;
+}
+.svg-inline--fa{
+  margin-right: 11px;
+}
+.bnt-logout {
+  width: 90px;
+}
+
+.slider-menu{
+  width: 100%;
+}
+
+.mat-list-base .mat-list-item.mat-list-item-with-avatar .mat-list-item-content-reverse .mat-list-text, .mat-list-base .mat-list-item.mat-list-option .mat-list-item-content-reverse .mat-list-text, .mat-list-base .mat-list-option.mat-list-item-with-avatar .mat-list-item-content-reverse .mat-list-text, .mat-list-base .mat-list-option.mat-list-option .mat-list-item-content-reverse .mat-list-text{
+  display: flex;
+  flex-direction: row;
+}
+.active{
+  background: rgba(0,0,0,.12);
+}

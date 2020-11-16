@@ -1,0 +1,15 @@
+<div class="row block-left-menu h-100">
+  <div class="left-menu d-flex align-items-center flex-column">
+    <img src="#" alt="">
+    <button mat-stroked-button class="bnt-logout">Выйти</button>
+
+    <mat-selection-list #shoes [multiple]="false" class="slider-menu">
+      <mat-list-option routerLinkActive="active">
+        <i class="far fa-user"></i> Мой профиль
+      </mat-list-option>
+      <mat-list-option routerLink="me" routerLinkActive="mat-list-single-selected-option">
+        <i class="far fa-credit-card"></i> Покупки
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+</div>

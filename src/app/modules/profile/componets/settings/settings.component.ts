@@ -9,6 +9,10 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {now} from 'moment/moment';
 import {MAT_FORM_FIELD, MatFormField, MatFormFieldControl} from '@angular/material/form-field';
+import {ProfileService} from '../../services/profile.service';
+import {User} from '../../../../models/User';
+import {UserStatus} from '../../../../models/type/UserStatus';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -18,7 +22,7 @@ import {MAT_FORM_FIELD, MatFormField, MatFormFieldControl} from '@angular/materi
     // The locale would typically be provided on the root module of your application. We do it at
     // the component level here, due to limitations of our example generation script.
     {provide: MAT_DATE_LOCALE, useValue: 'ja-JP'},
-    { provide: MatFormFieldControl, useExisting: SettingsComponent },
+    {provide: MatFormFieldControl, useExisting: SettingsComponent},
     // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
     // `MatMomentDateModule` in your applications root module. We provide it at the component level
     // here, due to limitations of our example generation script.
@@ -42,11 +46,12 @@ export class SettingsComponent implements OnInit {
   userPhone: FormControl;
   userPassword: FormControl;
   userSex: FormControl;
-  filterType = 1
+  filterType = 1;
   hide = true;
 
+  userModel: User;
 
-  constructor(private _adapter: DateAdapter<any>) {
+  constructor(private _adapter: DateAdapter<any>, private profileService: ProfileService) {
 
   }
 
@@ -57,7 +62,7 @@ export class SettingsComponent implements OnInit {
 
     this.userName.valueChanges.subscribe(value => {
       console.log(this.userName);
-    })
+    });
   }
 
   createFormControls() {
@@ -101,7 +106,17 @@ export class SettingsComponent implements OnInit {
   }
 
   submit() {
-    console.log( this.personalDataForm);
+    this.userModel = {
+      nickName: this.userNickname.value,
+      surname: this.userName.value,
+      name : this.userName.value,
+      patronymic: this.userPatronymic.value,
+      phone: this.userPhone.value
+    };
+    this.profileService.sendUserData(this.userModel).subscribe(value => {
+console.log("Sus")
+    });
+    console.log(this.personalDataForm);
   }
 
 }
@@ -111,5 +126,6 @@ export class MyTel {
     public area: string,
     public exchange: string,
     public subscriber: string
-  ) {}
+  ) {
+  }
 }
