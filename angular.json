@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "WebUI2"
+  "defaultProject": "WebUI2",
+  "cli": {
+    "analytics": false
+  }
 }

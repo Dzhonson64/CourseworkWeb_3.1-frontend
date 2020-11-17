@@ -1,10 +1,11 @@
+import { GenderType } from './type/GenderType';
 import {UserStatus} from './type/UserStatus';
 
 export class User {
   id?: number = null;
   googleId?: string;
   nickName: string;
-  // status?: UserStatus;
+  status?: UserStatus;
   snils?: string;
   surname: string;
   name: string;
@@ -12,10 +13,15 @@ export class User {
   phone: string;
   postcode?: number;
   money?: number;
+  email: string;
+  birthday: string;
+  password: string;
+  gender: GenderType;
+
 
   constructor(id?: number, googleId?: string, nickName: string = '',
               snils?: string, surname: string = '', name: string = '', patronymic: string = '', phone: string = '',
-              postcode?: number, money?: number) {
+              postcode?: number, money?: number, email: string = '', birthday: string = '', password: string = '', gender: GenderType = GenderType.MALE) {
     if (id == undefined) {
       this.id = null;
     } else {
@@ -55,6 +61,10 @@ export class User {
     this.name = name;
     this.patronymic = patronymic;
     this.phone = phone;
+    this.email = email;
+    this.birthday = birthday;
+    this.password = password;
+    this.gender = gender;
   }
 
   static getInstance(obj: User): User {

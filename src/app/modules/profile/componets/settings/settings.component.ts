@@ -12,6 +12,7 @@ import {MAT_FORM_FIELD, MatFormField, MatFormFieldControl} from '@angular/materi
 import {ProfileService} from '../../services/profile.service';
 import {User} from '../../../../models/User';
 import {UserStatus} from '../../../../models/type/UserStatus';
+import {GenderType} from '../../../../models/type/GenderType';
 
 @Component({
   selector: 'app-settings',
@@ -36,6 +37,9 @@ import {UserStatus} from '../../../../models/type/UserStatus';
 })
 export class SettingsComponent implements OnInit {
 
+
+  private _fileToUpload: File = null;
+  private _pathImgFile: string;
   personalDataForm: FormGroup;
   userName: FormControl;
   userSurname: FormControl;
@@ -45,7 +49,8 @@ export class SettingsComponent implements OnInit {
   userBirthday: FormControl;
   userPhone: FormControl;
   userPassword: FormControl;
-  userSex: FormControl;
+  userGender: FormControl;
+  userSnils: FormControl;
   filterType = 1;
   hide = true;
 
@@ -77,7 +82,8 @@ export class SettingsComponent implements OnInit {
       Validators.email
     ]);
     this.userBirthday = new FormControl(moment(now()));
-    this.userSex = new FormControl('auto');
+    this.userGender = new FormControl(GenderType.MALE);
+    this.userSnils = new FormControl('', [Validators.required]);
   }
 
   createForm() {
@@ -92,7 +98,8 @@ export class SettingsComponent implements OnInit {
       userSurname: this.userSurname,
       userPhone: this.userPhone,
       userPassword: this.userPassword,
-      userSex: this.userSex
+      userGender: this.userGender,
+      userSnils: this.userSnils
     });
   }
 
@@ -111,21 +118,46 @@ export class SettingsComponent implements OnInit {
       surname: this.userName.value,
       name : this.userName.value,
       patronymic: this.userPatronymic.value,
-      phone: this.userPhone.value
+      phone: this.userPhone.value,
+      birthday: this.userBirthday.value,
+      gender: this.userGender.value,
+      password: this.userPassword.value,
+      email: this.userEmail.value,
+      snils: this.userSnils.value
     };
-    this.profileService.sendUserData(this.userModel).subscribe(value => {
+    this.profileService.saveUserData(this.userModel).subscribe(value => {
 console.log("Sus")
     });
     console.log(this.personalDataForm);
   }
 
+
+  handleFileInput(event: any) {
+
+    var blob = event.target.files[0].slice(0, event.target.files[0].size, 'image/png');
+    this._fileToUpload = new File([blob], event.target.files[0].name, {type: 'image/png'});
+    this._pathImgFile = URL.createObjectURL(this._fileToUpload);
+    this.profileService.uploadImage(this.fileToUpload).subscribe(value => {
+      console.log(event);
+    });
+
+  }
+
+  get fileToUpload(): File {
+    return this._fileToUpload;
+  }
+
+  set fileToUpload(value: File) {
+    this._fileToUpload = value;
+  }
+
+  get pathImgFile(): string {
+    return this._pathImgFile;
+  }
+
+  set pathImgFile(value: string) {
+    this._pathImgFile = value;
+  }
+
 }
 
-export class MyTel {
-  constructor(
-    public area: string,
-    public exchange: string,
-    public subscriber: string
-  ) {
-  }
-}

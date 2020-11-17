@@ -4,11 +4,11 @@
     <button mat-stroked-button class="bnt-logout">Выйти</button>
 
     <mat-selection-list #shoes [multiple]="false" class="slider-menu">
-      <mat-list-option routerLinkActive="active">
-        <i class="far fa-user"></i> Мой профиль
+      <mat-list-option routerLink="" routerLinkActive="active" class = "d-flex align-items-center">
+        <i class="far fa-user"></i> <span>Мой профиль</span>
       </mat-list-option>
-      <mat-list-option routerLink="me" routerLinkActive="mat-list-single-selected-option">
-        <i class="far fa-credit-card"></i> Покупки
+      <mat-list-option class = "d-flex align-items-center">
+        <i class="far fa-credit-card"></i> <span> Покупки </span>
       </mat-list-option>
     </mat-selection-list>
   </div>
