@@ -4,13 +4,15 @@
     <div class="content">
       <h3>Персональные данные</h3>
 
-      <form class="content-block d-flex flex-column"  [formGroup]="personalDataForm" novalidate
+      <form class="content-block d-flex flex-column" [formGroup]="personalDataForm" novalidate
             (ngSubmit)="submit()">
         <div class="row">
           <div class="col-md-3">
             <div class="avatar">
               <img src="#" alt="">
-              <button mat-mini-fab color="primary">
+              <input id="my-input" #uploadImg #file type="file" hidden  id="file"
+                     (change)="handleFileInput($event)"  accept="image/jpeg,image/png" />
+              <button mat-mini-fab color="primary" (click)="uploadImg.click()">
                 <i class="fas fa-upload"></i>
               </button>
             </div>
@@ -35,7 +37,7 @@
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>Телефон</mat-label>
-                <input matInput placeholder="Телефон" formControlName="userPhone" required>
+                <input matInput placeholder="Телефон" formControlName="userPhone" required type="number">
                 <mat-error *ngIf="userPhone.invalid">{{getErrorMessage("Телефон")}}</mat-error>
               </mat-form-field>
             </div>
@@ -72,14 +74,18 @@
           </div>
           <div class="userSex">
             <mat-label>Пол</mat-label>
-            <mat-radio-group formControlName="userSex" class="radio-group-userSex" formControlName="userSex">
+            <mat-radio-group class="radio-group-userSex" formControlName="userGender">
               <mat-radio-button value="Мужской" [checked]=true>Мужской</mat-radio-button>
               <mat-radio-button value="Женский">Женский</mat-radio-button>
             </mat-radio-group>
           </div>
+
         </div>
-
-
+        <mat-form-field appearance="outline" class="userSnils">
+          <mat-label>СНИЛС</mat-label>
+          <input matInput placeholder="СНИЛС" formControlName="userSnils" required>
+          <mat-error *ngIf="userSnils.invalid">{{getErrorMessage("СНИЛС")}}</mat-error>
+        </mat-form-field>
 
         <button type="submit" mat-flat-button color="primary" [disabled]="personalDataForm.invalid">Сохранить</button>
       </form>

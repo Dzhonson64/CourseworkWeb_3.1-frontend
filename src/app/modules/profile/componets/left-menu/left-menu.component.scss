@@ -1,0 +1,38 @@
+.left-menu{
+  background-color: #fff;
+  width: 100%;
+}
+.left-menu .block-left-menu{
+  position: static;
+}
+.left-menu li {
+  padding: 10px 20px 10px 16px;
+  text-decoration: none;
+  list-style-type: none;
+}
+.left-menu .svg-inline--fa{
+  margin-right: 11px;
+}
+.left-menu .bnt-logout {
+  width: 90px;
+}
+
+.left-menu .slider-menu{
+  width: 100%;
+}
+
+.left-menu .mat-list-base .mat-list-item.mat-list-item-with-avatar .mat-list-item-content-reverse .mat-list-text, .mat-list-base .mat-list-item.mat-list-option .mat-list-item-content-reverse .mat-list-text, .mat-list-base .mat-list-option.mat-list-item-with-avatar .mat-list-item-content-reverse .mat-list-text, .mat-list-base .mat-list-option.mat-list-option .mat-list-item-content-reverse .mat-list-text{
+  display: flex;
+  flex-direction: row;
+}
+.left-menu .active{
+  background: rgba(0,0,0,.12);
+}
+.left-menu .slider-menu span {
+  padding-left: 15px !important;
+}
+
+.mat-list-base .mat-list-item.mat-list-item-with-avatar .mat-list-item-content-reverse .mat-list-text, .mat-list-base .mat-list-item.mat-list-option .mat-list-item-content-reverse .mat-list-text, .mat-list-base .mat-list-option.mat-list-item-with-avatar .mat-list-item-content-reverse .mat-list-text, .mat-list-base .mat-list-option.mat-list-option .mat-list-item-content-reverse .mat-list-text {
+  display: flex;
+  align-items: center;
+}

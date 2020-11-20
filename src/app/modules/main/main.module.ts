@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {MainRoutingModule} from './routing.module';
@@ -11,7 +11,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav';
 import {MatSelectModule} from '@angular/material/select';
 import {HeaderModule} from './components/header/header.module';
 import {HomeModule} from './components/home/home.module';
@@ -41,4 +41,7 @@ import {FormCommonModule} from '../common-modules/forms/form-common.module';
   exports: [HeaderModule, HomeModule, FooterComponent, ContactComponent]
 })
 export class MainModule {
+
+
+
 }

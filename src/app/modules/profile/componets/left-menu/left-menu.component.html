@@ -1,0 +1,15 @@
+<div class="row block-left-menu h-100">
+  <div class="left-menu d-flex align-items-center flex-column">
+    <img src="#" alt="">
+    <button mat-stroked-button class="bnt-logout">Выйти</button>
+
+    <mat-selection-list #shoes [multiple]="false" class="slider-menu">
+      <mat-list-option routerLink="" routerLinkActive="active" class = "d-flex align-items-center">
+        <i class="far fa-user"></i> <span>Мой профиль</span>
+      </mat-list-option>
+      <mat-list-option class = "d-flex align-items-center">
+        <i class="far fa-credit-card"></i> <span> Покупки </span>
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+</div>
