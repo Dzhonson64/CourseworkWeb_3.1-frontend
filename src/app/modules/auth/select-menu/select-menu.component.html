@@ -1,0 +1,29 @@
+<div #popUp class="modal-wrapper">
+  <div class="modal">
+    <div class="head">
+      <a class="btn-close trigger" (click)="close()">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="content">
+      <div class="good-job">
+        <h3>Выберите вид регистрации</h3>
+        <div class="row justify-content-center mt-5">
+          <div class="type-block">
+            <a routerLink="/registration/user" class="d-flex align-items-center flex-column justify-content-center">
+              <i class="fas fa-user-circle"></i>
+              <p  class="mt-3">Физическое лицо</p>
+            </a>
+          </div>
+          <div class="type-block">
+            <a routerLink="/registration/company" class="d-flex align-items-center flex-column justify-content-center">
+              <i class="fas fa-briefcase"></i>
+              <p class="mt-3">Юридическое лицо</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,5 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ContentChild, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../auth.service';
+import * as moment from 'moment';
+import {now} from 'moment/moment';
+import {GenderType} from '../../../models/type/GenderType';
 
 @Component({
   selector: 'app-login',
@@ -7,26 +11,50 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./login.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
+  @ViewChild('login_content') login_content: ElementRef;
+
   hide = true;
-  myForm: FormGroup;
+  loginForm: FormGroup;
+  userNameControl: FormControl;
+  passwordControl: FormControl;
 
-  constructor() {
-    this.myForm = new FormGroup({
 
-      'userName': new FormControl('', Validators.required),
-      'password': new FormControl('', [
-        Validators.required,
-        Validators.pattern('(?=.*[0-9])')
-      ])
-    });
+  constructor(private authService: AuthService) {
+
   }
 
   submit() {
-    console.log(this.myForm);
+    console.log(this.loginForm);
   }
 
   ngOnInit(): void {
+    this.createFormControls();
+    this.createForm();
   }
 
+  createFormControls() {
+    this.userNameControl = new FormControl('', Validators.required);
+    this.passwordControl = new FormControl('', [
+      Validators.required,
+      Validators.pattern('(?=.*[0-9])')
+    ]);
+
+  }
+
+  createForm() {
+    this.loginForm = new FormGroup({
+      userName: this.userNameControl,
+      password: this.passwordControl
+
+    });
+  }
+
+  displayPopUpSelectMenu() {
+    this.authService.togglePopUpSelectionMenu();
+  }
+
+  ngAfterViewInit(): void {
+    this.authService.loginContent = this.login_content;
+  }
 }

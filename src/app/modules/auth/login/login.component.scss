@@ -17,11 +17,13 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
+
 }
 
 .login-block {
   display: block;
   width: 100%;
+  z-index: -10;
 }
 .login-content {
   z-index: 15;
@@ -48,4 +50,10 @@ body{
 
 .form-group {
   width: 100%;
+}
+.pseudo-link {
+  cursor: pointer;
+}
+.blur-it {
+  filter: blur(4px);
 }
