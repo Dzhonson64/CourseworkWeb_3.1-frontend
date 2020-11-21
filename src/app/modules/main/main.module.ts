@@ -20,7 +20,7 @@ import {ContactComponent} from './components/contact/contact.component';
 import {AppRoutingModule} from '../../app-routing.module';
 import { LoginComponent } from '../auth/login/login.component';
 import { MatInputModule } from '@angular/material/input';
-import { RegistrationComponent } from '../auth/registration/registration.component';
+import { RegistrationComponent } from '../auth/registration/user-registration/registration.component';
 import {MatFieldCommonModule} from '../common-modules/mat-field/mat-field-common.module';
 import {FormCommonModule} from '../common-modules/forms/form-common.module';
 @NgModule({

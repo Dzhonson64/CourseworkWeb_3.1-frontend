@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="registration-block d-flex justify-content-center">
+    <div class="login-content">
+      <div class="form-panel">
+        <div class="form-header">
+          Регистрация компании
+        </div>
+        <div class="form-content " [formGroup]="regCompanyForm" novalidate>
+          <mat-form-field appearance="fill" class="form-group">
+            <mat-label>Введите название компании</mat-label>
+            <input matInput required>
+          </mat-form-field>
+          <div class="country d-flex flex-column">
+            <mat-label>Страна</mat-label>
+            <mat-radio-group class="radio-group-country d-flex flex-column" formControlName="countryCompany">
+              <mat-radio-button value="Россия" #russia_rb >Россия</mat-radio-button>
+              <mat-radio-button value="Другой" #other>Другой</mat-radio-button>
+            </mat-radio-group>
+            <div class="location-company" *ngIf="russia_rb.checked">
+              <mat-form-field appearance="fill" class="form-group" >
+                <mat-label>Город</mat-label>
+                <input matInput required (change)="serch(this)" class="city" formControlName="cityCompany" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of cities" [value]="option">
+                    {{option.typeCity | lowercase}} {{option.city}}
+                    <span *ngIf="option.parents[0]">, {{option.parents[0].typeShort}} {{option.parents[0].name}}</span>
+                    <span *ngIf="option.parents[1]">, {{option.parents[1].typeShort}} {{option.parents[1].name}}</span>
+
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

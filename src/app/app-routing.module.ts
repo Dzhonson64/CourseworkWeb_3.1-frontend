@@ -2,12 +2,12 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {MainModule} from './modules/main/main.module';
 import {LoginComponent} from './modules/auth/login/login.component';
-import {RegistrationComponent} from './modules/auth/registration/registration.component';
+import {RegistrationComponent} from './modules/auth/registration/user-registration/registration.component';
 import {ProfileModule} from './modules/profile/profile.module';
 import {LayoutComponent} from './modules/main/components/layout/layout.component';
 import {HomeMainComponent} from './modules/main/components/home/home-main.component';
 import {ContactComponent} from './modules/main/components/contact/contact.component';
-import {CompanyRegistationComponent} from './modules/auth/registration/company-registation/company-registation.component';
+import {CompanyRegistrationComponent} from './modules/auth/registration/company-registration/company-registration.component';
 
 const routes: Routes = [
   {
@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'registration', children: [
       {path: 'user', component: RegistrationComponent},
-      {path: 'company', component: CompanyRegistationComponent}
+      {path: 'company', component: CompanyRegistrationComponent}
     ]
   },
   {
