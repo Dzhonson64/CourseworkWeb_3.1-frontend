@@ -1,5 +1,7 @@
 import {ElementRef, Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {User} from '../../../models/User';
+import {Address} from '../../../models/address/Address';
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +23,11 @@ export class AuthService {
     }
   }
 
-  public searchCity(str: string) {
-    const params = new HttpParams()
-      .set('query', str.toString())
-      .set('contentType', "city")
-      .set('withParent', "1")
-      .set('limit', "5");
-    return this.http.get("https://kladr-api.ru/api.php", {params});
-  }
 
+  public saveAddress(address: Address){
+    console.log(address);
+    return this.http.post("/api/courseworkWeb/user/address", address);
+  }
 
   get popUpSelectionMenu(): ElementRef {
     return this._popUpSelectionMenu;

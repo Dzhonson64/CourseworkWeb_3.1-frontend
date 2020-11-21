@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, ContentChild, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../../services/auth.service';
 import * as moment from 'moment';
 import {now} from 'moment/moment';
-import {GenderType} from '../../../models/type/GenderType';
+import {GenderType} from '../../../../models/type/GenderType';
 
 @Component({
   selector: 'app-login',

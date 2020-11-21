@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {MainModule} from './modules/main/main.module';
-import {LoginComponent} from './modules/auth/login/login.component';
-import {RegistrationComponent} from './modules/auth/registration/user-registration/registration.component';
+import {LoginComponent} from './modules/auth/components/login/login.component';
+import {RegistrationComponent} from './modules/auth/components/registration/user-registration/registration.component';
 import {ProfileModule} from './modules/profile/profile.module';
 import {LayoutComponent} from './modules/main/components/layout/layout.component';
 import {HomeMainComponent} from './modules/main/components/home/home-main.component';
 import {ContactComponent} from './modules/main/components/contact/contact.component';
-import {CompanyRegistrationComponent} from './modules/auth/registration/company-registration/company-registration.component';
+import {CompanyRegistrationComponent} from './modules/auth/components/registration/company-registration/company-registration.component';
 
 const routes: Routes = [
   {
