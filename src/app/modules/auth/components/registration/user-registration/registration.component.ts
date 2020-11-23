@@ -120,7 +120,7 @@ export class RegistrationComponent implements OnInit {
     this.regionUser = new FormControl('',[Validators.required, Validators.maxLength(20)]);
     this.countryUser = new FormControl('', [Validators.required, Validators.maxLength(20)]);
     this.cityUser = new FormControl('', [Validators.required, Validators.maxLength(20)]);
-    this.districtUser = new FormControl('', [Validators.required, Validators.maxLength(15)]);
+    this.districtUser = new FormControl('', [Validators.maxLength(15)]);
     this.streetUser = new FormControl('', [Validators.required, Validators.maxLength(15)]);
     this.apartmentUser = new FormControl('', [Validators.required, Validators.maxLength(5)]);
     this.buildingUser = new FormControl('', [Validators.required, Validators.maxLength(10)]);

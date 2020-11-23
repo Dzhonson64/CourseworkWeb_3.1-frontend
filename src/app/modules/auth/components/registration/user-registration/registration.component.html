@@ -106,7 +106,7 @@
                   </mat-radio-group>
                   <div class="location-company mt-4" *ngIf="russia_rb.checked">
                     <mat-form-field appearance="fill" class="form-group">
-                      <mat-label>Регион</mat-label>
+                      <mat-label>Областной район</mat-label>
                       <input matInput required class="region" formControlName="regionUser" [matAutocomplete]="auto1">
                       <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
                         <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectRegion(option)">
@@ -120,7 +120,7 @@
                     </mat-form-field>
 
                     <mat-form-field appearance="fill" class="form-group" *ngIf="regionUser.value">
-                      <mat-label>Район</mat-label>
+                      <mat-label>Областной район</mat-label>
                       <input matInput class="city" formControlName="districtUser" [matAutocomplete]="auto2">
                       <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
                         <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectDistrict(option)">
@@ -128,7 +128,7 @@
 
                         </mat-option>
                       </mat-autocomplete>
-                      <mat-error *ngIf="districtUser.hasError('maxlength')">{{getErrorMessageMaxLength('Регион', 10)}}</mat-error>
+                      <mat-error *ngIf="districtUser.hasError('maxlength')">{{getErrorMessageMaxLength('Район', 15)}}</mat-error>
 
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="form-group" *ngIf="regionUser.value">
@@ -208,7 +208,7 @@
                     </mat-form-field>
 
                     <mat-form-field appearance="fill" class="form-group" *ngIf="regionUser.value">
-                      <mat-label>Район</mat-label>
+                      <mat-label>Областной район</mat-label>
                       <input matInput class="city" formControlName="districtUser">
                       <mat-error *ngIf="districtUser.hasError('maxlength')">{{getErrorMessageMaxLength('Регион', 10)}}</mat-error>
 
