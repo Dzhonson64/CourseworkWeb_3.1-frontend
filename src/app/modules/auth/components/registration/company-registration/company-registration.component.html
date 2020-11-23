@@ -1,112 +1,118 @@
-<div class="container">
-  <div class="registration-block d-flex justify-content-center">
-    <div class="login-content">
-      <div class="form-panel">
-        <div class="form-header">
-          Регистрация компании
-        </div>
-        <form class="form-content " [formGroup]="regCompanyForm" novalidate
-             (ngSubmit)="submit()">
-          <mat-form-field appearance="fill" class="form-group">
-            <mat-label>Название компании</mat-label>
-            <input matInput required formControlName="nameCompany">
-          </mat-form-field>
-          <div class="country d-flex flex-column">
-            <mat-label>Страна</mat-label>
-            <mat-radio-group class="radio-group-country d-flex flex-column" formControlName="countryCompany" >
-              <mat-radio-button value="Россия"  class="mt-1" #russia_rb (click)="deleteFiasArr()">Россия</mat-radio-button>
-              <mat-radio-button value="Другой" class="mt-1" #other (click)="deleteFiasArr()">Другой</mat-radio-button>
-            </mat-radio-group>
-            <div class="location-company mt-4" *ngIf="russia_rb.checked">
-              <mat-form-field appearance="fill" class="form-group">
-                <mat-label>Населённый пункт</mat-label>
-                <input matInput required class="region" formControlName="regionCompany" [matAutocomplete]="auto1" >
-                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
-                  <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectRegion(option)">
-                    {{option.type | lowercase}} {{option.name}}
-
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-
-              <mat-form-field appearance="fill" class="form-group" *ngIf="regionCompany.value">
-                <mat-label>Район</mat-label>
-                <input matInput class="city" formControlName="districtCompany" [matAutocomplete]="auto2">
-                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
-                  <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectDistrict(option)">
-                    {{option.type | lowercase}} {{option.name}}
-
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-              <mat-form-field appearance="fill" class="form-group" *ngIf="regionCompany.value">
-                <mat-label>Населённый пункт</mat-label>
-                <input matInput required class="city" formControlName="cityCompany" [matAutocomplete]="auto3">
-                <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayFn">
-                  <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectLocality(option)">
-                    {{option.type | lowercase}} {{option.name}}
-
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-              <mat-form-field appearance="fill" class="form-group" *ngIf="cityCompany.value">
-                <mat-label>Улица</mat-label>
-                <input matInput required class="street" formControlName="streetCompany" [matAutocomplete]="auto4" >
-                <mat-autocomplete #auto4="matAutocomplete" [displayWith]="displayFn">
-                  <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectStreet(option)">
-                    {{option.type | lowercase}} {{option.name}}
-
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-
-              <mat-form-field appearance="fill" class="form-group" *ngIf="streetCompany.value">
-                <mat-label>Дом</mat-label>
-                <input matInput required class="building" formControlName="buildingCompany" [matAutocomplete]="auto5" >
-                <mat-autocomplete #auto5="matAutocomplete" [displayWith]="displayFn">
-                  <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectBuilding(option)">
-                    {{option.type | lowercase}} {{option.name}}
-
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </div>
-            <div class="location-company mt-4" *ngIf="other.checked">
-              <mat-form-field appearance="fill" class="form-group">
-                <mat-label>Регион</mat-label>
-                <input matInput required class="region" formControlName="regionCompany" >
-
-              </mat-form-field>
-
-              <mat-form-field appearance="fill" class="form-group" *ngIf="regionCompany.value">
-                <mat-label>Район</mat-label>
-                <input matInput class="city" formControlName="districtCompany">
-
-              </mat-form-field>
-              <mat-form-field appearance="fill" class="form-group" *ngIf="regionCompany.value">
-                <mat-label>Населённый пункт</mat-label>
-                <input matInput required class="city" formControlName="cityCompany">
-
-              </mat-form-field>
-              <mat-form-field appearance="fill" class="form-group" *ngIf="cityCompany.value">
-                <mat-label>Улица</mat-label>
-                <input matInput required class="street" formControlName="streetCompany">
-
-              </mat-form-field>
-
-              <mat-form-field appearance="fill" class="form-group" *ngIf="streetCompany.value">
-                <mat-label>Дом</mat-label>
-                <input matInput required class="building" formControlName="buildingCompany">
-              </mat-form-field>
-
-            </div>
+<div class="registration-block">
+  <div class="container">
+    <div class=" d-flex justify-content-center">
+      <div class="login-content">
+        <div class="form-panel">
+          <div class="form-header">
+            Регистрация компании
           </div>
-          <button type="submit" mat-flat-button color="primary"  class="mt-4" [disabled]="regCompanyForm.invalid">Сохранить</button>
-        </form>
+          <form class="form-content " [formGroup]="regCompanyForm" novalidate
+                (ngSubmit)="submit()">
+            <mat-form-field appearance="fill" class="form-group">
+              <mat-label>Название компании</mat-label>
+              <input matInput required formControlName="nameCompany">
+            </mat-form-field>
+            <div class="address d-flex flex-column">
+              <mat-label>Страна</mat-label>
+              <mat-radio-group class="radio-group-country d-flex flex-column" formControlName="countryCompany">
+                <mat-radio-button value="Россия" class="mt-1" #russia_rb (click)="deleteFiasArr()">Россия
+                </mat-radio-button>
+                <mat-radio-button value="Другой" class="mt-1" #other (click)="deleteFiasArr()">Другой</mat-radio-button>
+              </mat-radio-group>
+              <div class="location-company mt-4" *ngIf="russia_rb.checked">
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>Населённый пункт</mat-label>
+                  <input matInput required class="region" formControlName="regionCompany" [matAutocomplete]="auto1">
+                  <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectRegion(option)">
+                      {{option.type | lowercase}} {{option.name}}
+
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="form-group" *ngIf="regionCompany.value">
+                  <mat-label>Район</mat-label>
+                  <input matInput class="city" formControlName="districtCompany" [matAutocomplete]="auto2">
+                  <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectDistrict(option)">
+                      {{option.type | lowercase}} {{option.name}}
+
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group" *ngIf="regionCompany.value">
+                  <mat-label>Населённый пункт</mat-label>
+                  <input matInput required class="city" formControlName="cityCompany" [matAutocomplete]="auto3">
+                  <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectLocality(option)">
+                      {{option.type | lowercase}} {{option.name}}
+
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group" *ngIf="cityCompany.value">
+                  <mat-label>Улица</mat-label>
+                  <input matInput required class="street" formControlName="streetCompany" [matAutocomplete]="auto4">
+                  <mat-autocomplete #auto4="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectStreet(option)">
+                      {{option.type | lowercase}} {{option.name}}
+
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="form-group" *ngIf="streetCompany.value">
+                  <mat-label>Дом</mat-label>
+                  <input matInput required class="building" formControlName="buildingCompany" [matAutocomplete]="auto5">
+                  <mat-autocomplete #auto5="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectBuilding(option)">
+                      {{option.type | lowercase}} {{option.name}}
+
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+              <div class="location-company mt-4" *ngIf="other.checked">
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>Регион</mat-label>
+                  <input matInput required class="region" formControlName="regionCompany">
+
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="form-group" *ngIf="regionCompany.value">
+                  <mat-label>Район</mat-label>
+                  <input matInput class="city" formControlName="districtCompany">
+
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group" *ngIf="regionCompany.value">
+                  <mat-label>Населённый пункт</mat-label>
+                  <input matInput required class="city" formControlName="cityCompany">
+
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group" *ngIf="cityCompany.value">
+                  <mat-label>Улица</mat-label>
+                  <input matInput required class="street" formControlName="streetCompany">
+
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="form-group" *ngIf="streetCompany.value">
+                  <mat-label>Дом</mat-label>
+                  <input matInput required class="building" formControlName="buildingCompany">
+                </mat-form-field>
+
+              </div>
+            </div>
+            <button type="submit" mat-flat-button color="primary" class="mt-4" [disabled]="regCompanyForm.invalid">
+              Сохранить
+            </button>
+          </form>
+
+        </div>
 
       </div>
 
     </div>
-
   </div>
 </div>
+

@@ -1,7 +1,7 @@
 import {ElementRef, Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {User} from '../../../models/User';
-import {Address} from '../../../models/address/Address';
+import {AddressCompany} from '../../../models/address/AddressCompany';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class AuthService {
   }
 
 
-  public saveAddress(address: Address){
+  public saveAddress(address: AddressCompany){
     console.log(address);
     return this.http.post("/api/courseworkWeb/user/address", address);
   }

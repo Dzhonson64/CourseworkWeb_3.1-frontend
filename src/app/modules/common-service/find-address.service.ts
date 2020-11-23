@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {FormControl} from '@angular/forms';
-import {AddressObj} from '../../models/address/addressObj';
+import {AddressObj} from '../../models/address/AddressObj';
 
 declare var $: any;
 
@@ -18,8 +18,8 @@ export class FindAddressService {
     const params = new HttpParams()
       .set('query', str.toString())
       .set('contentType', 'region')
-      .set('withParent', '1')
-      .set('limit', '5');
+      .set('withParent', '3')
+      .set('limit', '10');
     return this.http.get('https://kladr-api.ru/api.php', {params});
   }
 
@@ -30,7 +30,7 @@ export class FindAddressService {
       .set('contentType', 'city')
       .set('regionId', selectedRegion.id.toString())
       .set('withParent', '1')
-      .set('limit', '5');
+      .set('limit', '10');
     return this.http.get('https://kladr-api.ru/api.php', {params});
   }
 
@@ -50,7 +50,7 @@ export class FindAddressService {
       .set('query', str.toString())
       .set('contentType', 'street')
       .set('cityId', selectedCity.id.toString())
-      .set('limit', '5');
+      .set('limit', '10');
     return this.http.get('https://kladr-api.ru/api.php', {params});
   }
 
@@ -60,7 +60,7 @@ export class FindAddressService {
       .set('query', str.toString())
       .set('contentType', 'building')
       .set('streetId', selectedStreet.id.toString())
-      .set('limit', '5');
+      .set('limit', '10');
     return this.http.get('https://kladr-api.ru/api.php', {params});
   }
 
@@ -88,10 +88,11 @@ export class FindAddressService {
   }
 
   public searchDistrict(filed: FormControl, selectedRegion: AddressObj, arrayResults?: Array<AddressObj>): Array<AddressObj> {
-
+console.log("DD")
     filed.valueChanges.subscribe(value => {
       this.requestSearchDistrict(value, selectedRegion).subscribe(value1 => {
         this.fillArrayResult(value1, arrayResults);
+
       });
 
     });

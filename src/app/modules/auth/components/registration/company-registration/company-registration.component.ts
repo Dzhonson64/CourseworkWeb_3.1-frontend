@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormControl, FormGroup, MaxLengthValidator, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../services/auth.service';
-import {AddressObj} from '../../../../../models/address/addressObj';
-import {Address} from '../../../../../models/address/Address';
+import {AddressObj} from '../../../../../models/address/AddressObj';
+import {AddressCompany} from '../../../../../models/address/AddressCompany';
 import {Observable} from 'rxjs';
 import {FindAddressService} from '../../../../common-service/find-address.service';
 
@@ -26,13 +26,13 @@ export class CompanyRegistrationComponent implements OnInit {
   districtCompany: FormControl;
 
 
-  private _resAddress: Address;
+  private _resAddress: AddressCompany;
 
   filteredOptions: Observable<AddressObj[]>;
   public fiasObjects: Array<AddressObj> = new Array<AddressObj>();
 
   constructor(private authService: AuthService, private findAddressService: FindAddressService) {
-    this.resAddress = new Address();
+    this.resAddress = new AddressCompany();
   }
 
   ngOnInit(): void {
@@ -118,11 +118,11 @@ export class CompanyRegistrationComponent implements OnInit {
 
 
 
-  get resAddress(): Address {
+  get resAddress(): AddressCompany {
     return this._resAddress;
   }
 
-  set resAddress(value: Address) {
+  set resAddress(value: AddressCompany) {
     this._resAddress = value;
   }
 
@@ -180,6 +180,6 @@ export class CompanyRegistrationComponent implements OnInit {
     this.cityCompany.setValue("");
     this.streetCompany.setValue("");
     this.buildingCompany.setValue("");
-    this.resAddress = new Address();
+    this.resAddress = new AddressCompany();
   }
 }

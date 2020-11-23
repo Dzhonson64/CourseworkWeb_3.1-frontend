@@ -1,15 +1,16 @@
-import {AddressObj} from './addressObj';
+import {AddressObj} from './AddressObj';
 
-export class Address {
+export class AddressCompany {
   id?: number = null;
   region: AddressObj = new AddressObj();
   city: AddressObj = new AddressObj();
   district?: AddressObj = new AddressObj();
   street: AddressObj = new AddressObj();
   building: AddressObj = new AddressObj();
+  country: AddressObj = new AddressObj();
 
 
-  constructor(id?: number, region: AddressObj = new AddressObj(),  city: AddressObj = new AddressObj(),
+  constructor(id?: number,  country: AddressObj = new AddressObj(), region: AddressObj = new AddressObj(),  city: AddressObj = new AddressObj(),
               district?: AddressObj, street: AddressObj = new AddressObj(),  building: AddressObj = new AddressObj()) {
     if (id == undefined) {
       this.id = null;
@@ -28,20 +29,22 @@ export class Address {
     this.city = city;
     this.street = street;
     this.building = building;
+    this.country = country;
   }
 
-  static getInstance(obj: Address): Address {
+  static getInstance(obj: AddressCompany): AddressCompany {
     if (obj == null) {
-      return new Address();
+      return new AddressCompany();
     }
 
-    return new Address(
+    return new AddressCompany(
       obj.id,
       obj.region,
       obj.city,
       obj.district,
       obj.street,
-      obj.building
+      obj.building,
+      obj.country
     );
   }
 
