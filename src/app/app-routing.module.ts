@@ -15,9 +15,8 @@ const routes: Routes = [
   {
     path: 'registration', component: RegistrationComponent
   },
-  {
-    path: 'test', loadChildren: () => ProfileModule
-  }
+  { path: 'me', loadChildren: () => ProfileModule}
+
 ];
 
 @NgModule({

@@ -1,14 +1,16 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 import {SettingsComponent} from './componets/settings/settings.component';
-import {LayoutComponent} from './componets/layout/layout.component';
+import {ProfileLayoutComponent} from './componets/layout/profile-layout.component';
+import {ProductCompanyComponent} from './componets/productCompany/components/product-company/product-company.component';
 
 
 const routes: Routes = [
   {
-    path: 'me', component: LayoutComponent, children: [
-      {path: '', component: SettingsComponent}
+    path: '', component: ProfileLayoutComponent, children: [
+      {path: 'settings', component: SettingsComponent},
+      {path: 'products', component: ProductCompanyComponent}
     ]
   }
 ];

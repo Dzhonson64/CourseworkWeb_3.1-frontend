@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MatDrawer} from '@angular/material/sidenav';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-left-menu',
@@ -11,7 +12,7 @@ export class LeftMenuComponent implements OnInit, AfterViewInit {
 
   listMenu: string[] = ['', 'Покупки'];
 
-  constructor() { }
+  constructor(private r: Router) { }
 
   ngOnInit(): void {
   }
