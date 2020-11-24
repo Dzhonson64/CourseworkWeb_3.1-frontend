@@ -9,17 +9,11 @@ $lighter-gray: rgba($black, 0.2);
 $white: #FFFFFF;
 $accent: #4285F4;
 
-body{
+
+.page-wrapper {
   background: linear-gradient(45deg,  rgba(66, 183, 245,0.8) 0%,rgba(66, 245, 189,0.4) 100%);
-  color: $gray;
-  font-size: $base-font-size;
-  line-height: $base-line-height;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   height: 100%;
-
 }
-
 .login-block {
   display: block;
   width: 100%;

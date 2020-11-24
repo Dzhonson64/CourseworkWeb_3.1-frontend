@@ -12,9 +12,9 @@
               <mat-label>Название компании</mat-label>
               <input matInput required formControlName="nameCompany">
               <mat-error
-                *ngIf="cityCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Название компании', 30)}}</mat-error>
+                *ngIf="nameCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Название компании', 30)}}</mat-error>
               <mat-error
-                *ngIf="cityCompany.hasError('required')">{{getErrorMessageRequired('Название компании')}}</mat-error>
+                *ngIf="nameCompany.hasError('required')">{{getErrorMessageRequired('Название компании')}}</mat-error>
 
             </mat-form-field>
             <div class="address d-flex flex-column">
@@ -22,12 +22,12 @@
               <mat-radio-group class="radio-group-country d-flex flex-column" formControlName="countryCompany">
                 <mat-radio-button value="Россия" class="mt-1" [checked]="true" #russia_rb (click)="selectCountry()">Россия
                 </mat-radio-button>
-                <mat-radio-button value="Другой" class="mt-1" #other (click)="selectCountry()">Другой</mat-radio-button>
+                <mat-radio-button  class="mt-1" #other (click)="selectCountry()">Другой</mat-radio-button>
               </mat-radio-group>
 
               <div class="location-company mt-4" *ngIf="russia_rb.checked">
                 <mat-form-field appearance="fill" class="form-group">
-                  <mat-label>Регион</mat-label>
+                  <mat-label>Областной Регион</mat-label>
                   <input matInput required class="region" formControlName="regionCompany" [matAutocomplete]="auto1">
                   <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
                     <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectRegion(option)">
@@ -156,7 +156,20 @@
                 </mat-form-field>
 
 
+
+
               </div>
+              <mat-form-field appearance="fill" class="form-group" >
+                <mat-label>ИНН / ОГРН</mat-label>
+                <input matInput required class="region" formControlName="identityCompany" [matAutocomplete]="auto6">
+                <mat-autocomplete #auto6="matAutocomplete" [displayWith]="displayFn2">
+                  <mat-option *ngFor="let option of innArr" [value]="option" >
+                    {{option}}
+
+                  </mat-option>
+                </mat-autocomplete>
+
+              </mat-form-field>
             </div>
             <button type="submit" mat-flat-button color="primary" class="mt-4" [disabled]="regCompanyForm.invalid">
               Сохранить

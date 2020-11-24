@@ -5,8 +5,14 @@ import {AddressObj} from '../../../../../models/address/AddressObj';
 import {AddressCompany} from '../../../../../models/address/AddressCompany';
 import {Observable} from 'rxjs';
 import {FindAddressService} from '../../../../common-service/find-address.service';
+import {RootSuggestion} from '../../../../../models/organisation/RootSuggestion';
 
 declare var $: any;
+const urlDaDataINN: string = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party';
+const tokenDaData: string = 'a437178a69bc00fcb26cce29fca12824be0ae5af';
+
+
+
 
 @Component({
   selector: 'app-company-registration',
@@ -17,8 +23,6 @@ declare var $: any;
 export class CompanyRegistrationComponent implements OnInit {
 
 
-
-
   regCompanyForm: FormGroup;
   nameCompany: FormControl;
   countryCompany: FormControl;
@@ -27,16 +31,19 @@ export class CompanyRegistrationComponent implements OnInit {
   buildingCompany: FormControl;
   regionCompany: FormControl;
   districtCompany: FormControl;
+  identityCompany: FormControl;
 
 
   private _resAddress: AddressCompany;
 
   filteredOptions: Observable<AddressObj[]>;
   public fiasObjects: Array<AddressObj> = new Array<AddressObj>();
+  innArr: string[];
 
   constructor(private authService: AuthService, private findAddressService: FindAddressService) {
     this.resAddress = new AddressCompany();
   }
+
 
   ngOnInit(): void {
     this.createFormControls();
@@ -44,9 +51,49 @@ export class CompanyRegistrationComponent implements OnInit {
     this.Jquery();
 
     this.findAddressService.searchRegion(this.regionCompany, this.fiasObjects);
-this.findAddressService.requestCompanyBYINN("402708415215").subscribe(value => console.log(value))
+
+    this.identityCompany.valueChanges.subscribe(value => {
+      let s = new RootSuggestion();
+      this.requestCompanyBYINN(value);
+      console.log(s)
+
+
+
+    })
 
   }
+
+  public requestCompanyBYINN(query: string) {
+    let options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Token " + tokenDaData
+      },
+      body: JSON.stringify({
+        query: query,
+        type: "LEGAL",
+        count: 10
+      })
+    }
+let res = new RootSuggestion();
+
+    // @ts-ignore
+    fetch(urlDaDataINN, options)
+      .then(response => response.text())
+      .then(result => {
+        this.innArr = [];
+        res = JSON.parse(result)
+        for (let i = 0; i < res.suggestions.length; i++) {
+          this.innArr.push(res.suggestions[i].data.name.full)
+        }
+        console.log(this.innArr)
+      })
+      .catch(error => console.log("error", error));
+  }
+
 
   createFormControls() {
     this.nameCompany = new FormControl('', [Validators.required, Validators.maxLength(30)]);
@@ -56,6 +103,7 @@ this.findAddressService.requestCompanyBYINN("402708415215").subscribe(value => c
     this.buildingCompany = new FormControl('', [Validators.required, Validators.maxLength(10)]);
     this.regionCompany = new FormControl('', [Validators.required, Validators.maxLength(20)]);
     this.districtCompany = new FormControl('', [Validators.maxLength(15)]);
+    this.identityCompany = new FormControl('');
 
   }
 
@@ -67,7 +115,8 @@ this.findAddressService.requestCompanyBYINN("402708415215").subscribe(value => c
       streetCompany: this.streetCompany,
       buildingCompany: this.buildingCompany,
       regionCompany: this.regionCompany,
-      districtCompany: this.districtCompany
+      districtCompany: this.districtCompany,
+      identityCompany: this.identityCompany
     });
 
   }
@@ -138,7 +187,6 @@ this.findAddressService.requestCompanyBYINN("402708415215").subscribe(value => c
   }
 
   private checkForm() {
-    console.log(this.resAddress);
     if (this.resAddress.region.name == '') {
       let obj = new AddressObj();
       obj.name = this.regionCompany.value;
@@ -164,7 +212,6 @@ this.findAddressService.requestCompanyBYINN("402708415215").subscribe(value => c
       obj.name = this.buildingCompany.value;
       this.resAddress.building = obj;
     }
-    console.log(this.resAddress);
   }
 
   clearOldData() {
@@ -175,11 +222,14 @@ this.findAddressService.requestCompanyBYINN("402708415215").subscribe(value => c
 
   selectCountry() {
     for (let i in this.regCompanyForm.controls) {
-      this.regCompanyForm.controls[i].setValue('');
-      console.log(this.regCompanyForm.controls[i]);
+      if (i !== 'nameCompany') {
+        this.regCompanyForm.controls[i].setValue('');
+        this.regCompanyForm.controls[i].markAsUntouched();
+        console.log(this.regCompanyForm.controls[i]);
+      }
+
     }
     this.resAddress = new AddressCompany();
-    this.regCompanyForm.markAsDirty();
   }
 
   public getErrorMessageRequired(nameFiled: string): string {
@@ -201,8 +251,16 @@ this.findAddressService.requestCompanyBYINN("402708415215").subscribe(value => c
 
   public getErrorMessageMin(nameFiled: string, amount: number): string {
     return 'Число в поле ' + nameFiled + ' должно быть не менее ' + amount;
-    ;
+
+  }
+
+  displayFn2(obj: string): string {
+    return obj && obj ? obj : '';
   }
 
 
+  selectInn(option) {
+    console.log(option)
+    this.identityCompany.setValue(option);
+  }
 }

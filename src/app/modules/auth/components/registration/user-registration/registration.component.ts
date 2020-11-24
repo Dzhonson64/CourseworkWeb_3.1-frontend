@@ -175,6 +175,8 @@ export class RegistrationComponent implements OnInit {
     return obj && obj.name ? obj.name : '';
   }
 
+
+
   private Jquery() {
     $.fias.token = '5Kaya85thDHibsYt2frbZzNQ6kh2StNN';
     $.fias.url = 'https://kladr-api.ru/api.php';

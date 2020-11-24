@@ -12,22 +12,6 @@
   z-index: 10;
 }
 
-//a.btn {
-//  width: 200px;
-//  padding: 18px 0;
-//  position: absolute;
-//  top: 50%;
-//  left: 50%;
-//  transform: translate(-50%, -50%);
-//  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-//  font-weight: 700;
-//  text-align: center;
-//  text-decoration: none;
-//  text-transform: uppercase;
-//  color: #fff;
-//  border-radius: 0;
-//  background: #e2525c;
-//}
 
 .modal-wrapper.open {
   opacity: 1;
@@ -55,7 +39,7 @@
 
 .head {
   width: 100%;
-  padding: 12px 30px;
+  padding: 0 30px;
   overflow: hidden;
   background: #4285F4;
 }

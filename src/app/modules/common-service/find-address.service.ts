@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {FormControl} from '@angular/forms';
 import {AddressObj} from '../../models/address/AddressObj';
 import set = Reflect.set;
+import {RootSuggestion} from '../../models/organisation/RootSuggestion';
 
 declare var $: any;
 
@@ -12,23 +13,11 @@ declare var $: any;
 })
 export class FindAddressService {
 
-  private urlDaDataINN: string = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/findById/party';
-  private tokenDaData: string = 'a437178a69bc00fcb26cce29fca12824be0ae5af';
 
   constructor(private http: HttpClient) {
   }
 
 
-  public requestCompanyBYINN(str: string) {
-    const myHeaders = new HttpHeaders();
-    myHeaders.set('Authorization', 'Token ' + this.tokenDaData)
-      .set('Content-Type', 'application/json')
-      .set('Accept', 'application/json');
-    const params = new HttpParams()
-      .set('query', str.toString())
-      .set("type", "INDIVIDUAL");
-    return this.http.post(this.urlDaDataINN, {params}, {headers: myHeaders});
-  }
 
 
   public requestSearchRegion(str: string) {
