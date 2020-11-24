@@ -11,7 +11,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [],
@@ -29,7 +31,9 @@ import {MatRadioModule} from '@angular/material/radio';
     MatInputModule,
     MatMenuModule,
     MatDatepickerModule,
-    MatRadioModule
+    MatRadioModule,
+    MatAutocompleteModule,
+    MatNativeDateModule, MatMomentDateModule
   ]
 })
 export class MatFieldCommonModule { }

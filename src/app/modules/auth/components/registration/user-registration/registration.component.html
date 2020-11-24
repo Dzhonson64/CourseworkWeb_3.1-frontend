@@ -1,0 +1,283 @@
+<div class="registration-block">
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      <div class="login-content">
+        <div class="form-panel">
+          <div class="form-header">
+            Регистрация пользователя
+          </div>
+          <div class="form-content">
+            <form (ngSubmit)="submit()">
+              <form class="" [formGroup]="regSiteDataUserForm" novalidate >
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>Введите никнейм</mat-label>
+                  <input matInput required formControlName="nickNameUser">
+                  <mat-error *ngIf="nickNameUser.hasError('required')">{{getErrorMessageRequired('Никнейм')}}</mat-error>
+                  <mat-error *ngIf="nickNameUser.hasError('maxlength')">{{getErrorMessageMaxLength('Никнейм', 15)}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>Имя</mat-label>
+                  <input matInput required formControlName="nameUser">
+                  <mat-error *ngIf="nameUser.hasError('required')">{{getErrorMessageRequired('Имя')}}</mat-error>
+                  <mat-error *ngIf="nameUser.hasError('maxlength')">{{getErrorMessageMaxLength('Имя', 20)}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>Фамилия</mat-label>
+                  <input matInput required formControlName="surnameUser">
+                  <mat-error *ngIf="surnameUser.hasError('required')">{{getErrorMessageRequired('Фамилия')}}</mat-error>
+                  <mat-error *ngIf="surnameUser.hasError('maxlength')">{{getErrorMessageMaxLength('Фамилия', 20)}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>Отчество</mat-label>
+                  <input matInput  formControlName="patronymicUser">
+                  <mat-error *ngIf="patronymicUser.hasError('maxlength')">{{getErrorMessageMaxLength('Отчество', 20)}}</mat-error>
+                  <mat-error *ngIf="patronymicUser.hasError('required')">{{getErrorMessageRequired('Отчество')}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>Пароль</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" required formControlName="passwordUser">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Скрыть пароль'"
+                          [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="passwordUser.hasError('required')">{{getErrorMessageRequired('Пароль')}}</mat-error>
+                  <mat-error *ngIf="passwordUser.hasError('maxlength')">{{getErrorMessageMaxLength('Пароль', 20)}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>Подтвердите пароль</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" required formControlName="passwordConfirmUser">
+
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Скрыть пароль'"
+                          [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+                  </button>
+                  <mat-error *ngIf="passwordConfirmUser.hasError('required')">{{getErrorMessageRequired('Пароль')}}</mat-error>
+                  <mat-error *ngIf="passwordConfirmUser.hasError('maxlength')">{{getErrorMessageMaxLength('Пароль', 20)}}</mat-error>
+                  <mat-error *ngIf="displayPasswordError && passwordConfirmUser.dirty"> Пароли не совпадает</mat-error>
+
+                </mat-form-field>
+
+
+
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>Введите ваш e-mail</mat-label>
+                  <input matInput placeholder="name@example.com" required formControlName="emailUser">
+                  <mat-error *ngIf="emailUser.hasError('required')">{{getErrorMessageRequired('E-mail')}}</mat-error>
+                  <mat-error *ngIf="emailUser.hasError('email')">{{getErrorMessageEmail()}}</mat-error>
+
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Дата рождения</mat-label>
+                  <input matInput [matDatepicker]="dp" formControlName="birthdayUser" required>
+                  <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                  <mat-datepicker #dp></mat-datepicker>
+                  <mat-error *ngIf="birthdayUser.hasError('required')">{{getErrorMessageRequired('Дату рождения')}}</mat-error>
+
+                </mat-form-field>
+                <div class="userGender d-flex mb-3 flex-column">
+                  <mat-label>Пол</mat-label>
+                  <mat-radio-group class="radio-group-userSex d-flex  flex-column" formControlName="genderUser">
+                    <mat-radio-button value="Мужской" [checked]=true>Мужской</mat-radio-button>
+                    <mat-radio-button value="Женский">Женский</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>Мобильный телефон</mat-label>
+                  <input matInput required formControlName="phoneUser" type="number">
+                  <mat-error *ngIf="phoneUser.hasError('required')">{{getErrorMessageRequired('Телефон')}}</mat-error>
+
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>СНИЛС</mat-label>
+                  <input matInput required formControlName="snilsUser" >
+                  <mat-error *ngIf="snilsUser.hasError('required')">{{getErrorMessageRequired('СНИЛС')}}</mat-error>
+
+                </mat-form-field>
+              </form>
+              <form [formGroup]="regAddressUserForm" novalidate>
+                <div class="address d-flex flex-column">
+                  <mat-label>Страна</mat-label>
+                  <mat-radio-group class="radio-group-country d-flex flex-column" formControlName="countryUser">
+                    <mat-radio-button value="Россия" class="mt-1" #russia_rb (click)="deleteFiasArr()">Россия
+                    </mat-radio-button>
+                    <mat-radio-button value="Другой" class="mt-1" #other (click)="deleteFiasArr()">Другой</mat-radio-button>
+
+                  </mat-radio-group>
+                  <div class="location-company mt-4" *ngIf="russia_rb.checked">
+                    <mat-form-field appearance="fill" class="form-group">
+                      <mat-label>Областной район</mat-label>
+                      <input matInput required class="region" formControlName="regionUser" [matAutocomplete]="auto1">
+                      <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectRegion(option)">
+                          {{option.type | lowercase}} {{option.name}}
+
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-error *ngIf="regionUser.hasError('required')">{{getErrorMessageRequired('Регион')}}</mat-error>
+                      <mat-error *ngIf="regionUser.hasError('maxlength')">{{getErrorMessageMaxLength('Регион', 20)}}</mat-error>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="form-group" *ngIf="regionUser.value">
+                      <mat-label>Областной район</mat-label>
+                      <input matInput class="city" formControlName="districtUser" [matAutocomplete]="auto2">
+                      <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectDistrict(option)">
+                          {{option.type | lowercase}} {{option.name}}
+
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-error *ngIf="districtUser.hasError('maxlength')">{{getErrorMessageMaxLength('Район', 15)}}</mat-error>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="form-group" *ngIf="regionUser.value">
+                      <mat-label>Населённый пункт</mat-label>
+                      <input matInput required class="city" formControlName="cityUser" [matAutocomplete]="auto3">
+                      <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectLocality(option)">
+                          {{option.type | lowercase}} {{option.name}}
+
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-error *ngIf="cityUser.hasError('maxlength')">{{getErrorMessageMaxLength('Населённый пункт', 20)}}</mat-error>
+                      <mat-error *ngIf="cityUser.hasError('required')">{{getErrorMessageRequired('Населённый пункт')}}</mat-error>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="form-group" *ngIf="cityUser.value">
+                      <mat-label>Улица</mat-label>
+                      <input matInput required class="street" formControlName="streetUser" [matAutocomplete]="auto4">
+                      <mat-autocomplete #auto4="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectStreet(option)">
+                          {{option.type | lowercase}} {{option.name}}
+
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-error *ngIf="streetUser.hasError('maxlength')">{{getErrorMessageMaxLength('Улица', 15)}}</mat-error>
+                      <mat-error *ngIf="streetUser.hasError('required')">{{getErrorMessageRequired('Улица')}}</mat-error>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="form-group" *ngIf="streetUser.value">
+                      <mat-label>Дом</mat-label>
+                      <input matInput required class="building" formControlName="buildingUser" [matAutocomplete]="auto5">
+                      <mat-autocomplete #auto5="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectBuilding(option)">
+                          {{option.type | lowercase}} {{option.name}}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-error *ngIf="buildingUser.hasError('maxlength')">{{getErrorMessageMaxLength('Дом', 10)}}</mat-error>
+                      <mat-error *ngIf="buildingUser.hasError('required')">{{getErrorMessageRequired('Дом')}}</mat-error>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="form-group" *ngIf="buildingUser.value">
+                      <mat-label>Квартира</mat-label>
+                      <input matInput required class="building" formControlName="apartmentUser">
+                      <mat-error *ngIf="apartmentUser.hasError('maxlength')">{{getErrorMessageMaxLength('Квартира', 5)}}</mat-error>
+                      <mat-error *ngIf="apartmentUser.hasError('required')">{{getErrorMessageRequired('Квартира')}}</mat-error>
+
+
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="form-group">
+                      <mat-label>Почтовый индекс</mat-label>
+                      <input matInput required formControlName="zipUser" type="number">
+                      <mat-error *ngIf="zipUser.hasError('min')">{{getErrorMessageMin('Почтовый индекс', 100000)}}</mat-error>
+                      <mat-error *ngIf="zipUser.hasError('max')">{{getErrorMessageMax('Почтовый индекс', 999999)}}</mat-error>
+                      <mat-error *ngIf="zipUser.hasError('required')">{{getErrorMessageRequired('Почтовый индекс')}}</mat-error>
+
+                    </mat-form-field>
+
+                  </div>
+
+
+                  <div class="location-company mt-4" *ngIf="other.checked">
+                    <mat-form-field appearance="fill" class="form-group">
+                      <mat-label>Страна</mat-label>
+                      <input matInput required class="region" formControlName="countryUser">
+                      <mat-error *ngIf="buildingUser.hasError('maxlength')">{{getErrorMessageMaxLength('Страна', 20)}}</mat-error>
+                      <mat-error *ngIf="buildingUser.hasError('required')">{{getErrorMessageRequired('Страна')}}</mat-error>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="form-group">
+                      <mat-label>Регион</mat-label>
+                      <input matInput required class="region" formControlName="regionUser">
+                      <mat-error *ngIf="regionUser.hasError('required')">{{getErrorMessageRequired('Регион')}}</mat-error>
+                      <mat-error *ngIf="regionUser.hasError('maxlength')">{{getErrorMessageMaxLength('Регион', 20)}}</mat-error>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="form-group" *ngIf="regionUser.value">
+                      <mat-label>Областной район</mat-label>
+                      <input matInput class="city" formControlName="districtUser">
+                      <mat-error *ngIf="districtUser.hasError('maxlength')">{{getErrorMessageMaxLength('Регион', 10)}}</mat-error>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="form-group" *ngIf="regionUser.value">
+                      <mat-label>Населённый пункт</mat-label>
+                      <input matInput required class="city" formControlName="cityUser">
+                      <mat-error *ngIf="cityUser.hasError('maxlength')">{{getErrorMessageMaxLength('Населённый пункт', 20)}}</mat-error>
+                      <mat-error *ngIf="cityUser.hasError('required')">{{getErrorMessageRequired('Населённый пункт')}}</mat-error>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="form-group" *ngIf="cityUser.value">
+                      <mat-label>Улица</mat-label>
+                      <input matInput required class="street" formControlName="streetUser">
+                      <mat-error *ngIf="streetUser.hasError('maxlength')">{{getErrorMessageMaxLength('Улица', 15)}}</mat-error>
+                      <mat-error *ngIf="streetUser.hasError('required')">{{getErrorMessageRequired('Улица')}}</mat-error>
+
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="fill" class="form-group" *ngIf="streetUser.value">
+                      <mat-label>Дом</mat-label>
+                      <input matInput required class="building" formControlName="buildingUser">
+                      <mat-error *ngIf="buildingUser.hasError('maxlength')">{{getErrorMessageMaxLength('Дом', 10)}}</mat-error>
+                      <mat-error *ngIf="buildingUser.hasError('required')">{{getErrorMessageRequired('Дом')}}</mat-error>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="form-group" *ngIf="buildingUser.value">
+                      <mat-label>Квартира</mat-label>
+                      <input matInput required class="building" formControlName="apartmentUser">
+                      <mat-error *ngIf="apartmentUser.hasError('maxlength')">{{getErrorMessageMaxLength('Квартира', 5)}}</mat-error>
+                      <mat-error *ngIf="apartmentUser.hasError('required')">{{getErrorMessageRequired('Квартира')}}</mat-error>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="form-group">
+                      <mat-label>Почтовый индекс</mat-label>
+                      <input matInput required formControlName="zipUser" type="number">
+                      <mat-error *ngIf="zipUser.hasError('min')">{{getErrorMessageMin('Почтовый индекс', 100000)}}</mat-error>
+                      <mat-error *ngIf="zipUser.hasError('max')">{{getErrorMessageMax('Почтовый индекс', 999999)}}</mat-error>
+                      <mat-error *ngIf="zipUser.hasError('required')">{{getErrorMessageRequired('Почтовый индекс')}}</mat-error>
+
+                    </mat-form-field>
+
+                  </div>
+                </div>
+
+              </form>
+
+              <div class="d-flex align-items-center justify-content-between flex-row">
+                <button mat-flat-button color="primary" type="submit"
+                        [disabled]="regAddressUserForm.invalid || regSiteDataUserForm.invalid"><a routerLink=""></a>Зарегестрироваться
+                </button>
+              </div>
+              {{regAddressUserForm.invalid}}
+              {{regAddressUserForm.invalid}}
+            </form>
+
+
+
+
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+

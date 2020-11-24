@@ -66,7 +66,7 @@ export class SettingsComponent implements OnInit {
     this.createForm();
 
     this.userName.valueChanges.subscribe(value => {
-      console.log(this.userName);
+
     });
   }
 
@@ -126,9 +126,8 @@ export class SettingsComponent implements OnInit {
       snils: this.userSnils.value
     };
     this.profileService.saveUserData(this.userModel).subscribe(value => {
-console.log("Sus")
+
     });
-    console.log(this.personalDataForm);
   }
 
 
@@ -138,7 +137,7 @@ console.log("Sus")
     this._fileToUpload = new File([blob], event.target.files[0].name, {type: 'image/png'});
     this._pathImgFile = URL.createObjectURL(this._fileToUpload);
     this.profileService.uploadImage(this.fileToUpload).subscribe(value => {
-      console.log(event);
+
     });
 
   }

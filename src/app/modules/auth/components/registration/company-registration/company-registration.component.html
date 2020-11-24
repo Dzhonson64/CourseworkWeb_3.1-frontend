@@ -1,0 +1,186 @@
+<div class="registration-block">
+  <div class="container">
+    <div class=" d-flex justify-content-center">
+      <div class="login-content">
+        <div class="form-panel">
+          <div class="form-header">
+            Регистрация компании
+          </div>
+          <form class="form-content " [formGroup]="regCompanyForm" novalidate
+                (ngSubmit)="submit()">
+            <mat-form-field appearance="fill" class="form-group">
+              <mat-label>Название компании</mat-label>
+              <input matInput required formControlName="nameCompany">
+              <mat-error
+                *ngIf="nameCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Название компании', 30)}}</mat-error>
+              <mat-error
+                *ngIf="nameCompany.hasError('required')">{{getErrorMessageRequired('Название компании')}}</mat-error>
+
+            </mat-form-field>
+            <div class="address d-flex flex-column">
+              <mat-label>Страна</mat-label>
+              <mat-radio-group class="radio-group-country d-flex flex-column" formControlName="countryCompany">
+                <mat-radio-button value="Россия" class="mt-1" [checked]="true" #russia_rb (click)="selectCountry()">Россия
+                </mat-radio-button>
+                <mat-radio-button  class="mt-1" #other (click)="selectCountry()">Другой</mat-radio-button>
+              </mat-radio-group>
+
+              <div class="location-company mt-4" *ngIf="russia_rb.checked">
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>Областной Регион</mat-label>
+                  <input matInput required class="region" formControlName="regionCompany" [matAutocomplete]="auto1">
+                  <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectRegion(option)">
+                      {{option.type | lowercase}} {{option.name}}
+
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error
+                    *ngIf="regionCompany.hasError('required')">{{getErrorMessageRequired('Регион')}}</mat-error>
+                  <mat-error
+                    *ngIf="regionCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Регион', 20)}}</mat-error>
+
+                </mat-form-field>
+
+
+                <mat-form-field appearance="fill" class="form-group" *ngIf="regionCompany.value">
+                  <mat-label>Областной район</mat-label>
+                  <input matInput class="city" formControlName="districtCompany" [matAutocomplete]="auto2">
+                  <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectDistrict(option)">
+                      {{option.type | lowercase}} {{option.name}}
+
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error
+                    *ngIf="districtCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Регион', 10)}}</mat-error>
+
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group" *ngIf="regionCompany.value">
+                  <mat-label>Населённый пункт</mat-label>
+                  <input matInput required class="city" formControlName="cityCompany" [matAutocomplete]="auto3">
+                  <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectLocality(option)">
+                      {{option.type | lowercase}} {{option.name}}
+
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error
+                    *ngIf="cityCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Населённый пункт', 20)}}</mat-error>
+                  <mat-error
+                    *ngIf="cityCompany.hasError('required')">{{getErrorMessageRequired('Населённый пункт')}}</mat-error>
+
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group" *ngIf="cityCompany.value">
+                  <mat-label>Улица</mat-label>
+                  <input matInput required class="street" formControlName="streetCompany" [matAutocomplete]="auto4">
+                  <mat-autocomplete #auto4="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectStreet(option)">
+                      {{option.type | lowercase}} {{option.name}}
+
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error
+                    *ngIf="streetCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Улица', 15)}}</mat-error>
+                  <mat-error *ngIf="streetCompany.hasError('required')">{{getErrorMessageRequired('Улица')}}</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="form-group" *ngIf="streetCompany.value">
+                  <mat-label>Дом</mat-label>
+                  <input matInput required class="building" formControlName="buildingCompany" [matAutocomplete]="auto5">
+                  <mat-autocomplete #auto5="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of fiasObjects" [value]="option" (click)="selectBuilding(option)">
+                      {{option.type | lowercase}} {{option.name}}
+
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error
+                    *ngIf="buildingCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Дом', 10)}}</mat-error>
+                  <mat-error *ngIf="buildingCompany.hasError('required')">{{getErrorMessageRequired('Дом')}}</mat-error>
+
+                </mat-form-field>
+              </div>
+              <div class="location-company mt-4" *ngIf="other.checked">
+                <mat-form-field appearance="fill" class="form-group">
+
+                  <mat-label>Страна</mat-label>
+                  <input matInput required class="region" formControlName="countryCompany">
+                  <mat-error
+                    *ngIf="countryCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Страна', 20)}}</mat-error>
+                  <mat-error
+                    *ngIf="countryCompany.hasError('required')">{{getErrorMessageRequired('Страна')}}</mat-error>
+
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group">
+                  <mat-label>Областной район</mat-label>
+                  <input matInput required class="region" formControlName="regionCompany">
+                  <mat-error
+                    *ngIf="regionCompany.hasError('required')">{{getErrorMessageRequired('Регион')}}</mat-error>
+                  <mat-error
+                    *ngIf="regionCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Регион', 20)}}</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="form-group" *ngIf="regionCompany.value">
+                  <mat-label>Район</mat-label>
+                  <input matInput class="city" formControlName="districtCompany">
+                  <mat-error
+                    *ngIf="districtCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Регион', 10)}}</mat-error>
+
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group" *ngIf="regionCompany.value">
+                  <mat-label>Населённый пункт</mat-label>
+                  <input matInput required class="city" formControlName="cityCompany">
+                  <mat-error
+                    *ngIf="cityCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Населённый пункт', 20)}}</mat-error>
+                  <mat-error
+                    *ngIf="cityCompany.hasError('required')">{{getErrorMessageRequired('Населённый пункт')}}</mat-error>
+
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="form-group" *ngIf="cityCompany.value">
+                  <mat-label>Улица</mat-label>
+                  <input matInput required class="street" formControlName="streetCompany">
+                  <mat-error
+                    *ngIf="streetCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Улица', 15)}}</mat-error>
+                  <mat-error *ngIf="streetCompany.hasError('required')">{{getErrorMessageRequired('Улица')}}</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="form-group" *ngIf="streetCompany.value">
+                  <mat-label>Дом</mat-label>
+                  <input matInput required class="building" formControlName="buildingCompany">
+                  <mat-error
+                    *ngIf="buildingCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Дом', 10)}}</mat-error>
+                  <mat-error *ngIf="buildingCompany.hasError('required')">{{getErrorMessageRequired('Дом')}}</mat-error>
+                </mat-form-field>
+
+
+
+
+              </div>
+              <mat-form-field appearance="fill" class="form-group" >
+                <mat-label>ИНН / ОГРН</mat-label>
+                <input matInput required class="region" formControlName="identityCompany" [matAutocomplete]="auto6">
+                <mat-autocomplete #auto6="matAutocomplete" [displayWith]="displayFn2">
+                  <mat-option *ngFor="let option of innArr" [value]="option" >
+                    {{option}}
+
+                  </mat-option>
+                </mat-autocomplete>
+
+              </mat-form-field>
+            </div>
+            <button type="submit" mat-flat-button color="primary" class="mt-4" [disabled]="regCompanyForm.invalid">
+              Сохранить
+            </button>
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+

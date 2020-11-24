@@ -6,10 +6,12 @@ import {MainModule} from './modules/main/main.module';
 import {AuthModule} from './modules/auth/auth.module';
 import {ProfileModule} from './modules/profile/profile.module';
 import {CommonModule} from '@angular/common';
+import { ComparePasswordsDirective } from './directives/compare-passwords.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ComparePasswordsDirective,
   ],
   imports: [
     BrowserModule,
