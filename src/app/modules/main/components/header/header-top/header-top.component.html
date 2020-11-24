@@ -1,45 +1,59 @@
 <div class="header-bot">
-    <div class="container">
-        <div class="row header-bot_inner_wthreeinfo_header_mid d-flex align-items-center">
-            <!-- logo -->
+  <div class="container">
+    <div class="row header-bot_inner_wthreeinfo_header_mid d-flex align-items-center">
+      <!-- logo -->
 
-            <div class="col-md-3 logo_agile">
-                <h1 class="text-center">
-                    <a routerLink="" class="font-weight-bold font-italic">
-                        <i class="fas fa-cogs"></i>
-                        RusElectro
-                    </a>
-                </h1>
-            </div>
-            <!-- //logo -->
-            <!-- search -->
-            <div class="col-md-8 header">
-                <div class="row">
-                    
-                    <div class="col-10 agileits_search">
-                        <form class="form-inline" action="#" method="post">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-                                required>
-                                <button mat-flat-button color="accent" class="search" type="submit">Поиск</button>
-                        </form>
-                    </div>
-                    
-                    
-                </div>
-            </div>
-            <!-- //search -->
-            <div class="col-1 top_nav_right text-center">
-                <div class="wthreecartaits wthreecartaits2 cart cart box_1">
-                    <form action="#" method="post" class="last">
-                        <input type="hidden" name="cmd" value="_cart">
-                        <input type="hidden" name="display" value="1">
-                        <button class="btn w3view-cart" type="submit" name="submit" value="">
-                            <i class="fas fa-cart-arrow-down"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <!-- //cart details -->
+      <div class="col-md-3 logo_agile">
+        <h1 class="text-center">
+          <a routerLink="" class="font-weight-bold font-italic">
+            <i class="fas fa-cogs"></i>
+            RusElectro
+          </a>
+        </h1>
+      </div>
+      <!-- //logo -->
+      <!-- search -->
+      <div class="col-md-7 header">
+        <div class="row">
+
+          <div class="col-10 agileits_search">
+            <form class="form-inline" action="#" method="post">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                     required>
+              <button mat-flat-button color="accent" class="search" type="submit">Поиск</button>
+            </form>
+          </div>
+
+
         </div>
+      </div>
+      <!-- //search -->
+      <div class="col-2 top_nav_right text-center">
+        <div class="row">
+          <div class="col-md-3 d-flex">
+            <a routerLink="/me">
+              <i class="fas fa-user-alt align-self-center"></i>
+            </a>
+
+          </div>
+          <div class="col-md-8">
+            <div class="wthreecartaits wthreecartaits2 cart cart box_1">
+              <form action="#" method="post" class="last">
+                <input type="hidden" name="cmd" value="_cart">
+                <input type="hidden" name="display" value="1">
+
+                <button class="btn w3view-cart" type="submit" name="submit" value="">
+                  <i class="fas fa-cart-arrow-down"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- //cart details -->
     </div>
+  </div>
 </div>

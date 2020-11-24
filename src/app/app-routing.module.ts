@@ -22,9 +22,8 @@ const routes: Routes = [
       {path: 'company', component: CompanyRegistrationComponent}
     ]
   },
-  {
-    path: 'test', loadChildren: () => ProfileModule
-  }
+  { path: 'me', loadChildren: () => ProfileModule}
+
 ];
 
 @NgModule({

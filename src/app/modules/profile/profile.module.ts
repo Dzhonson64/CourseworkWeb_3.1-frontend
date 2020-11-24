@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SettingsComponent } from './componets/settings/settings.component';
 import {RoutingModule} from './routing.module';
-import { LayoutComponent } from './componets/layout/layout.component';
+import { ProfileLayoutComponent } from './componets/layout/profile-layout.component';
 import {RouterModule} from '@angular/router';
 import {HeaderModule} from '../main/components/header/header.module';
 import {MenuComponent} from '../main/components/header/menu/menu.component';
@@ -11,14 +11,16 @@ import {MatFieldCommonModule} from '../common-modules/mat-field/mat-field-common
 import {FormCommonModule} from '../common-modules/forms/form-common.module';
 import { LeftMenuComponent } from './componets/left-menu/left-menu.component';
 import {HttpClientModule} from '@angular/common/http';
+import { ProductCompanyComponent } from './componets/productCompany/components/product-company/product-company.component';
 
 
 
 @NgModule({
   declarations: [
     SettingsComponent,
-    LayoutComponent,
-    LeftMenuComponent
+    ProfileLayoutComponent,
+    LeftMenuComponent,
+    ProductCompanyComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import {HttpClientModule} from '@angular/common/http';
     RoutingModule,
     MatFieldCommonModule,
     FormCommonModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   providers: [ProfileService]
 })

@@ -36,3 +36,6 @@
   display: flex;
   align-items: center;
 }
+.mat-list-base .mat-list-item .mat-list-item-content-reverse, .mat-list-base .mat-list-option .mat-list-item-content-reverse {
+  width: 100%;
+}
