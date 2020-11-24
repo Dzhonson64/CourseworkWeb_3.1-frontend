@@ -1,5 +1,6 @@
-import { GenderType } from './type/GenderType';
+import {GenderType} from './type/GenderType';
 import {UserStatus} from './type/UserStatus';
+import {AddressUser} from './address/AddressUser';
 
 export class User {
   id?: number = null;
@@ -16,12 +17,13 @@ export class User {
   email: string;
   birthday: string;
   password: string;
-  gender: GenderType;
+  gender: GenderType = GenderType.MALE;
+  address?: AddressUser = new AddressUser();
 
 
   constructor(id?: number, googleId?: string, nickName: string = '',
               snils?: string, surname: string = '', name: string = '', patronymic: string = '', phone: string = '',
-              postcode?: number, money?: number, email: string = '', birthday: string = '', password: string = '', gender: GenderType = GenderType.MALE) {
+              postcode?: number, money?: number, email: string = '', birthday: string = '', password: string = '', gender: GenderType = GenderType.MALE, address?: AddressUser) {
     if (id == undefined) {
       this.id = null;
     } else {
@@ -65,6 +67,7 @@ export class User {
     this.birthday = birthday;
     this.password = password;
     this.gender = gender;
+    this.address = address;
   }
 
   static getInstance(obj: User): User {
@@ -82,7 +85,12 @@ export class User {
       obj.patronymic,
       obj.phone,
       obj.postcode,
-      obj.money
+      obj.money,
+      obj.email,
+      obj.birthday,
+      obj.password,
+      obj.gender,
+      obj.address
     );
     return newObj;
   }

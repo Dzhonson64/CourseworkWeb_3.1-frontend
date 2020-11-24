@@ -18,9 +18,9 @@ import {HomeModule} from './components/home/home.module';
 import {FooterComponent} from './components/footer/footer.component';
 import {ContactComponent} from './components/contact/contact.component';
 import {AppRoutingModule} from '../../app-routing.module';
-import { LoginComponent } from '../auth/login/login.component';
+import { LoginComponent } from '../auth/components/login/login.component';
 import { MatInputModule } from '@angular/material/input';
-import { RegistrationComponent } from '../auth/registration/registration.component';
+import { RegistrationComponent } from '../auth/components/registration/user-registration/registration.component';
 import {MatFieldCommonModule} from '../common-modules/mat-field/mat-field-common.module';
 import {FormCommonModule} from '../common-modules/forms/form-common.module';
 @NgModule({
