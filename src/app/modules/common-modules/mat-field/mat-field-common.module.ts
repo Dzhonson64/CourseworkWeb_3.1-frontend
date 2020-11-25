@@ -14,7 +14,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [],
   imports: [
@@ -33,7 +33,8 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatDatepickerModule,
     MatRadioModule,
     MatAutocompleteModule,
-    MatNativeDateModule, MatMomentDateModule
+    MatNativeDateModule, MatMomentDateModule,
+    MatTooltipModule
   ]
 })
 export class MatFieldCommonModule { }

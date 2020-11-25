@@ -6,6 +6,8 @@ import {AddressCompany} from '../../../../../models/address/AddressCompany';
 import {Observable} from 'rxjs';
 import {FindAddressService} from '../../../../common-service/find-address.service';
 import {RootSuggestion} from '../../../../../models/organisation/RootSuggestion';
+import {Data} from '../../../../../models/organisation/Data';
+import {OrganisationType} from '../../../../../models/type/OrganisationType';
 
 declare var $: any;
 const urlDaDataINN: string = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party';
@@ -31,14 +33,14 @@ export class CompanyRegistrationComponent implements OnInit {
   buildingCompany: FormControl;
   regionCompany: FormControl;
   districtCompany: FormControl;
-  identityCompany: FormControl;
 
+  OrganisationType = OrganisationType;
 
   private _resAddress: AddressCompany;
 
   filteredOptions: Observable<AddressObj[]>;
   public fiasObjects: Array<AddressObj> = new Array<AddressObj>();
-  innArr: string[];
+  innArr: Data[];
 
   constructor(private authService: AuthService, private findAddressService: FindAddressService) {
     this.resAddress = new AddressCompany();
@@ -52,18 +54,22 @@ export class CompanyRegistrationComponent implements OnInit {
 
     this.findAddressService.searchRegion(this.regionCompany, this.fiasObjects);
 
-    this.identityCompany.valueChanges.subscribe(value => {
-      let s = new RootSuggestion();
+    this.nameCompany.valueChanges.subscribe(value => {
       this.requestCompanyBYINN(value);
-      console.log(s)
-
-
-
     })
 
   }
 
   public requestCompanyBYINN(query: string) {
+
+    let d = query
+    console.log(d)
+    // @ts-ignore
+    if (query.name !== undefined) {
+      // @ts-ignore
+       d = query.name?.full;
+    }
+    console.log(d)
     let options = {
       method: "POST",
       mode: "cors",
@@ -73,8 +79,7 @@ export class CompanyRegistrationComponent implements OnInit {
         "Authorization": "Token " + tokenDaData
       },
       body: JSON.stringify({
-        query: query,
-        type: "LEGAL",
+        query: d,
         count: 10
       })
     }
@@ -87,7 +92,7 @@ let res = new RootSuggestion();
         this.innArr = [];
         res = JSON.parse(result)
         for (let i = 0; i < res.suggestions.length; i++) {
-          this.innArr.push(res.suggestions[i].data.name.full)
+          this.innArr.push(res.suggestions[i].data)
         }
         console.log(this.innArr)
       })
@@ -103,7 +108,6 @@ let res = new RootSuggestion();
     this.buildingCompany = new FormControl('', [Validators.required, Validators.maxLength(10)]);
     this.regionCompany = new FormControl('', [Validators.required, Validators.maxLength(20)]);
     this.districtCompany = new FormControl('', [Validators.maxLength(15)]);
-    this.identityCompany = new FormControl('');
 
   }
 
@@ -115,8 +119,7 @@ let res = new RootSuggestion();
       streetCompany: this.streetCompany,
       buildingCompany: this.buildingCompany,
       regionCompany: this.regionCompany,
-      districtCompany: this.districtCompany,
-      identityCompany: this.identityCompany
+      districtCompany: this.districtCompany
     });
 
   }
@@ -254,13 +257,10 @@ let res = new RootSuggestion();
 
   }
 
-  displayFn2(obj: string): string {
-    return obj && obj ? obj : '';
+  displayFn2(obj: Data): string {
+    return obj.name && obj.name.short ? obj.name.short : '';
   }
 
 
-  selectInn(option) {
-    console.log(option)
-    this.identityCompany.setValue(option);
-  }
+
 }

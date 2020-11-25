@@ -9,20 +9,39 @@
           <form class="form-content " [formGroup]="regCompanyForm" novalidate
                 (ngSubmit)="submit()">
             <mat-form-field appearance="fill" class="form-group">
-              <mat-label>Название компании</mat-label>
-              <input matInput required formControlName="nameCompany">
+              <mat-label>Название организации</mat-label>
+              <input matInput required class="nameCompany" formControlName="nameCompany" [matAutocomplete]="auto6">
+              <mat-icon matTooltip="Вы можете искакать компании и индивидуальных предпринимателей:
+                    по ИНН, ОГРН и КПП;
+                    названию (полному и краткому);
+                    ФИО (для индивидуальных предпринимателей);
+                    ФИО руководителя компании;
+                    адресу до улицы."
+                        matTooltipClass="tooltip-identityComp"
+                        class="example-button"
+                        matSuffix>help
+              </mat-icon>
+              <mat-autocomplete #auto6="matAutocomplete" [displayWith]="displayFn2">
+                <mat-option *ngFor="let option of innArr" [value]="option">
+                  {{option.name.short_with_opf}}
+                  <br>
+                  <span class="inn" *ngIf="option.type =='LEGAL' ">ИНН: {{option.inn}} </span>
+                  <span class="inn" *ngIf="option.type =='LEGAL' "> Тип: {{OrganisationType.LEGAL}} </span>
+                  <span class="inn" *ngIf="option.type =='INDIVIDUAL' "> Тип: {{OrganisationType.INDIVIDUAL}} </span>
+                </mat-option>
+              </mat-autocomplete>
               <mat-error
                 *ngIf="nameCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Название компании', 30)}}</mat-error>
               <mat-error
                 *ngIf="nameCompany.hasError('required')">{{getErrorMessageRequired('Название компании')}}</mat-error>
-
             </mat-form-field>
             <div class="address d-flex flex-column">
               <mat-label>Страна</mat-label>
               <mat-radio-group class="radio-group-country d-flex flex-column" formControlName="countryCompany">
-                <mat-radio-button value="Россия" class="mt-1" [checked]="true" #russia_rb (click)="selectCountry()">Россия
+                <mat-radio-button value="Россия" class="mt-1" [checked]="true" #russia_rb (click)="selectCountry()">
+                  Россия
                 </mat-radio-button>
-                <mat-radio-button  class="mt-1" #other (click)="selectCountry()">Другой</mat-radio-button>
+                <mat-radio-button class="mt-1" #other (click)="selectCountry()">Другой</mat-radio-button>
               </mat-radio-group>
 
               <div class="location-company mt-4" *ngIf="russia_rb.checked">
@@ -156,20 +175,9 @@
                 </mat-form-field>
 
 
-
-
               </div>
-              <mat-form-field appearance="fill" class="form-group" >
-                <mat-label>ИНН / ОГРН</mat-label>
-                <input matInput required class="region" formControlName="identityCompany" [matAutocomplete]="auto6">
-                <mat-autocomplete #auto6="matAutocomplete" [displayWith]="displayFn2">
-                  <mat-option *ngFor="let option of innArr" [value]="option" >
-                    {{option}}
 
-                  </mat-option>
-                </mat-autocomplete>
 
-              </mat-form-field>
             </div>
             <button type="submit" mat-flat-button color="primary" class="mt-4" [disabled]="regCompanyForm.invalid">
               Сохранить
