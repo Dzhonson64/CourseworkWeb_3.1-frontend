@@ -12,6 +12,7 @@ import {FormCommonModule} from '../common-modules/forms/form-common.module';
 import { LeftMenuComponent } from './componets/left-menu/left-menu.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ProductCompanyComponent } from './componets/productCompany/components/product-company/product-company.component';
+import {MatSortModule} from '@angular/material/sort';
 
 
 
@@ -30,7 +31,8 @@ import { ProductCompanyComponent } from './componets/productCompany/components/p
     MatFieldCommonModule,
     FormCommonModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    MatSortModule
   ],
   providers: [ProfileService]
 })
