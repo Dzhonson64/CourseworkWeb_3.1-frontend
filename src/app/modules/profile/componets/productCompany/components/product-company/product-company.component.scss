@@ -187,3 +187,53 @@ tr.example-element-row:not(.example-expanded-row):active {
 .material-icons.md-dark.ng-tns-c203-2 {
   color: rgb(33 37 41 / 36%);
 }
+
+tr:hover {
+  cursor: pointer;
+}
+.action-elem-delete, .action-elem-display-more {
+  background-color: #888888;
+  padding: 2px 10px;
+  border-radius: 8px;
+  color: #F2F4F7;
+  transition: all 0.3s ease;
+}
+
+.action-elem-edit {
+  background-color: #F2F4F7;
+  color: #5a5a5a;
+  padding: 2px 10px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.action-elem-display-more:hover{
+  background-color: #F2F4F7;
+  color: #5a5a5a;
+}
+.action-elem-edit:hover{
+  background-color: #888888;
+  color: #F2F4F7;
+}
+
+.action-elem-delete:hover{
+  background-color: #F2F4F7;
+  color: #5a5a5a;
+}
+.display-more-icon{
+  transition: transform 0.3s ease;
+}
+.example-expanded-row .display-more-icon{
+  font-size: 20px;
+  transform: rotate(180deg);
+
+}
+.example-expanded-row{
+  background-color: #F2F4F7;
+  color: #5a5a5a;
+  border: 1px solid;
+}
+
+.removed{
+  opacity: 0.5;
+}
+

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {LOCALE_ID, NgModule} from '@angular/core';
+import {CommonModule, registerLocaleData} from '@angular/common';
 import { SettingsComponent } from './componets/settings/settings.component';
 import {RoutingModule} from './routing.module';
 import { ProfileLayoutComponent } from './componets/layout/profile-layout.component';
@@ -13,7 +13,7 @@ import { LeftMenuComponent } from './componets/left-menu/left-menu.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ProductCompanyComponent } from './componets/productCompany/components/product-company/product-company.component';
 import {MatSortModule} from '@angular/material/sort';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -23,6 +23,7 @@ import {MatSortModule} from '@angular/material/sort';
     LeftMenuComponent,
     ProductCompanyComponent
   ],
+
   imports: [
     CommonModule,
     RouterModule,
@@ -32,8 +33,11 @@ import {MatSortModule} from '@angular/material/sort';
     FormCommonModule,
     HttpClientModule,
     RouterModule,
-    MatSortModule
+    MatSortModule,
+    MatPaginatorModule
   ],
-  providers: [ProfileService]
+  providers: [
+    ProfileService,
+    /*{ provide: LOCALE_ID, useValue: "ru-RU"},*/]
 })
 export class ProfileModule { }
