@@ -54,7 +54,6 @@ export class ProductCompanyComponent implements OnInit, AfterViewInit {
   expandedElement: PeriodicElement | null;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  private defaultObj = {position: 0, name: '000', weight: 0, symbol: '000'};
   private removeElem: PeriodicElement[] = [];
 
   ngAfterViewInit() {

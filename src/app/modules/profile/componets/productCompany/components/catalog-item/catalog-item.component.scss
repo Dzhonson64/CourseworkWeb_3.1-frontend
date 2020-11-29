@@ -1,0 +1,26 @@
+.catalog-item::before{
+  content: "";
+  display: block;
+  height: 20px;
+  left: 0;
+  bottom: 13px;
+  position: absolute;
+  width: 1px;
+  background: black;
+}
+
+.catalog-item::after{
+  content: "";
+  display: block;
+  height: 1px;
+  left: 0;
+  bottom: 12px;
+  position: absolute;
+  width: 18px;
+  background: black;
+}
+
+.catalog-item {
+  position: relative;
+  padding: 20px 0 0 20px;
+}

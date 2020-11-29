@@ -1,0 +1,8 @@
+<button class="catalog-item d-flex"  mat-button [matMenuTriggerFor]="menu" #menuTrigger #catalog>
+  <span class="material-icons">folder</span>
+  <span class="title ml-2">Кореневой католог</span>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="openDialog(actionType.NEW_BRANCH)">Добавить новую ветку</button>
+  <button mat-menu-item (click)="openDialog(actionType.OLD_BRANCH)">Продолжить старую ветку</button>
+</mat-menu>

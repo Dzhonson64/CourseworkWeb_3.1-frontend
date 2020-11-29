@@ -14,14 +14,23 @@ import {HttpClientModule} from '@angular/common/http';
 import { ProductCompanyComponent } from './componets/productCompany/components/product-company/product-company.component';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import { NewProductComponent } from './componets/productCompany/components/new-product/new-product.component';
+import { EditConfigProductsComponent } from './componets/edit-config-products/edit-config-products.component';
+import {ColorPickerModule} from 'ngx-color-picker';
+import { TreeCatalogComponent } from './componets/productCompany/components/tree-catalog/tree-catalog.component';
+import { CatalogItemComponent } from './componets/productCompany/components/catalog-item/catalog-item.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     SettingsComponent,
     ProfileLayoutComponent,
     LeftMenuComponent,
-    ProductCompanyComponent
+    ProductCompanyComponent,
+    NewProductComponent,
+    EditConfigProductsComponent,
+    TreeCatalogComponent,
+    CatalogItemComponent
   ],
 
   imports: [
@@ -34,7 +43,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     HttpClientModule,
     RouterModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ColorPickerModule,
+    MatDialogModule
   ],
   providers: [
     ProfileService,

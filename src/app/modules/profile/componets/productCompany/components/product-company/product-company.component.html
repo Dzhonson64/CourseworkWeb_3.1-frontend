@@ -1,8 +1,14 @@
 <div class="settings">
   <div class="container">
     <div class="content">
-      <h3>Продукты компании</h3>
-      <button mat-flat-button color="primary" (click)="addRow()">Добавить продукт</button>
+      <div class="d-flex justify-content-between flex-row">
+        <h3>Продукты компании</h3>
+        <a routerLink="create">
+          <button mat-flat-button color="primary"  >Добавить продукт</button>
+        </a>
+      </div>
+
+
       <div class="add-product">
         <table mat-table [dataSource]="dataSource" matSort class="product-table" multiTemplateDataRows>
           <ng-container matColumnDef="name">
@@ -80,7 +86,7 @@
           <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons></mat-paginator>
       </div>
     </div>
   </div>
