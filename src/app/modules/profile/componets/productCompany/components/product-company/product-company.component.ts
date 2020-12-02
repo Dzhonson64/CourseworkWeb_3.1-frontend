@@ -59,13 +59,14 @@ export class ProductCompanyComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.translateMatPaginator(this.paginator);
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.dataSource.sort = this.sort;
+
 
   }
 
