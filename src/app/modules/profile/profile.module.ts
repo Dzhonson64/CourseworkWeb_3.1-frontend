@@ -19,6 +19,7 @@ import { EditConfigProductsComponent } from './componets/edit-config-products/ed
 import {ColorPickerModule} from 'ngx-color-picker';
 import { TreeCatalogComponent } from './componets/productCompany/components/tree-catalog/tree-catalog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { TreeItemComponent } from './componets/productCompany/components/tree-catalog/tree-item/tree-item.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     ProductCompanyComponent,
     NewProductComponent,
     EditConfigProductsComponent,
-    TreeCatalogComponent
+    TreeCatalogComponent,
+    TreeItemComponent
   ],
 
   imports: [
