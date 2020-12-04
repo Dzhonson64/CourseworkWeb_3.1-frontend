@@ -1,12 +1,6 @@
 
 
 <template #parent></template>
-<button class="catalog-item d-flex catalog-item"  mat-button [matMenuTriggerFor]="menu" #catalog (click)="selectItemTree()">
-  <span class="material-icons">folder</span>
-  <span class="title ml-2">Кореневой католог {{id}}</span>
-</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="createChild()">Создать дочерний компонент</button>
-  <button mat-menu-item (click)="deleteMe()">Удалить узел</button>
-  <button mat-menu-item (click)="deleteChildren()">Удалить все дочерние узлы</button>
-</mat-menu>
+<button  mat-button (click)="createChild()" #catalog>Создать корневой каталог</button>
+<button mat-flat-button color="primary" (click)="save()">Сохранить</button>
+

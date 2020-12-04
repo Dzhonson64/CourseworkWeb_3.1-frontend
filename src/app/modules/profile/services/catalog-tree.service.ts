@@ -1,20 +1,25 @@
 import {ComponentRef, Injectable} from '@angular/core';
-import {TreeCatalogComponent} from '../componets/productCompany/components/tree-catalog/tree-catalog.component';
 import {CatalogTreeItem} from '../../../models/CatalogTreeItem';
+import {TreeItemComponent} from '../componets/productCompany/components/tree-catalog/tree-item/tree-item.component';
+import {CatalogDto} from '../../../models/CatalogDto';
+import {StatusActive} from '../../../models/type/StatusActive';
+import {User} from '../../../models/User';
+import {HttpClient} from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogTreeService {
 
-  private _selectedItem: ComponentRef<TreeCatalogComponent>;
+  private _selectedItem: ComponentRef<TreeItemComponent>;
   private _container: any;
   private _counter = 0;
-  private _catalogItemsList:CatalogTreeItem[][] = [];
+  private _catalogItemsList: CatalogTreeItem[][] = [];
   private _marginLeft = 0;
 
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
 
@@ -50,11 +55,45 @@ export class CatalogTreeService {
     this._container = value;
   }
 
-  get selectedItem(): ComponentRef<TreeCatalogComponent> {
+
+  get selectedItem(): ComponentRef<TreeItemComponent> {
     return this._selectedItem;
   }
 
-  set selectedItem(value: ComponentRef<TreeCatalogComponent>) {
+  set selectedItem(value: ComponentRef<TreeItemComponent>) {
     this._selectedItem = value;
+  }
+
+  save() {
+    let dto = new CatalogDto();
+    for (let i in this.catalogItemsList[0]) {
+      let node = this.catalogItemsList[0][i].value.instance;
+      this.buildData(dto, node);
+    }
+    this.saveCatalog(dto).subscribe();
+  }
+
+
+
+  buildData(parent:CatalogDto, node: TreeItemComponent): CatalogDto {
+    console.log(node)
+    let dtoP = new CatalogDto();
+    dtoP.value = node.title;
+    dtoP.status = node.typeNode;
+    dtoP.id = node.id;
+    parent.children.push(dtoP);
+
+    for (let i = 0; i <  node.componentsRefArray.length; i++){
+      this.buildData(dtoP, node.componentsRefArray[i].value.instance);
+    }
+    return dtoP;
+  }
+
+  public saveCatalog(dto: CatalogDto) {
+    return this.http.post('/api/courseworkWeb/products/catalog', dto.children);
+  }
+
+  public getCatalog():Observable<CatalogDto[]> {
+    return this.http.get<CatalogDto[]>('/api/courseworkWeb/products/catalog');
   }
 }
