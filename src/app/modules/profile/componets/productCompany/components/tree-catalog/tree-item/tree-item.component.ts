@@ -1,20 +1,35 @@
-import {Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ComponentFactory,
+  ComponentFactoryResolver,
+  ComponentRef,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {NodeCatalogTreeType} from '../../../../../../../models/type/NodeCatalogTreeType';
 import {CatalogTreeItem} from '../../../../../../../models/CatalogTreeItem';
 import {CatalogTreeService} from '../../../../../services/catalog-tree.service';
 import {TreeCatalogComponent} from '../tree-catalog.component';
 import {StatusActive} from '../../../../../../../models/type/StatusActive';
 import {StatusMode} from '../../../../../../../models/type/StatusMode';
+import {CatalogDto} from '../../../../../../../models/CatalogDto';
 
 @Component({
   selector: 'app-tree-item',
   templateUrl: './tree-item.component.html',
   styleUrls: ['./tree-item.component.scss']
 })
-export class TreeItemComponent implements OnInit {
-  title: string = "";
-  modeStatus = StatusMode
-  catalogType = NodeCatalogTreeType
+export class TreeItemComponent implements OnInit, AfterViewInit {
+  tempContainer: ViewContainerRef;
+
+  dataDB: CatalogDto;
+  i: string;
+  title: string = '';
+  modeStatus = StatusMode;
+  catalogType = NodeCatalogTreeType;
   @ViewChild('parent', {read: ViewContainerRef}) container: ViewContainerRef;
   @ViewChild('catalog', {read: ViewContainerRef}) catalogItem: ComponentRef<TreeItemComponent>;
   thisNode: ComponentRef<TreeItemComponent | TreeCatalogComponent>;
@@ -25,23 +40,23 @@ export class TreeItemComponent implements OnInit {
   typeNode: NodeCatalogTreeType = NodeCatalogTreeType.ROOT_NODE;
   mode: StatusMode;
   componentsRefArray: CatalogTreeItem[] = [];
+  changeDetectorRef: ChangeDetectorRef;
 
-  constructor(private resolver: ComponentFactoryResolver, private catalogTreeService: CatalogTreeService) {
+  constructor(private resolver: ComponentFactoryResolver,
+              private catalogTreeService: CatalogTreeService,
+              private cdRef: ChangeDetectorRef) {
     this.mode = StatusMode.EDIT;
     this.parentNode = null;
     catalogTreeService.counter++;
     this.cssMarginLeft = catalogTreeService.marginLeft;
     this.status = StatusActive.ENABLE;
-    //console.log(catalogTreeService.catalogItemsList)
+    this.changeDetectorRef = cdRef;
   }
 
   ngOnInit(): void {
 
   }
 
-  ngAfterViewInit() {
-    //console.log(this.catalogItem);
-  }
 
   selectItemTree() {
     this.catalogTreeService.selectedItem = this.catalogItem;
@@ -57,7 +72,7 @@ export class TreeItemComponent implements OnInit {
     catalogItemList.value.instance.status = StatusActive.ENABLE;
 
     catalogItemList.value.instance.parentNode = this.thisNode;
-    if (catalogItemList.value.instance.parentNode === undefined || catalogItemList.value.instance.parentNode === null ) {
+    if (catalogItemList.value.instance.parentNode === undefined || catalogItemList.value.instance.parentNode === null) {
 
       catalogItemList.value.instance.typeNode = NodeCatalogTreeType.ROOT_NODE;
     } else {
@@ -67,17 +82,36 @@ export class TreeItemComponent implements OnInit {
     catalogItemList.value.location.nativeElement.getElementsByClassName('catalog-item')[0].style.marginLeft = this.cssMarginLeft + 'px';
     catalogItemList.value.instance.cssMarginLeft = this.cssMarginLeft + 50;
     this.componentsRefArray.push(catalogItemList);
-    if (catalogItemList.value.instance.typeNode == 0) {
+    if (catalogItemList.value.instance.typeNode == NodeCatalogTreeType.SUB_NODE) {
       this.catalogTreeService.catalogItemsList.push(this.componentsRefArray);
     }
 
-    this.ngOnInit();
-    this.ngAfterViewInit();
+  }
+
+
+  createSubCatalogFromDB(id: number, value: string, status: NodeCatalogTreeType): TreeItemComponent {
+    let catalogItemList = new CatalogTreeItem();
+    const factory: ComponentFactory<TreeItemComponent> = this.resolver.resolveComponentFactory(TreeItemComponent);
+    catalogItemList.value = this.container.createComponent(factory);
+    catalogItemList.value.instance.thisNode = catalogItemList.value;
+    catalogItemList.value.instance.id = id;
+    catalogItemList.value.instance.title = value;
+    catalogItemList.value.instance.typeNode = status;
+    catalogItemList.value.instance.mode = StatusMode.VIEW;
+    catalogItemList.value.location.nativeElement.getElementsByClassName('catalog-item')[0].style.marginLeft = this.cssMarginLeft + 'px';
+    catalogItemList.value.instance.cssMarginLeft = this.cssMarginLeft + 50;
+    this.componentsRefArray.push(catalogItemList);
+    if (catalogItemList.value.instance.typeNode == NodeCatalogTreeType.SUB_NODE) {
+      this.catalogTreeService.catalogItemsList.push(this.componentsRefArray);
+    }
+    return catalogItemList.value.instance;
   }
 
   deleteChildren() {
     this.container.clear();
-    while (this.componentsRefArray.length > 0) this.componentsRefArray.pop()
+    while (this.componentsRefArray.length > 0) {
+      this.componentsRefArray.pop();
+    }
 
   }
 
@@ -96,6 +130,16 @@ export class TreeItemComponent implements OnInit {
 
   edit() {
     this.mode = StatusMode.EDIT;
+  }
+
+  ngAfterViewInit(): void {
+    // console.log('ngAfterViewChecked ');
+    // console.log(this.dataDB);
+    // if (this.dataDB) {
+    //   this.container = this.tempContainer;
+    //   this.createSubCatalogFromDB(this.dataDB.id, this.dataDB.value, this.dataDB.status);
+    // }
+
   }
 
 

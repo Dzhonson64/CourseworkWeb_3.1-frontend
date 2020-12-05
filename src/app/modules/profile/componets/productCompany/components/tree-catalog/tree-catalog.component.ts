@@ -15,6 +15,7 @@ import {NodeCatalogTreeType} from '../../../../../../models/type/NodeCatalogTree
 import {TreeItemComponent} from './tree-item/tree-item.component';
 import {StatusActive} from '../../../../../../models/type/StatusActive';
 import {CatalogDto} from '../../../../../../models/CatalogDto';
+import {StatusMode} from '../../../../../../models/type/StatusMode';
 
 @Component({
   selector: 'app-tree-catalog',
@@ -26,6 +27,8 @@ import {CatalogDto} from '../../../../../../models/CatalogDto';
 export class TreeCatalogComponent implements OnInit, AfterViewInit {
   @ViewChild('parent', {read: ViewContainerRef}) container: ViewContainerRef;
   @ViewChild('catalog', {read: ViewContainerRef}) catalogItem: ComponentRef<TreeCatalogComponent>;
+  @ViewChild(TreeItemComponent) child: TreeItemComponent;
+
   thisNode: ComponentRef<TreeItemComponent>;
   parentNode: ComponentRef<TreeItemComponent> = null;
   id: number;
@@ -33,6 +36,8 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
   typeNode: NodeCatalogTreeType = NodeCatalogTreeType.ROOT_NODE;
   status: StatusActive;
   componentsRefArray: CatalogTreeItem[] = [];
+  globalCompCatalog: CatalogDto[];
+  globalCompTreeItem: TreeItemComponent;
 
   constructor(private resolver: ComponentFactoryResolver, private catalogTreeService: CatalogTreeService) {
     this.parentNode = null;
@@ -46,7 +51,8 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
     this.catalogTreeService.getCatalog().subscribe(value => {
       let catalogTree = new CatalogDto();
       catalogTree.children = value;
-      console.log(catalogTree)
+      this.buildDataFromDB(catalogTree);
+
     });
   }
 
@@ -70,8 +76,42 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
     this.componentsRefArray.push(catalogItemList);
 
 
+  }
 
-    this.ngAfterViewInit();
+  createChildFromDB(id: number, value: string, status: NodeCatalogTreeType): TreeItemComponent {
+    let catalogItemList = new CatalogTreeItem();
+    const factory: ComponentFactory<TreeItemComponent> = this.resolver.resolveComponentFactory(TreeItemComponent);
+    catalogItemList.value = this.container.createComponent(factory);
+    catalogItemList.value.instance.thisNode = catalogItemList.value;
+    catalogItemList.value.instance.id = id;
+    catalogItemList.value.instance.title = value;
+    catalogItemList.value.instance.typeNode = status;
+    catalogItemList.value.instance.mode = StatusMode.VIEW;
+    catalogItemList.value.location.nativeElement.getElementsByClassName('catalog-item')[0].style.marginLeft = this.cssMarginLeft + 'px';
+    catalogItemList.value.instance.cssMarginLeft = this.cssMarginLeft + 50;
+    this.componentsRefArray.push(catalogItemList);
+
+    return catalogItemList.value.instance;
+
+  }
+
+  buildDataFromDB(catalogTree: CatalogDto) {
+
+    for (let i in catalogTree.children) {
+      let catalog = catalogTree.children[i];
+      let child = this.createChildFromDB(catalog.id, catalog.value, catalog.status);
+      this.buildDataChildItem(catalog.children, child);
+    }
+  }
+
+  buildDataChildItem(catalog: CatalogDto[], treeItem: TreeItemComponent): TreeItemComponent {
+    for (let i in catalog) {
+      treeItem.changeDetectorRef.detectChanges();
+      let treeItems = treeItem.createSubCatalogFromDB(catalog[i].id, catalog[i].value, catalog[i].status);
+      this.buildDataChildItem(catalog[i].children, treeItems);
+
+    }
+    return treeItem;
   }
 
 

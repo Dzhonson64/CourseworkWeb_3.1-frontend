@@ -76,7 +76,6 @@ export class CatalogTreeService {
 
 
   buildData(parent:CatalogDto, node: TreeItemComponent): CatalogDto {
-    console.log(node)
     let dtoP = new CatalogDto();
     dtoP.value = node.title;
     dtoP.status = node.typeNode;
