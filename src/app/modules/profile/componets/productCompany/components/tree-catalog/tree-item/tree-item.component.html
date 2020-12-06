@@ -1,7 +1,7 @@
 <template #parent></template>
 
 
-<div class="catalog-item d-flex catalog-item" #catalog>
+<div class="catalog-item d-flex catalog-item align-items-center" #catalog >
   <div *ngIf="typeNode == catalogType.ROOT_NODE">
     <span class="material-icons root ml-2">folder</span>
   </div>
@@ -10,14 +10,14 @@
     <span class="material-icons sub_node ml-2">folder</span>
   </div>
   <div *ngIf="mode == modeStatus.EDIT">
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="block-filed-edit ml-2">
       <input type="text" matInput placeholder="Название каталога" #input (focusout)="selectEditMode(input.value)"
              [value]="title" autocomplete="off">
     </mat-form-field>
   </div>
-  <div *ngIf=" mode == modeStatus.VIEW ">
-    <button  mat-button>
-      <span class="title" [matMenuTriggerFor]="menu" (click)="selectItemTree()">{{title}}</span>
+  <div *ngIf="mode == modeStatus.VIEW " [matMenuTriggerFor]="menu">
+    <button  mat-button >
+      <span class="title"  (click)="selectItemTree()">{{title}}</span>
     </button>
 
   </div>
@@ -25,6 +25,5 @@
 <mat-menu #menu="matMenu">
   <button mat-menu-item (click)="createChild()">Создать подкатолог</button>
   <button mat-menu-item (click)="deleteMe()">Удалить каталог</button>
-  <button mat-menu-item (click)="deleteChildren()">Удалить все подкаталоги</button>
   <button mat-menu-item (click)="edit()">Редактировать каталог</button>
 </mat-menu>
