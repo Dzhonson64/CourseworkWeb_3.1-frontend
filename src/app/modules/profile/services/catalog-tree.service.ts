@@ -78,7 +78,8 @@ export class CatalogTreeService {
   buildData(parent:CatalogDto, node: TreeItemComponent): CatalogDto {
     let dtoP = new CatalogDto();
     dtoP.value = node.title;
-    dtoP.status = node.typeNode;
+    dtoP.type = node.typeNode;
+    dtoP.status = node.status;
     dtoP.id = node.id;
     parent.children.push(dtoP);
 
@@ -94,5 +95,9 @@ export class CatalogTreeService {
 
   public getCatalog():Observable<CatalogDto[]> {
     return this.http.get<CatalogDto[]>('/api/courseworkWeb/products/catalog');
+  }
+
+  public getCatalogLast():Observable<CatalogDto[]> {
+    return this.http.get<CatalogDto[]>('/api/courseworkWeb/products/catalog/last');
   }
 }

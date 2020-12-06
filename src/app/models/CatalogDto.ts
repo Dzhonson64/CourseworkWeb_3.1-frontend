@@ -1,8 +1,10 @@
 import {NodeCatalogTreeType} from './type/NodeCatalogTreeType';
+import {StatusActive} from './type/StatusActive';
 
 export class CatalogDto {
   id: number;
   children: CatalogDto[] = [];
   value: string;
-  status: NodeCatalogTreeType;
+  type: NodeCatalogTreeType;
+  status: StatusActive;
 }

@@ -32,7 +32,7 @@ export class TreeItemComponent implements OnInit, AfterViewInit {
   catalogType = NodeCatalogTreeType;
   @ViewChild('parent', {read: ViewContainerRef}) container: ViewContainerRef;
   @ViewChild('catalog', {read: ViewContainerRef}) catalogItem: ComponentRef<TreeItemComponent>;
-  thisNode: ComponentRef<TreeItemComponent | TreeCatalogComponent>;
+  thisNode: ComponentRef<TreeItemComponent>;
   parentNode: ComponentRef<TreeItemComponent | TreeCatalogComponent>;
   status: StatusActive;
   id: number;
@@ -89,14 +89,15 @@ export class TreeItemComponent implements OnInit, AfterViewInit {
   }
 
 
-  createSubCatalogFromDB(id: number, value: string, status: NodeCatalogTreeType): TreeItemComponent {
+  createSubCatalogFromDB(id: number, value: string, type: NodeCatalogTreeType): TreeItemComponent {
     let catalogItemList = new CatalogTreeItem();
     const factory: ComponentFactory<TreeItemComponent> = this.resolver.resolveComponentFactory(TreeItemComponent);
     catalogItemList.value = this.container.createComponent(factory);
     catalogItemList.value.instance.thisNode = catalogItemList.value;
     catalogItemList.value.instance.id = id;
     catalogItemList.value.instance.title = value;
-    catalogItemList.value.instance.typeNode = status;
+    catalogItemList.value.instance.typeNode = type;
+    catalogItemList.value.instance.status = StatusActive.ENABLE;
     catalogItemList.value.instance.mode = StatusMode.VIEW;
     catalogItemList.value.location.nativeElement.getElementsByClassName('catalog-item')[0].style.marginLeft = this.cssMarginLeft + 'px';
     catalogItemList.value.instance.cssMarginLeft = this.cssMarginLeft + 50;
@@ -109,15 +110,21 @@ export class TreeItemComponent implements OnInit, AfterViewInit {
 
   deleteChildren() {
     this.container.clear();
-    while (this.componentsRefArray.length > 0) {
-      this.componentsRefArray.pop();
-    }
+    console.log(this.componentsRefArray.length);
+    // while (this.componentsRefArray.length > 0) {
+    //
+    // }
 
   }
 
   deleteMe() {
-    this.thisNode.hostView.destroy();
-    this.status = StatusActive.UNABLE;
+    // this.thisNode.hostView.destroy();
+    // this.status = StatusActive.UNABLE;
+    console.log(this.thisNode)
+    this.thisNode.destroy();
+    console.log(this)
+    this.setDeleteMark(this.thisNode.instance);
+    console.log(this.thisNode);
 
   }
 
@@ -133,13 +140,14 @@ export class TreeItemComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // console.log('ngAfterViewChecked ');
-    // console.log(this.dataDB);
-    // if (this.dataDB) {
-    //   this.container = this.tempContainer;
-    //   this.createSubCatalogFromDB(this.dataDB.id, this.dataDB.value, this.dataDB.status);
-    // }
 
+  }
+
+  setDeleteMark(item: TreeItemComponent) {
+    item.status = StatusActive.UNABLE;
+    for (let i in item.componentsRefArray) {
+      this.setDeleteMark(item.componentsRefArray[i].value.instance);
+    }
   }
 
 

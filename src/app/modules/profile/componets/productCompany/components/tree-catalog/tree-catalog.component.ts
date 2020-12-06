@@ -54,6 +54,11 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
       this.buildDataFromDB(catalogTree);
 
     });
+
+    this.catalogTreeService.getCatalogLast().subscribe(value => {
+      console.log(value)
+
+    });
   }
 
   ngAfterViewInit() {
@@ -78,14 +83,15 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
 
   }
 
-  createChildFromDB(id: number, value: string, status: NodeCatalogTreeType): TreeItemComponent {
+  createChildFromDB(id: number, value: string, type: NodeCatalogTreeType): TreeItemComponent {
     let catalogItemList = new CatalogTreeItem();
     const factory: ComponentFactory<TreeItemComponent> = this.resolver.resolveComponentFactory(TreeItemComponent);
     catalogItemList.value = this.container.createComponent(factory);
     catalogItemList.value.instance.thisNode = catalogItemList.value;
     catalogItemList.value.instance.id = id;
     catalogItemList.value.instance.title = value;
-    catalogItemList.value.instance.typeNode = status;
+    catalogItemList.value.instance.typeNode = type;
+    catalogItemList.value.instance.status = StatusActive.ENABLE;
     catalogItemList.value.instance.mode = StatusMode.VIEW;
     catalogItemList.value.location.nativeElement.getElementsByClassName('catalog-item')[0].style.marginLeft = this.cssMarginLeft + 'px';
     catalogItemList.value.instance.cssMarginLeft = this.cssMarginLeft + 50;
@@ -99,7 +105,7 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
 
     for (let i in catalogTree.children) {
       let catalog = catalogTree.children[i];
-      let child = this.createChildFromDB(catalog.id, catalog.value, catalog.status);
+      let child = this.createChildFromDB(catalog.id, catalog.value, catalog.type);
       this.buildDataChildItem(catalog.children, child);
     }
   }
@@ -107,7 +113,7 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
   buildDataChildItem(catalog: CatalogDto[], treeItem: TreeItemComponent): TreeItemComponent {
     for (let i in catalog) {
       treeItem.changeDetectorRef.detectChanges();
-      let treeItems = treeItem.createSubCatalogFromDB(catalog[i].id, catalog[i].value, catalog[i].status);
+      let treeItems = treeItem.createSubCatalogFromDB(catalog[i].id, catalog[i].value, catalog[i].type);
       this.buildDataChildItem(catalog[i].children, treeItems);
 
     }
