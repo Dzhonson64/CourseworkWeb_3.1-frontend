@@ -9,13 +9,13 @@ import {
   ViewContainerRef,
   ViewEncapsulation
 } from '@angular/core';
-import {CatalogTreeItem} from '../../../../../../models/CatalogTreeItem';
-import {CatalogTreeService} from '../../../../services/catalog-tree.service';
-import {NodeCatalogTreeType} from '../../../../../../models/type/NodeCatalogTreeType';
-import {TreeItemComponent} from './tree-item/tree-item.component';
-import {StatusActive} from '../../../../../../models/type/StatusActive';
-import {CatalogDto} from '../../../../../../models/CatalogDto';
-import {StatusMode} from '../../../../../../models/type/StatusMode';
+import {CatalogTreeItem} from '../../../../../../../models/CatalogTreeItem';
+import {CatalogTreeService} from '../../../../../services/catalog-tree.service';
+import {NodeCatalogTreeType} from '../../../../../../../models/type/NodeCatalogTreeType';
+import {TreeItemComponent} from '../sub-tree-item/tree-item.component';
+import {StatusActive} from '../../../../../../../models/type/StatusActive';
+import {CatalogDto} from '../../../../../../../models/CatalogDto';
+import {StatusMode} from '../../../../../../../models/type/StatusMode';
 
 @Component({
   selector: 'app-tree-catalog',

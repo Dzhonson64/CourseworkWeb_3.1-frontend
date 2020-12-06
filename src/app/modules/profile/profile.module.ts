@@ -15,11 +15,13 @@ import { ProductCompanyComponent } from './componets/productCompany/components/p
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { NewProductComponent } from './componets/productCompany/components/new-product/new-product.component';
-import { EditConfigProductsComponent } from './componets/edit-config-products/edit-config-products.component';
+import { EditConfigProductsComponent } from './componets/productCompany/components/edit-config-products/edit-config-products.component';
 import {ColorPickerModule} from 'ngx-color-picker';
-import { TreeCatalogComponent } from './componets/productCompany/components/tree-catalog/tree-catalog.component';
+import { TreeCatalogComponent } from './componets/productCompany/components/tree-catalog/root-tree-item/tree-catalog.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { TreeItemComponent } from './componets/productCompany/components/tree-catalog/tree-item/tree-item.component';
+import { TreeItemComponent } from './componets/productCompany/components/tree-catalog/sub-tree-item/tree-item.component';
+import { PropertyProductsComponent } from './componets/productCompany/components/property-products/property-products.component';
+import { PropertyProductComponent } from './componets/productCompany/components/property-product/property-product.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { TreeItemComponent } from './componets/productCompany/components/tree-ca
     NewProductComponent,
     EditConfigProductsComponent,
     TreeCatalogComponent,
-    TreeItemComponent
+    TreeItemComponent,
+    PropertyProductsComponent,
+    PropertyProductComponent
   ],
 
   imports: [

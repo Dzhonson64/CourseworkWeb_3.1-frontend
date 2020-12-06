@@ -1,6 +1,6 @@
 import {ComponentRef, Injectable} from '@angular/core';
 import {CatalogTreeItem} from '../../../models/CatalogTreeItem';
-import {TreeItemComponent} from '../componets/productCompany/components/tree-catalog/tree-item/tree-item.component';
+import {TreeItemComponent} from '../componets/productCompany/components/tree-catalog/sub-tree-item/tree-item.component';
 import {CatalogDto} from '../../../models/CatalogDto';
 import {StatusActive} from '../../../models/type/StatusActive';
 import {User} from '../../../models/User';

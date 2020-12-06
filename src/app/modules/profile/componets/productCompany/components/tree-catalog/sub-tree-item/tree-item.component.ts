@@ -12,7 +12,7 @@ import {
 import {NodeCatalogTreeType} from '../../../../../../../models/type/NodeCatalogTreeType';
 import {CatalogTreeItem} from '../../../../../../../models/CatalogTreeItem';
 import {CatalogTreeService} from '../../../../../services/catalog-tree.service';
-import {TreeCatalogComponent} from '../tree-catalog.component';
+import {TreeCatalogComponent} from '../root-tree-item/tree-catalog.component';
 import {StatusActive} from '../../../../../../../models/type/StatusActive';
 import {StatusMode} from '../../../../../../../models/type/StatusMode';
 import {CatalogDto} from '../../../../../../../models/CatalogDto';
