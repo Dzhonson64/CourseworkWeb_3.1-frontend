@@ -7,4 +7,6 @@ export class CatalogDto {
   value: string;
   type: NodeCatalogTreeType;
   status: StatusActive;
+
+
 }

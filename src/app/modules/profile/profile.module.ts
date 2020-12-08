@@ -22,6 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { TreeItemComponent } from './componets/productCompany/components/tree-catalog/sub-tree-item/tree-item.component';
 import { PropertyProductsComponent } from './componets/productCompany/components/property-products/property-products.component';
 import { PropertyProductComponent } from './componets/productCompany/components/property-product/property-product.component';
+import { ContainerPropertiesComponent } from './componets/productCompany/components/container-properties/container-properties.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PropertyProductComponent } from './componets/productCompany/components/
     TreeCatalogComponent,
     TreeItemComponent,
     PropertyProductsComponent,
-    PropertyProductComponent
+    PropertyProductComponent,
+    ContainerPropertiesComponent
   ],
 
   imports: [

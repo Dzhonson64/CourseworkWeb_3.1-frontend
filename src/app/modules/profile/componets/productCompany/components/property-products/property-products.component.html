@@ -17,7 +17,7 @@
         <table mat-table [dataSource]="dataSource" class="product-table" multiTemplateDataRows>
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Название</th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.value}} </td>
           </ng-container>
 
 
@@ -47,7 +47,7 @@
                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                 <div class="content-property w-100">
                   <ol>
-                    <app-property-product></app-property-product>
+                    <app-container-properties></app-container-properties>
                   </ol>
 
                 </div>

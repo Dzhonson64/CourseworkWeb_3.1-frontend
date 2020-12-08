@@ -3,8 +3,8 @@
     <div class="col-md-6">
       <mat-form-field appearance="standard" class="example-full-width w-100">
         <mat-label>Название свойства</mat-label>
-        <input matInput  [(ngModel)]="value" maxlength="50" #message  autocomplete="off">
-        <mat-hint align="end">{{message.value.length}} / 50</mat-hint>
+        <input matInput   maxlength="50" #name  autocomplete="off">
+        <mat-hint align="end">{{name.value.length}} / 50</mat-hint>
         <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" >
           <mat-icon>close</mat-icon>
         </button>
@@ -13,8 +13,8 @@
     <div class="col-md-6">
       <mat-form-field appearance="standard" class="example-full-width w-100">
         <mat-label>Название единицы измерения</mat-label>
-        <input matInput  [(ngModel)]="value" maxlength="50" #message  autocomplete="off">
-        <mat-hint align="end">{{message.value.length}} / 50</mat-hint>
+        <input matInput   maxlength="50" #unit  autocomplete="off">
+        <mat-hint align="end">{{unit.value.length}} / 50</mat-hint>
         <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" >
           <mat-icon>close</mat-icon>
         </button>
