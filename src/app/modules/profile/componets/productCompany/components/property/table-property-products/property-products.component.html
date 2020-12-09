@@ -6,13 +6,14 @@
       </div>
       <mat-form-field appearance="standard" class="example-full-width">
         <mat-label>Поиск по названию каталога</mat-label>
+
         <input matInput  [(ngModel)]="value" maxlength="50" #message (keyup)="applyFilter($event)" autocomplete="off">
         <mat-hint align="end">{{message.value.length}} / 50</mat-hint>
         <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" >
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
-
+      <button mat-flat-button color="primary" (click)="save()">Сохранить свойства товаров</button>
       <div class="add-product">
         <table mat-table [dataSource]="dataSource" class="product-table" multiTemplateDataRows>
           <ng-container matColumnDef="name">
@@ -47,7 +48,7 @@
                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                 <div class="content-property w-100">
                   <ol>
-                    <app-container-properties></app-container-properties>
+                    <app-container-properties [catalogId]="element.id"></app-container-properties>
                   </ol>
 
                 </div>
