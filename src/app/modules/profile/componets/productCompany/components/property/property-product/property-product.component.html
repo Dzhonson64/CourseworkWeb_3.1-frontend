@@ -1,25 +1,41 @@
-<li>
+<li *ngIf="status == statusActive.ENABLE">
   <div class="row ml-2 mr-2">
-    <div class="col-md-6">
-      <mat-form-field appearance="standard" class="example-full-width w-100">
-        <mat-label>Название свойства</mat-label>
-        <input matInput  [(ngModel)]="name_property" maxlength="50" #name  autocomplete="off">
-        <mat-hint align="end">{{name.value.length}} / 50</mat-hint>
-        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" >
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+    <div class="col-md-10">
+      <div class="main-block">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="standard" class="example-full-width w-100">
+              <mat-label>Название свойства</mat-label>
+              <input matInput  [(ngModel)]="name_property" maxlength="50" #name  autocomplete="off">
+              <mat-hint align="end">{{name.value.length}} / 50</mat-hint>
+              <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" >
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="standard" class="example-full-width w-100">
+              <mat-label>Название единицы измерения</mat-label>
+              <input matInput [(ngModel)]="unit_property"  maxlength="50" #unit  autocomplete="off">
+              <mat-hint align="end">{{unit.value.length}} / 50</mat-hint>
+              <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" >
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <div class="col-md-6">
-      <mat-form-field appearance="standard" class="example-full-width w-100">
-        <mat-label>Название единицы измерения</mat-label>
-        <input matInput [(ngModel)]="unit_property"  maxlength="50" #unit  autocomplete="off">
-        <mat-hint align="end">{{unit.value.length}} / 50</mat-hint>
-        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" >
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
-    </div>
+   <div class="col-md-2 d-flex align-self-center">
+     <div class="delete-btn ">
+       <button mat-button (click)="delete()">
+         <mat-icon>close</mat-icon>
+       </button>
+     </div>
+
+   </div>
+
 
   </div>
 </li>

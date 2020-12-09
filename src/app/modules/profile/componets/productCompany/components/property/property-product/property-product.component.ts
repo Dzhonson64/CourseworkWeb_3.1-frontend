@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSort} from '@angular/material/sort';
+import {Component, OnInit} from '@angular/core';
 import {TablePropertyProductService} from '../../../../../services/table-property-product.service';
+import {StatusActive} from '../../../../../../../models/type/StatusActive';
 
 @Component({
   selector: 'app-property-product',
@@ -12,10 +12,22 @@ export class PropertyProductComponent implements OnInit {
   id: number;
   name_property: string;
   unit_property: string;
-  constructor() {
+  status: StatusActive
+  statusActive = StatusActive;
+  constructor( private propertyProductService: TablePropertyProductService) {
+    this.status = StatusActive.ENABLE;
   }
 
   ngOnInit(): void {
   }
 
+  delete() {
+    this.status = StatusActive.UNABLE;
+    if (this.id) {
+      this.propertyProductService.deleteProperty(this.id).subscribe(value1 => {
+
+      })
+    }
+
+  }
 }

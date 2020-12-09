@@ -56,7 +56,7 @@ export class PropertyProductsComponent implements OnInit {
         console.log(this.propertyProductService.containerPropertyMap)
         console.log(i.catalogId)
         let containerProperties = this.propertyProductService.containerPropertyMap.get(i.catalogId);
-        let property = new PropertyProductComponent();
+        let property = new PropertyProductComponent(this.propertyProductService);
         property.unit_property = i.unit;
         property.name_property = i.name;
         property.id = i.id;

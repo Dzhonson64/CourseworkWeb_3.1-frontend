@@ -3,8 +3,8 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {PropertyProductsDto} from '../../../models/PropertyProductsDto';
 import {PropertyProductComponent} from '../componets/productCompany/components/property/property-product/property-product.component';
-import {ContactComponent} from '../../main/components/contact/contact.component';
 import {ContainerPropertiesComponent} from '../componets/productCompany/components/property/container-properties/container-properties.component';
+import {StatusActive} from '../../../models/type/StatusActive';
 
 @Injectable({
   providedIn: 'root'
@@ -29,16 +29,23 @@ export class TablePropertyProductService {
 
   }
 
+  deleteProperty(id:number):Observable<PropertyProductsDto> {
+    return this.http.delete<PropertyProductsDto>(`/api/courseworkWeb/products/properties/${id}`);
+  }
+
   private reformatDate() {
     this.savedPropertyProductsDto = [];
     for (let entry of this.propertiesMap.entries()){
       for (let property of entry[1]){
-        let savedPropertyProductsDto = new PropertyProductsDto();
-        savedPropertyProductsDto.catalogId = entry[0];
-        savedPropertyProductsDto.name = property.name_property;
-        savedPropertyProductsDto.unit = property.unit_property;
-        savedPropertyProductsDto.id = property.id;
-        this.savedPropertyProductsDto.push(savedPropertyProductsDto);
+        if (property.status == StatusActive.ENABLE) {
+          let savedPropertyProductsDto = new PropertyProductsDto();
+          savedPropertyProductsDto.catalogId = entry[0];
+          savedPropertyProductsDto.name = property.name_property;
+          savedPropertyProductsDto.unit = property.unit_property;
+          savedPropertyProductsDto.id = property.id;
+          this.savedPropertyProductsDto.push(savedPropertyProductsDto);
+        }
+
       }
 
     }
