@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectorRef,
   Component,
   ComponentFactory,
   ComponentFactoryResolver,
@@ -40,13 +40,14 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
   componentsRefArray: CatalogTreeItem[] = [];
   globalCompCatalog: CatalogDto[];
   globalCompTreeItem: TreeItemComponent;
-
-  constructor(private resolver: ComponentFactoryResolver, private catalogTreeService: CatalogTreeService, private propertyService: TablePropertyProductService) {
+  changeDetectorRef: ChangeDetectorRef;
+  constructor(private resolver: ComponentFactoryResolver, private catalogTreeService: CatalogTreeService, private propertyService: TablePropertyProductService, private cdRef: ChangeDetectorRef) {
     this.parentNode = null;
     catalogTreeService.counter++;
     this.cssMarginLeft = catalogTreeService.marginLeft;
     this.catalogTreeService.catalogItemsList.push(this.componentsRefArray);
     this.catalogTreeService.container = this.container;
+    this.changeDetectorRef = cdRef;
   }
 
   ngOnInit(): void {
@@ -69,6 +70,7 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
 
 
   createChild() {
+    this.changeDetectorRef.detectChanges();
     let catalogItemList = new CatalogTreeItem();
     const factory: ComponentFactory<TreeItemComponent> = this.resolver.resolveComponentFactory(TreeItemComponent);
     catalogItemList.value = this.container.createComponent(factory);
