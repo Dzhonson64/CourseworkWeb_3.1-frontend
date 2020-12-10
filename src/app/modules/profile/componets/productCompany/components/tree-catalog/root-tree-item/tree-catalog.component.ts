@@ -52,16 +52,14 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.catalogTreeService.getCatalog().subscribe(value => {
+      this.container.clear();
       let catalogTree = new CatalogDto();
       catalogTree.children = value;
       this.buildDataFromDB(catalogTree);
 
     });
 
-    this.catalogTreeService.getCatalogLast().subscribe(value => {
-      console.log(value)
 
-    });
   }
 
   ngAfterViewInit() {
@@ -127,6 +125,7 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
 
   save() {
     this.catalogTreeService.save().subscribe(value => {
+      this.ngOnInit();
       this.propertyService.savePropertyProduct().subscribe()
     });
 
