@@ -5,6 +5,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatPaginator} from '@angular/material/paginator';
 import {DecimalPipe} from '@angular/common';
+import {TablePropertyProductService} from '../../../../services/table-property-product.service';
+import {ProductService} from '../../../../services/product.service';
 
 
 // export interface PeriodicElement {
@@ -21,18 +23,18 @@ export interface PeriodicElement {
   symbol: string;
 }
 
-const ELEMENT_DATA2: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+// const ELEMENT_DATA2: PeriodicElement[] = [
+//   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+//   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+//   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+//   {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+//   {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+//   {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+//   {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+//   {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+//   {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+//   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+// ];
 
 
 @Component({
@@ -49,20 +51,27 @@ const ELEMENT_DATA2: PeriodicElement[] = [
   ],
 })
 export class ProductCompanyComponent implements OnInit, AfterViewInit {
-  columnsToDisplay = ['name', 'weight', 'symbol', 'position', 'actions'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA2);
+  columnsToDisplay = ['id', 'name', 'price', 'actions'];
+  dataSource ;
   expandedElement: PeriodicElement | null;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   private removeElem: PeriodicElement[] = [];
 
   ngAfterViewInit() {
-    this.translateMatPaginator(this.paginator);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.productService.getProducts().subscribe(value =>{
+
+      this.dataSource = new MatTableDataSource(value);
+      this.translateMatPaginator(this.paginator);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      console.log(this.dataSource)
+    })
+
+
   }
 
-  constructor() {
+  constructor(private productService: ProductService) {
   }
 
   ngOnInit(): void {
@@ -105,9 +114,7 @@ export class ProductCompanyComponent implements OnInit, AfterViewInit {
   }
 
   isContainRemoveArr(elem: PeriodicElement):boolean {
-    console.log(this.removeElem)
     for (let i = 0; i < this.removeElem.length; i++) {
-      console.log(this.removeElem[i])
       if (this.removeElem[i].position == elem.position) {
         return true
       }

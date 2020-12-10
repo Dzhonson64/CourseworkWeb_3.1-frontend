@@ -1,0 +1,15 @@
+<div class="row">
+  <span>{{name}}</span>
+
+  <mat-form-field appearance="standard" class="example-full-width w-100">
+    <mat-label>Значение свойтсва</mat-label>
+    <input matInput [(ngModel)]="value"  maxlength="10" #units  autocomplete="off">
+    <mat-hint align="end">{{units.value.length}} / 10</mat-hint>
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <span>{{unit}}</span>
+</div>
+
+

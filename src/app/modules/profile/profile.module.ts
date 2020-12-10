@@ -15,7 +15,7 @@ import { ProductCompanyComponent } from './componets/productCompany/components/p
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { NewProductComponent } from './componets/productCompany/components/new-product/new-product.component';
-import { EditConfigProductsComponent } from './componets/productCompany/components/tree-catalog/edit-config-products/edit-config-products.component';
+import { EditConfigProductsComponent } from './componets/productCompany/components/edit-config-products/edit-config-products.component';
 import {ColorPickerModule} from 'ngx-color-picker';
 import { TreeCatalogComponent } from './componets/productCompany/components/tree-catalog/root-tree-item/tree-catalog.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -23,6 +23,7 @@ import { TreeItemComponent } from './componets/productCompany/components/tree-ca
 import { PropertyProductsComponent } from './componets/productCompany/components/property/table-property-products/property-products.component';
 import { PropertyProductComponent } from './componets/productCompany/components/property/property-product/property-product.component';
 import { ContainerPropertiesComponent } from './componets/productCompany/components/property/container-properties/container-properties.component';
+import { CompNewProductComponent } from './componets/productCompany/components/new-product/comp-new-product/comp-new-product.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ContainerPropertiesComponent } from './componets/productCompany/compone
     TreeItemComponent,
     PropertyProductsComponent,
     PropertyProductComponent,
-    ContainerPropertiesComponent
+    ContainerPropertiesComponent,
+    CompNewProductComponent
   ],
 
   imports: [

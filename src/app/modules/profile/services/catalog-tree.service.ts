@@ -64,13 +64,13 @@ export class CatalogTreeService {
     this._selectedItem = value;
   }
 
-  save() {
+  save():Observable<any> {
     let dto = new CatalogDto();
     for (let i in this.catalogItemsList[0]) {
       let node = this.catalogItemsList[0][i].value.instance;
       this.buildData(dto, node);
     }
-    this.saveCatalog(dto).subscribe();
+    return this.saveCatalog(dto);
   }
 
 

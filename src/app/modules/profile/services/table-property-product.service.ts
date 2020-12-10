@@ -29,6 +29,11 @@ export class TablePropertyProductService {
 
   }
 
+  getPropertyProductByCatalog(id:number):Observable<PropertyProductsDto[]> {
+    return this.http.get<PropertyProductsDto[]>(`/api/courseworkWeb/products/properties/catalog/${id}`);
+
+  }
+
   deleteProperty(id:number):Observable<PropertyProductsDto> {
     return this.http.delete<PropertyProductsDto>(`/api/courseworkWeb/products/properties/${id}`);
   }

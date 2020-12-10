@@ -3,7 +3,7 @@ import {
   Component,
   ComponentFactory,
   ComponentFactoryResolver,
-  ComponentRef,
+  ComponentRef, Input,
   OnInit,
   ViewChild,
   ViewContainerRef,
@@ -16,6 +16,8 @@ import {TreeItemComponent} from '../sub-tree-item/tree-item.component';
 import {StatusActive} from '../../../../../../../models/type/StatusActive';
 import {CatalogDto} from '../../../../../../../models/CatalogDto';
 import {StatusMode} from '../../../../../../../models/type/StatusMode';
+import {TablePropertyProductService} from '../../../../../services/table-property-product.service';
+import {EditConfigProductsComponent} from '../../edit-config-products/edit-config-products.component';
 
 @Component({
   selector: 'app-tree-catalog',
@@ -28,7 +30,7 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
   @ViewChild('parent', {read: ViewContainerRef}) container: ViewContainerRef;
   @ViewChild('catalog', {read: ViewContainerRef}) catalogItem: ComponentRef<TreeCatalogComponent>;
   @ViewChild(TreeItemComponent) child: TreeItemComponent;
-
+  @Input() propertyObj: EditConfigProductsComponent;
   thisNode: ComponentRef<TreeItemComponent>;
   parentNode: ComponentRef<TreeItemComponent> = null;
   id: number;
@@ -39,7 +41,7 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
   globalCompCatalog: CatalogDto[];
   globalCompTreeItem: TreeItemComponent;
 
-  constructor(private resolver: ComponentFactoryResolver, private catalogTreeService: CatalogTreeService) {
+  constructor(private resolver: ComponentFactoryResolver, private catalogTreeService: CatalogTreeService, private propertyService: TablePropertyProductService) {
     this.parentNode = null;
     catalogTreeService.counter++;
     this.cssMarginLeft = catalogTreeService.marginLeft;
@@ -122,6 +124,9 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
 
 
   save() {
-    this.catalogTreeService.save();
+    this.catalogTreeService.save().subscribe(value => {
+      this.propertyService.savePropertyProduct().subscribe()
+    });
+
   }
 }
