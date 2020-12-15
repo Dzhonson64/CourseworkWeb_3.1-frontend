@@ -1,7 +1,7 @@
-<div class="row">
-  <span>{{name}}</span>
+<div class="row d-flex align-items-center justify-content-center">
+  <div class="info mr-2">{{name}}</div>
 
-  <mat-form-field appearance="standard" class="example-full-width w-100">
+  <mat-form-field appearance="standard" class="example-full-width info">
     <mat-label>Значение свойтсва</mat-label>
     <input matInput [(ngModel)]="value"  maxlength="10" #units  autocomplete="off">
     <mat-hint align="end">{{units.value.length}} / 10</mat-hint>
@@ -9,7 +9,9 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
-  <span>{{unit}}</span>
+  <div class="info mr-2">{{unit}}</div>
 </div>
+
+
 
 

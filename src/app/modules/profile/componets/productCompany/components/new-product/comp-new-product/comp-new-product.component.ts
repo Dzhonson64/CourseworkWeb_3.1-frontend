@@ -10,6 +10,7 @@ export class CompNewProductComponent implements OnInit {
   unit: string;
   value: any;
   id: number;
+  productPropertyId: number;
 
   constructor() {
   }

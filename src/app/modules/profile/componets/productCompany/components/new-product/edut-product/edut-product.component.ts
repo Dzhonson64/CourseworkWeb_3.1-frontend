@@ -1,24 +1,20 @@
 import {Component, ComponentFactory, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import * as moment from 'moment';
-import {now} from 'moment/moment';
-import {GenderType} from '../../../../../../models/type/GenderType';
-import {TablePropertyProductService} from '../../../../services/table-property-product.service';
-import {CatalogTreeService} from '../../../../services/catalog-tree.service';
-import {CatalogTreeItem} from '../../../../../../models/CatalogTreeItem';
-import {TreeItemComponent} from '../tree-catalog/sub-tree-item/tree-item.component';
-import {CompNewProductComponent} from './comp-new-product/comp-new-product.component';
-import {ProductDto} from '../../../../../../models/ProductDto';
-import {ProductService} from '../../../../services/product.service';
-import {ProductPropertyDto} from '../../../../../../models/ProductPropertyDto';
-import {Router} from '@angular/router';
+import {CatalogTreeService} from '../../../../../services/catalog-tree.service';
+import {TablePropertyProductService} from '../../../../../services/table-property-product.service';
+import {ProductService} from '../../../../../services/product.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CompNewProductComponent} from '../comp-new-product/comp-new-product.component';
+import {ProductDto} from '../../../../../../../models/ProductDto';
+import {ProductPropertyDto} from '../../../../../../../models/ProductPropertyDto';
+import {CatalogDto} from '../../../../../../../models/CatalogDto';
 
 @Component({
-  selector: 'app-new-product',
-  templateUrl: './new-product.component.html',
-  styleUrls: ['./new-product.component.scss']
+  selector: 'app-edut-product',
+  templateUrl: './edut-product.component.html',
+  styleUrls: ['./edut-product.component.scss']
 })
-export class NewProductComponent implements OnInit {
+export class EdutProductComponent implements OnInit {
   newProductFormGroup: FormGroup;
   nameProduct: FormControl;
   nameRootCatalog: FormControl;
@@ -26,42 +22,71 @@ export class NewProductComponent implements OnInit {
   descriptionProduct: FormControl;
   selectedValue: string;
   catalogs = [];
-  properties = [];
-  propertyList = [];
+  properties:any = [];
+  propertyList:any = [];
+  selectedProductId: number;
+  selectedCatalog: CatalogDto;
+  id: number;
   @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef;
 
   constructor(private resolver: ComponentFactoryResolver,
               private catalogService: CatalogTreeService,
               private propertiesService: TablePropertyProductService,
               private productService: ProductService,
-              private router: Router
+              private router: Router,
+              private _route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    this.createFormControls();
-    this.createForm();
-    this.catalogService.getCatalogLast().subscribe(value => {
-        console.log(value);
-        this.catalogs = value;
-      }
-    );
+
+
+    this._route.params.subscribe((params)=>{
+
+      this.selectedProductId = params["product"]
+      this.catalogService.getCatalogByProductId(this.selectedProductId).subscribe(value => {
+        console.log(value)
+        this.selectedCatalog = new CatalogDto();
+        this.selectedCatalog.id  = value.id;
+        this.selectedCatalog.type  = value.type;
+        this.selectedCatalog.status  = value.status;
+        this.selectedCatalog.value = value.value;
+        this.selectedCatalog.children = value.children;
+        //this.getPropertyProductByCatalog(this.selectedCatalog.id);
+        this.createFormControls();
+        this.createForm();
+        this.productService.getProductById( this.selectedProductId).subscribe(value1 => {
+          this.nameProduct.setValue(value1.name)
+          this.priceProduct.setValue(value1.price)
+          this.descriptionProduct.setValue(value1.description)
+        })
+        this.productService.getAllPropertyByProduct(this.selectedProductId).subscribe(value => {
+          for (let i in value) {
+            this.createProperties(value[i].name, value[i].unit, value[i].propertyId,  value[i].value, value[i].productPropertyId);
+          }
+          }
+        );
+      })
+    })
+
   }
 
   private createFormControls() {
     this.nameProduct = new FormControl('', [Validators.required]);
-    this.nameRootCatalog = new FormControl('', [Validators.required]);
+    this.nameRootCatalog = new FormControl(this.selectedCatalog.value);
     this.priceProduct = new FormControl('', [Validators.required]);
     this.descriptionProduct = new FormControl('', [Validators.required]);
   }
 
-  private createProperties(name: string, unit: string, id:number) {
+  private createProperties(name: string, unit: string, id:number, value?: number, productPropertyId? : number) {
 
     const factory: ComponentFactory<CompNewProductComponent> = this.resolver.resolveComponentFactory(CompNewProductComponent);
     let comp = this.container.createComponent(factory);
     comp.instance.name = name;
     comp.instance.unit = unit;
     comp.instance.id = id;
+    comp.instance.value = value;
+    comp.instance.productPropertyId = productPropertyId;
     this.propertyList.push(comp.instance);
   }
 
@@ -75,7 +100,7 @@ export class NewProductComponent implements OnInit {
   }
 
   submit() {
-this.saveProduct();
+    this.saveProduct();
   }
 
   getPropertyProductByCatalog(id: number) {
@@ -96,7 +121,8 @@ this.saveProduct();
     product.name = this.nameProduct.value;
     product.price = this.priceProduct.value;
     product.description = this.descriptionProduct.value;
-    product.catalogId = this.nameRootCatalog.value;
+    product.catalogId = this.selectedCatalog.id;
+    product.id = this.selectedProductId;
     this.productService.saveProduct(product).subscribe(value => {
       let productPropertyList = [];
       for (let property of this.propertyList) {
@@ -104,6 +130,7 @@ this.saveProduct();
         productProperty.productId = value.id;
         productProperty.propertyId = property.id;
         productProperty.value = property.value;
+        productProperty.productPropertyId = property.productPropertyId;
         productPropertyList.push(productProperty);
       }
 
@@ -111,10 +138,11 @@ this.saveProduct();
       this.productService.savePropertyProduct(productPropertyList).subscribe(value1 => {
         this.router.navigate(['/products']);
       })
-      console.log(value);
+      //console.log(value);
     })
   }
 
-
-
+  goBack() {
+    this.router.navigate(['/products']);
+  }
 }

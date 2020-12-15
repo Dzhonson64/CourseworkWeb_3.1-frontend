@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectorRef,
   Component,
   ComponentFactory,
   ComponentFactoryResolver,
@@ -23,13 +23,37 @@ import {TablePropertyProductService} from '../../../../../services/table-propert
 export class ContainerPropertiesComponent implements OnInit, AfterViewInit {
   @Input() catalogId: number;
   @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef;
+  changeDetectorRef: ChangeDetectorRef;
   propertyComponentList: PropertyProductComponent[] = [];
-  constructor(private resolver: ComponentFactoryResolver, private propertyProductService: TablePropertyProductService) {
-
+  constructor(private resolver: ComponentFactoryResolver,
+              private propertyProductService: TablePropertyProductService,
+              private cdRef: ChangeDetectorRef) {
+    this.changeDetectorRef = cdRef;
   }
 
   ngOnInit(): void {
     this.propertyProductService.containerPropertyMap.set(this.catalogId, this);
+    this.propertyProductService.getPropertyProduct().subscribe(value => {
+
+      for (let i of value){
+        console.log(this.propertyProductService.containerPropertyMap)
+        console.log(i.catalogId)
+        let containerProperties = this.propertyProductService.containerPropertyMap.get(i.catalogId);
+        let property = new PropertyProductComponent(this.propertyProductService);
+        property.unit_property = i.unit;
+        property.name_property = i.name;
+        property.id = i.id;
+        containerProperties.changeDetectorRef.detectChanges();
+        containerProperties.propertyComponentList.push(property)
+      }
+      this.propertyProductService.propertiesMap = new Map<number, PropertyProductComponent[]>();
+      for (let container of this.propertyProductService.containerPropertyMap.values()){
+        for (let property of container.propertyComponentList) {
+          container.createComponentPropertyFromDB(property.name_property, property.unit_property, property.id)
+        }
+
+      }
+    });
   }
 
 

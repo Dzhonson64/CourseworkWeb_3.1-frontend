@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {PeriodicElement} from '../../product-company/product-company.component';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {animate, state, style, transition, trigger} from '@angular/animations';
@@ -32,14 +32,17 @@ export class PropertyProductsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   value = '';
-
+  changeDetectorRef: ChangeDetectorRef;
   ngAfterViewInit() {
     this.translateMatPaginator(this.paginator);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  constructor(private catalogTreeService: CatalogTreeService, private propertyProductService: TablePropertyProductService) {
+  constructor(private catalogTreeService: CatalogTreeService,
+              private propertyProductService: TablePropertyProductService,
+              private cdRef: ChangeDetectorRef) {
+    this.changeDetectorRef = cdRef;
   }
 
   ngOnInit(): void {
@@ -50,27 +53,7 @@ export class PropertyProductsComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.DATA);
     });
 
-    this.propertyProductService.getPropertyProduct().subscribe(value => {
 
-      for (let i of value){
-        console.log(this.propertyProductService.containerPropertyMap)
-        console.log(i.catalogId)
-        let containerProperties = this.propertyProductService.containerPropertyMap.get(i.catalogId);
-        let property = new PropertyProductComponent(this.propertyProductService);
-        property.unit_property = i.unit;
-        property.name_property = i.name;
-        property.id = i.id;
-
-        containerProperties.propertyComponentList.push(property)
-      }
-      this.propertyProductService.propertiesMap = new Map<number, PropertyProductComponent[]>();
-      for (let container of this.propertyProductService.containerPropertyMap.values()){
-        for (let property of container.propertyComponentList) {
-          container.createComponentPropertyFromDB(property.name_property, property.unit_property, property.id)
-        }
-
-      }
-    });
 
   }
 

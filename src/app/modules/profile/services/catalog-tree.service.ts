@@ -100,4 +100,8 @@ export class CatalogTreeService {
   public getCatalogLast():Observable<CatalogDto[]> {
     return this.http.get<CatalogDto[]>('/api/courseworkWeb/products/catalog/last');
   }
+
+  public getCatalogByProductId(id):Observable<CatalogDto> {
+    return this.http.get<CatalogDto>(`/api/courseworkWeb/products/${id}/catalog`);
+  }
 }

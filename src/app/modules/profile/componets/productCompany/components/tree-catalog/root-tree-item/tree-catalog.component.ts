@@ -41,7 +41,10 @@ export class TreeCatalogComponent implements OnInit, AfterViewInit {
   globalCompCatalog: CatalogDto[];
   globalCompTreeItem: TreeItemComponent;
   changeDetectorRef: ChangeDetectorRef;
-  constructor(private resolver: ComponentFactoryResolver, private catalogTreeService: CatalogTreeService, private propertyService: TablePropertyProductService, private cdRef: ChangeDetectorRef) {
+  constructor(private resolver: ComponentFactoryResolver,
+              private catalogTreeService: CatalogTreeService,
+              private propertyService: TablePropertyProductService,
+              private cdRef: ChangeDetectorRef) {
     this.parentNode = null;
     catalogTreeService.counter++;
     this.cssMarginLeft = catalogTreeService.marginLeft;

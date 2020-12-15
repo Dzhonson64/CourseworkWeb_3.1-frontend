@@ -2,6 +2,7 @@
   <div class="container">
     <div class="content">
       <h3>Добавить продукт</h3>
+
       <form class="content-block d-flex flex-column" [formGroup]="newProductFormGroup" novalidate
             (ngSubmit)="submit()">
 
@@ -22,7 +23,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Выберите каталог</mat-label>
           <mat-select [(ngModel)]="selectedValue" formControlName="nameRootCatalog">
-            <mat-option *ngFor="let catalog of catalogs" [value]="catalog"
+            <mat-option *ngFor="let catalog of catalogs" [value]="catalog.id"
                         (onSelectionChange)="getPropertyProductByCatalog(catalog.id)">
               {{catalog.value}}
             </mat-option>
@@ -32,7 +33,7 @@
           <template #container></template>
         </div>
 
-        <button type="submit" mat-flat-button color="primary" [disabled]="newProductFormGroup.invalid">Сохранить
+        <button type="submit" mat-flat-button color="primary" [disabled]="newProductFormGroup.invalid" >Сохранить
         </button>
       </form>
 

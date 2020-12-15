@@ -7,6 +7,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {DecimalPipe} from '@angular/common';
 import {TablePropertyProductService} from '../../../../services/table-property-product.service';
 import {ProductService} from '../../../../services/product.service';
+import {ProductDto} from '../../../../../../models/ProductDto';
 
 
 // export interface PeriodicElement {
@@ -42,31 +43,31 @@ export interface PeriodicElement {
   templateUrl: './product-company.component.html',
   styleUrls: ['./product-company.component.scss'],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outlined'}}],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+  // animations: [
+  //   trigger('detailExpand', [
+  //     state('collapsed', style({height: '0px', minHeight: '0'})),
+  //     state('expanded', style({height: '*'})),
+  //     transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+  //   ]),
+  // ],
 })
 export class ProductCompanyComponent implements OnInit, AfterViewInit {
   columnsToDisplay = ['id', 'name', 'price', 'actions'];
-  dataSource ;
-  expandedElement: PeriodicElement | null;
+  dataSource;
+  // expandedElement: PeriodicElement | null;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  private removeElem: PeriodicElement[] = [];
+  private removeElem: ProductDto[] = [];
 
   ngAfterViewInit() {
-    this.productService.getProducts().subscribe(value =>{
+    this.productService.getProducts().subscribe(value => {
 
       this.dataSource = new MatTableDataSource(value);
       this.translateMatPaginator(this.paginator);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      console.log(this.dataSource)
-    })
+      console.log(this.dataSource);
+    });
 
 
   }
@@ -95,13 +96,14 @@ export class ProductCompanyComponent implements OnInit, AfterViewInit {
 
   }
 
-  deleteProduct(elem: PeriodicElement) {
+  deleteProduct(elem: ProductDto) {
     console.log(elem);
     this.removeElem.push(elem);
-    console.log(this.removeElem)
-   // this.dataSource = new MatTableDataSource(this.dataSource.data.filter(value => value.position != elem.position));
-    this.ngOnInit();
-    this.ngAfterViewInit();
+    this.productService.deleteProducts(elem).subscribe(value => {
+      this.ngOnInit();
+      this.ngAfterViewInit();
+    });
+
   }
 
   translateMatPaginator(paginator: MatPaginator) {
@@ -113,12 +115,17 @@ export class ProductCompanyComponent implements OnInit, AfterViewInit {
     };
   }
 
-  isContainRemoveArr(elem: PeriodicElement):boolean {
-    for (let i = 0; i < this.removeElem.length; i++) {
-      if (this.removeElem[i].position == elem.position) {
-        return true
-      }
-    }
+  isContainRemoveArr(elem: PeriodicElement): boolean {
+    // for (let i = 0; i < this.removeElem.length; i++) {
+    //   if (this.removeElem[i].position == elem.position) {
+    //     return true
+    //   }
+    // }
+    console.log(elem);
     return false;
+  }
+
+  insertComponent(index: any) {
+    console.log(index);
   }
 }

@@ -24,6 +24,7 @@ import { PropertyProductsComponent } from './componets/productCompany/components
 import { PropertyProductComponent } from './componets/productCompany/components/property/property-product/property-product.component';
 import { ContainerPropertiesComponent } from './componets/productCompany/components/property/container-properties/container-properties.component';
 import { CompNewProductComponent } from './componets/productCompany/components/new-product/comp-new-product/comp-new-product.component';
+import { EdutProductComponent } from './componets/productCompany/components/new-product/edut-product/edut-product.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CompNewProductComponent } from './componets/productCompany/components/n
     PropertyProductsComponent,
     PropertyProductComponent,
     ContainerPropertiesComponent,
-    CompNewProductComponent
+    CompNewProductComponent,
+    EdutProductComponent
   ],
 
   imports: [
