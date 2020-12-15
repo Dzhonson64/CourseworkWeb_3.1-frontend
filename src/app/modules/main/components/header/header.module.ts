@@ -14,10 +14,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {RouterModule} from '@angular/router';
 import {ProfileService} from '../../../profile/services/profile.service';
+import { ChildMenuComponent } from '../layout/child-menu/child-menu.component';
 
 
 @NgModule({
-  declarations: [MainHeaderComponent, HeaderTopComponent, MenuComponent],
+  declarations: [MainHeaderComponent, HeaderTopComponent, MenuComponent, ChildMenuComponent],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatFormFieldModule,
     MatIconModule, MatToolbarModule,
@@ -25,7 +26,7 @@ import {ProfileService} from '../../../profile/services/profile.service';
     MatSidenavModule,
     MatSelectModule, RouterModule
   ],
-  exports: [MainHeaderComponent, HeaderTopComponent, MenuComponent],
+  exports: [MainHeaderComponent, HeaderTopComponent, MenuComponent, ChildMenuComponent],
   providers: [ProfileService]
 })
 export class HeaderModule {

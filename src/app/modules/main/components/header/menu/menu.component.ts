@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {ProfileService} from '../../../../profile/services/profile.service';
+import {CatalogTreeService} from '../../../../profile/services/catalog-tree.service';
 
 @Component({
   selector: 'app-menu',
@@ -14,11 +15,13 @@ export class MenuComponent implements OnInit {
 
 
 
-  constructor(private profileService: ProfileService) {
+  constructor(private profileService: ProfileService,
+              ) {
     this.isVisibleToggleMenu = profileService.isVisibleToggleMenu;
   }
 
   ngOnInit(): void {
+
   }
 
 

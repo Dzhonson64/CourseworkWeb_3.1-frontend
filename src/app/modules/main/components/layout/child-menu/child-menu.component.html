@@ -1,0 +1,33 @@
+<!--<div *ngFor="let rootItem of rooItemMenu">-->
+
+<!--    <button (click)="shows(rootItem)" mat-button (close)="someMethod()">-->
+<!--      {{rootItem.value}}-->
+<!--    </button>-->
+<!--    <mat-menu *ngIf = "rootItem.show" yPosition="below">-->
+<!--      <app-child-menu [rooItemMenu]="rootItem.children" *ngIf="rootItem.children"></app-child-menu>-->
+<!--    </mat-menu>-->
+<!--&lt;!&ndash;    <ul *ngIf="rootItem.show && rootItem.children.length != 0">&ndash;&gt;-->
+<!--&lt;!&ndash;      <li>&ndash;&gt;-->
+<!--&lt;!&ndash;        &ndash;&gt;-->
+<!--&lt;!&ndash;      </li>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </ul>&ndash;&gt;-->
+
+<!--</div>-->
+<mat-menu #childMenu="matMenu" [overlapTrigger]="false">
+  <span *ngFor="let child of rooItemMenu">
+    <!-- Handle branch node menu items -->
+    <span *ngIf="child.children && child.children.length > 0">
+      <button mat-menu-item color="primary" [matMenuTriggerFor]="menu.childMenu">
+        <span>{{child.value}}</span>
+      </button>
+      <app-child-menu #menu [rooItemMenu]="child.children"></app-child-menu>
+    </span>
+    <!-- Handle leaf node menu items -->
+    <span *ngIf="!child.children || child.children.length === 0">
+      <button mat-menu-item>
+        <span>{{child.value}}</span>
+      </button>
+    </span>
+  </span>
+</mat-menu>

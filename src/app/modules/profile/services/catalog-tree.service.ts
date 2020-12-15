@@ -2,10 +2,8 @@ import {ComponentRef, Injectable} from '@angular/core';
 import {CatalogTreeItem} from '../../../models/CatalogTreeItem';
 import {TreeItemComponent} from '../componets/productCompany/components/tree-catalog/sub-tree-item/tree-item.component';
 import {CatalogDto} from '../../../models/CatalogDto';
-import {StatusActive} from '../../../models/type/StatusActive';
-import {User} from '../../../models/User';
 import {HttpClient} from '@angular/common/http';
-import {Observable, Subject} from 'rxjs';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
