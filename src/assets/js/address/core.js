@@ -33,7 +33,7 @@
      *
      * @type {{region: string, district: string, city: string, street: string, building: string}}
      */
-    $.fias.type = {
+    $.fias.actionType = {
         region: 'region',   // Область
         district: 'district', // Район
         city: 'city',     // Город

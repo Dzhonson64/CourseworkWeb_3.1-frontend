@@ -7,11 +7,14 @@ import {AuthModule} from './modules/auth/auth.module';
 import {ProfileModule} from './modules/profile/profile.module';
 import {CommonModule} from '@angular/common';
 import { ComparePasswordsDirective } from './directives/compare-passwords.directive';
-
+import { DialogOverviewComponent } from './modules/common-modules/dialog-overview/dialog-overview.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
     ComparePasswordsDirective,
+    DialogOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,7 +22,9 @@ import { ComparePasswordsDirective } from './directives/compare-passwords.direct
     MainModule,
     AuthModule,
     ProfileModule,
-    CommonModule
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent],

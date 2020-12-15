@@ -11,7 +11,7 @@ import {now} from 'moment/moment';
 import {MAT_FORM_FIELD, MatFormField, MatFormFieldControl} from '@angular/material/form-field';
 import {ProfileService} from '../../services/profile.service';
 import {User} from '../../../../models/User';
-import {UserStatus} from '../../../../models/type/UserStatus';
+import {StatusActive} from '../../../../models/type/StatusActive';
 import {GenderType} from '../../../../models/type/GenderType';
 
 @Component({

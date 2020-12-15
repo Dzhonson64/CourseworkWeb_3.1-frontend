@@ -1,12 +1,12 @@
 import {GenderType} from './type/GenderType';
-import {UserStatus} from './type/UserStatus';
+import {StatusActive} from './type/StatusActive';
 import {AddressUser} from './address/AddressUser';
 
 export class User {
   id?: number = null;
   googleId?: string;
   nickName: string;
-  status?: UserStatus;
+  status?: StatusActive;
   snils?: string;
   surname: string;
   name: string;

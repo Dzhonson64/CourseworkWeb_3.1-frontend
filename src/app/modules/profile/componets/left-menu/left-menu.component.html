@@ -4,19 +4,25 @@
     <button mat-stroked-button class="bnt-logout">Выйти</button>
 
     <mat-selection-list #shoes [multiple]="false" class="slider-menu">
-      <a  routerLink="/me" routerLinkActive="active">
-        <mat-list-option class = "d-flex align-items-center">
+      <a routerLink="settings" routerLinkActive="active">
+        <mat-list-option class="d-flex align-items-center">
           <i class="far fa-user"></i> <span>Мой профиль</span>
         </mat-list-option>
       </a>
-      <a  routerLink="settings" routerLinkActive="active">
-        <mat-list-option class = "d-flex align-items-center">
+      <a>
+        <mat-list-option class="d-flex align-items-center">
           <i class="far fa-credit-card"></i> <span> Покупки </span>
         </mat-list-option>
       </a>
-      <a  routerLink="products" routerLinkActive="active">
-        <mat-list-option class = "d-flex align-items-center">
-          <i class="far fa-credit-card" ></i> <span>Товары</span>
+      <a routerLink="products" routerLinkActive="active">
+        <mat-list-option class="d-flex align-items-center">
+          <i class="far fa-credit-card"></i> <span>Товары</span>
+        </mat-list-option>
+      </a>
+      <a routerLink="products/config" routerLinkActive="active">
+        <mat-list-option class="d-flex align-items-center">
+          <i class="material-icons">category</i>
+          <span>Конфигурация системы товаров</span>
         </mat-list-option>
       </a>
 
