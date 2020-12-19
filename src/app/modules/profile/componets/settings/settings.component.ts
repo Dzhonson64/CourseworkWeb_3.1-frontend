@@ -136,7 +136,7 @@ export class SettingsComponent implements OnInit {
     var blob = event.target.files[0].slice(0, event.target.files[0].size, 'image/png');
     this._fileToUpload = new File([blob], event.target.files[0].name, {type: 'image/png'});
     this._pathImgFile = URL.createObjectURL(this._fileToUpload);
-    this.profileService.uploadImage(this.fileToUpload).subscribe(value => {
+    this.profileService.uploadImage(this.fileToUpload, "/user/add/avatar").subscribe(value => {
 
     });
 

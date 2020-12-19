@@ -8,13 +8,13 @@
     </h1>
 
 
-    <div *ngFor="let item of rooItemMenu">
+    <div *ngFor="let item of rooItemMenu" >
       <!-- Handle branch node buttons here -->
       <div *ngIf="item.children && item.children.length > 0">
-        <button class = "begin-menu-trigger" mat-menu-item [matMenuTriggerFor]="menu.childMenu">
+        <button class = "begin-menu-trigger" mat-menu-item [matMenuTriggerFor]="menu.childMenu" (click)="t()">
           {{item.value}} <i class="fas fa-caret-right"></i>
         </button>
-        <app-child-menu #menu [rooItemMenu]="item.children"></app-child-menu>
+        <app-child-menu #menu [rooItemMenu]="item.children" ></app-child-menu>
       </div>
       <!-- Leaf node buttons here -->
       <div *ngIf="!item.children || item.children.length === 0">

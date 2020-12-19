@@ -31,12 +31,14 @@
             <th mat-header-cell *matHeaderCellDef style="text-align: center">Действия</th>
             <td mat-cell *matCellDef="let element" class="">
               <div class="row d-flex justify-content-center">
-<!--                <div class="action-elem-display-more d-flex flex-row align-items-center mr-2"-->
-<!--                     [class.example-expanded-row]="expandedElement === element"-->
-<!--                     (click)="expandedElement = expandedElement === element ? null : element">-->
-<!--                  <span class="material-icons-round display-more-icon">arrow_downward</span>-->
-<!--                  <span>Подробнее</span>-->
-<!--                </div>-->
+                <div class="avatar">
+                  <img src="#" alt="">
+                  <input id="my-input" #uploadImg #file type="file" hidden  id="file"
+                         (change)="handleFileInput($event, element.id)"  accept="image/jpeg,image/png" />
+                  <button mat-mini-fab color="primary" (click)="uploadImg.click()">
+                    <i class="fas fa-upload"></i>
+                  </button>
+                </div>
                 <button mat-flat-button class="action-elem-edit d-flex flex-row align-items-center mr-2"  routerLink="edit/{{element.id}}">
                   <span class="material-icons-outlined edit">create</span>
                   <span>редактировать</span>

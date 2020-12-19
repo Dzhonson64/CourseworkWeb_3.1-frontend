@@ -1,0 +1,53 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-9">
+      <div *ngFor="let product of productList" class="">
+        <div class="col-md-3 d-flex justify-content-center product-item">
+          <a routerLink="{{product.id}}" class="d-flex flex-column align-items-center">
+            <img src="api/courseworkWeb/products/{{product.id}}/image" alt="" class="img">
+            <span class="name">{{product.name}}</span>
+            <span class="price"><i class="fas fa-ruble-sign"></i> {{product.price}}</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card-filter">
+        <div class="cards">
+          <h5 class="mb-3">Сортировать по</h5>
+          <mat-radio-group aria-label="Select an option" class="d-flex flex-column" color="primary">
+            <mat-radio-button value="1" class="mt-1" [checked]="true">возрастанию цены</mat-radio-button>
+            <mat-radio-button value="2" class="mt-1">убыванию цены</mat-radio-button>
+            <mat-radio-button value="3" class="mt-1">популярности</mat-radio-button>
+            <mat-radio-button value="4" class="mt-1">названию</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="cards mt-5">
+
+          <h5 class="mb-3 mt-5">Цена</h5>
+          <form class="d-flex flex-row">
+            <div class="col-md-6">
+              <mat-form-field class="price-diap">
+                <mat-label>От</mat-label>
+                <input matInput placeholder="От 100" value="0" type="number" min="0">
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="price-diap">
+                <mat-label>До</mat-label>
+                <input matInput placeholder="До 1000" min="0">
+              </mat-form-field>
+            </div>
+
+
+          </form>
+        </div>
+        <button mat-stroked-button color="primary" class="apply mt-5">Применить</button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+

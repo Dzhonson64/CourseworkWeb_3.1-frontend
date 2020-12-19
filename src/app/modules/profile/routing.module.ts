@@ -7,6 +7,7 @@ import {ProductCompanyComponent} from './componets/productCompany/components/pro
 import {NewProductComponent} from './componets/productCompany/components/new-product/new-product.component';
 import {EditConfigProductsComponent} from './componets/productCompany/components/edit-config-products/edit-config-products.component';
 import {EdutProductComponent} from './componets/productCompany/components/new-product/edut-product/edut-product.component';
+import {CatalogItemComponent} from '../userProducts/catalog-item/catalog-item.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
 
     ]
   }
+
 ];
 @NgModule({
   declarations: [],

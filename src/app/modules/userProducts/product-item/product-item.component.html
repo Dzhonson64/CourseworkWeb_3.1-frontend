@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  <a routerLink="../../{{product.catalogId}}">
+    <button mat-stroked-button color="primary">
+    <span class="material-icons">
+      arrow_back
+    </span>
+    </button>
+  </a>
+  <div class="heading-product mt-5">
+    <div class="row">
+      <div class="col-md-7">
+        <img src="api/courseworkWeb/products/{{product.id}}/image" alt="" class="img_product">
+      </div>
+      <div class="col-md-5 d-flex flex-column justify-content-between">
+        <div class="heading">
+          <h2 class="name">{{product.name}}</h2>
+          <div class="company">Название компании</div>
+          <div class="price"><i class="fas fa-ruble-sign"></i> {{product.price}}</div>
+          <div class="stars">
+            <i class="far fa-star" *ngFor="let i of[0,1,2,3,4]"></i>
+          </div>
+        </div>
+        <div class="buy d-flex flex-row align-items-center">
+          <mat-form-field class="amount">
+            <mat-label>Количество</mat-label>
+            <input type="number" matInput
+                   [value]="value" autocomplete="off" min="1">
+
+          </mat-form-field>
+          <button mat-flat-button color="primary" class="order ml-2">Заказать</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="info-product mt-5">
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span class="material-icons-outlined  material-icons">description</span>
+          Описание
+        </ng-template>
+        <span>{{product.description}}</span>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span class="material-icons">notes</span>
+          Характеристики
+        </ng-template>
+        Content 2
+      </mat-tab>
+
+
+    </mat-tab-group>
+  </div>
+
+
+</div>

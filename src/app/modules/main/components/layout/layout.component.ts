@@ -34,4 +34,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.counterComponent.menuComponent.drawer = this.btnRef;
   }
 
+  t() {
+    console.log('sdd')
+  }
 }

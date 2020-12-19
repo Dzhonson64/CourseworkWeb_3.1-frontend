@@ -8,6 +8,7 @@ import {DecimalPipe} from '@angular/common';
 import {TablePropertyProductService} from '../../../../services/table-property-product.service';
 import {ProductService} from '../../../../services/product.service';
 import {ProductDto} from '../../../../../../models/ProductDto';
+import {ProfileService} from '../../../../services/profile.service';
 
 
 // export interface PeriodicElement {
@@ -58,7 +59,8 @@ export class ProductCompanyComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   private removeElem: ProductDto[] = [];
-
+  private _fileToUpload: File = null;
+  private _pathImgFile: string;
   ngAfterViewInit() {
     this.productService.getProducts().subscribe(value => {
 
@@ -71,9 +73,22 @@ export class ProductCompanyComponent implements OnInit, AfterViewInit {
 
 
   }
-
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,
+              private profileService: ProfileService) {
   }
+
+  handleFileInput(event: any, id:number) {
+
+    var blob = event.target.files[0].slice(0, event.target.files[0].size, 'image/png');
+    this._fileToUpload = new File([blob], event.target.files[0].name, {type: 'image/png'});
+    this._pathImgFile = URL.createObjectURL(this._fileToUpload);
+    this.profileService.uploadImage(this._fileToUpload, "image", id).subscribe(value => {
+
+    });
+
+  }
+
+
 
   ngOnInit(): void {
 

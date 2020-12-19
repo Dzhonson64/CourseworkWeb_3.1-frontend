@@ -10,11 +10,17 @@ import { ComparePasswordsDirective } from './directives/compare-passwords.direct
 import { DialogOverviewComponent } from './modules/common-modules/dialog-overview/dialog-overview.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { ProductItemComponent } from './modules/userProducts/product-item/product-item.component';
+import { CatalogItemComponent } from './modules/userProducts/catalog-item/catalog-item.component';
+import {MatFieldCommonModule} from './modules/common-modules/mat-field/mat-field-common.module';
+import {FormCommonModule} from './modules/common-modules/forms/form-common.module';
 @NgModule({
   declarations: [
     AppComponent,
     ComparePasswordsDirective,
     DialogOverviewComponent,
+    ProductItemComponent,
+    CatalogItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +30,9 @@ import {MatButtonModule} from '@angular/material/button';
     ProfileModule,
     CommonModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFieldCommonModule,
+    FormCommonModule
   ],
   providers: [],
   bootstrap: [AppComponent],

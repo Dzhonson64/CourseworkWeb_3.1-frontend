@@ -32,11 +32,16 @@ export class ProductService {
     return this.http.delete<ProductDto>(`/api/courseworkWeb/products/${product.id}`);
   }
 
-  getAllPropertyByProduct(id: number): Observable<FillPropertyDto> {
-    return this.http.get<FillPropertyDto>(`/api/courseworkWeb/products/${id}/properties`);
+  getAllPropertyByProduct(id: number): Observable<FillPropertyDto[]> {
+    return this.http.get<FillPropertyDto[]>(`/api/courseworkWeb/products/${id}/properties`);
   }
 
   getProductById(id: number): Observable<ProductDto> {
     return this.http.get<ProductDto>(`/api/courseworkWeb/products/${id}`);
+  }
+
+  getAllProductByCatalogId(id: number): Observable<ProductDto[]> {
+    console.log(id)
+    return this.http.get<ProductDto[]>(`/api/courseworkWeb/products/catalog/${id}`);
   }
 }

@@ -16,6 +16,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTableModule} from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatSliderModule} from '@angular/material/slider';
 @NgModule({
   declarations: [],
   imports: [
@@ -37,7 +39,9 @@ import {MatTableModule} from '@angular/material/table';
     MatNativeDateModule,
     MatMomentDateModule,
     MatTooltipModule,
-    MatTableModule
+    MatTableModule,
+    MatTabsModule,
+    MatSliderModule
   ]
 })
 export class MatFieldCommonModule { }

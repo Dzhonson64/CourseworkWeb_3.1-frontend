@@ -83,7 +83,6 @@ export class ContainerPropertiesComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.catalogId)
   }
 
 }

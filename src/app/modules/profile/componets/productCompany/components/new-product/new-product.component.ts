@@ -12,6 +12,7 @@ import {ProductDto} from '../../../../../../models/ProductDto';
 import {ProductService} from '../../../../services/product.service';
 import {ProductPropertyDto} from '../../../../../../models/ProductPropertyDto';
 import {Router} from '@angular/router';
+import {ProfileService} from '../../../../services/profile.service';
 
 @Component({
   selector: 'app-new-product',
@@ -28,13 +29,16 @@ export class NewProductComponent implements OnInit {
   catalogs = [];
   properties = [];
   propertyList = [];
+
+
   @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef;
 
   constructor(private resolver: ComponentFactoryResolver,
               private catalogService: CatalogTreeService,
               private propertiesService: TablePropertyProductService,
               private productService: ProductService,
-              private router: Router
+              private router: Router,
+
   ) {
   }
 
@@ -108,12 +112,16 @@ this.saveProduct();
       }
 
 
+
+
       this.productService.savePropertyProduct(productPropertyList).subscribe(value1 => {
         this.router.navigate(['/products']);
       })
       console.log(value);
     })
   }
+
+
 
 
 

@@ -29,10 +29,13 @@ export class ProfileService {
   }
 
 
-  public uploadImage(fileToUpload: File): Observable<User> {
+  public uploadImage(fileToUpload: File, endpoint:string, id?:number): Observable<User> {
     const formData: FormData = new FormData();
     formData.append('image', fileToUpload, fileToUpload.name);
-    return this.http.post<User>(`/api/courseworkWeb/user/add/avatar`, formData);
+    if (id) {
+      return this.http.post<User>(`/api/courseworkWeb/products/${id}/image`, formData);
+    }
+    return this.http.post<User>(`/api/courseworkWeb/products/image`, formData);
   }
 
 
