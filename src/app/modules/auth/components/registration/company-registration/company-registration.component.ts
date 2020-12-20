@@ -8,6 +8,9 @@ import {FindAddressService} from '../../../../common-service/find-address.servic
 import {RootSuggestion} from '../../../../../models/organisation/RootSuggestion';
 import {Data} from '../../../../../models/organisation/Data';
 import {OrganisationType} from '../../../../../models/type/OrganisationType';
+import {AddressType} from '../../../../../models/type/AddressType';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ProviderDto} from '../../../../../models/ProviderDto';
 
 declare var $: any;
 const urlDaDataINN: string = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party';
@@ -23,7 +26,7 @@ const tokenDaData: string = 'a437178a69bc00fcb26cce29fca12824be0ae5af';
   encapsulation: ViewEncapsulation.None
 })
 export class CompanyRegistrationComponent implements OnInit {
-
+  hide = true;
 
   regCompanyForm: FormGroup;
   nameCompany: FormControl;
@@ -33,6 +36,8 @@ export class CompanyRegistrationComponent implements OnInit {
   buildingCompany: FormControl;
   regionCompany: FormControl;
   districtCompany: FormControl;
+  passwordCompany: FormControl;
+  passwordConfirmCompany: FormControl;
 
   OrganisationType = OrganisationType;
 
@@ -42,7 +47,8 @@ export class CompanyRegistrationComponent implements OnInit {
   public fiasObjects: Array<AddressObj> = new Array<AddressObj>();
   innArr: Data[];
 
-  constructor(private authService: AuthService, private findAddressService: FindAddressService) {
+  constructor(private authService: AuthService, private findAddressService: FindAddressService, private router: Router,
+  private _route: ActivatedRoute) {
     this.resAddress = new AddressCompany();
   }
 
@@ -56,6 +62,10 @@ export class CompanyRegistrationComponent implements OnInit {
 
     this.nameCompany.valueChanges.subscribe(value => {
       this.requestCompanyBYINN(value);
+    })
+
+    this.regCompanyForm.valueChanges.subscribe(value => {
+      console.log(value);
     })
 
   }
@@ -103,11 +113,13 @@ let res = new RootSuggestion();
   createFormControls() {
     this.nameCompany = new FormControl('', [Validators.required, Validators.maxLength(30)]);
     this.cityCompany = new FormControl('', [Validators.required, Validators.maxLength(20)]);
-    this.countryCompany = new FormControl('', [Validators.required, Validators.maxLength(20)]);
+    this.countryCompany = new FormControl('Россия', [Validators.required, Validators.maxLength(20)]);
     this.streetCompany = new FormControl('', [Validators.required, Validators.maxLength(15)]);
     this.buildingCompany = new FormControl('', [Validators.required, Validators.maxLength(10)]);
     this.regionCompany = new FormControl('', [Validators.required, Validators.maxLength(20)]);
     this.districtCompany = new FormControl('', [Validators.maxLength(15)]);
+    this.passwordCompany = new FormControl('', );
+    this.passwordConfirmCompany = new FormControl('', );
 
   }
 
@@ -119,7 +131,10 @@ let res = new RootSuggestion();
       streetCompany: this.streetCompany,
       buildingCompany: this.buildingCompany,
       regionCompany: this.regionCompany,
-      districtCompany: this.districtCompany
+      districtCompany: this.districtCompany,
+      passwordCompany: this.passwordCompany,
+      passwordConfirmCompany: this.passwordConfirmCompany
+
     });
 
   }
@@ -183,9 +198,14 @@ let res = new RootSuggestion();
 
   submit() {
     this.checkForm();
-    this.authService.saveAddress(this.resAddress).subscribe(value => {
-      console.log(value);
-    });
+    let company = new ProviderDto();
+    console.log(this.nameCompany.value)
+    company.name = this.nameCompany.value.name.full;
+    company.password = this.passwordCompany.value;
+    company.address = this.resAddress;
+    this.authService.saveCompany(company).subscribe(value => {
+      this.router.navigate(["/login"])
+    })
 
   }
 

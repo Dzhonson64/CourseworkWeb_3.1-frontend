@@ -2,6 +2,9 @@ import {ElementRef, Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {User} from '../../../models/User';
 import {AddressCompany} from '../../../models/address/AddressCompany';
+import {AddressUser} from '../../../models/address/AddressUser';
+import {Observable} from 'rxjs';
+import {ProviderDto} from '../../../models/ProviderDto';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +27,12 @@ export class AuthService {
   }
 
 
-  public saveAddress(address: AddressCompany){
-    console.log(address);
-    return this.http.post("/api/courseworkWeb/user/address", address);
+  public saveUser(user: User):Observable<User>{
+    return this.http.post<User>("/api/courseworkWeb/auth/register/user", user);
+  }
+
+  public saveCompany(providerDto: ProviderDto):Observable<User>{
+    return this.http.post<User>("/api/courseworkWeb/auth/register/provider", providerDto);
   }
 
   get popUpSelectionMenu(): ElementRef {

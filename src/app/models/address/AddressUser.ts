@@ -1,4 +1,5 @@
 import {AddressObj} from './AddressObj';
+import {AddressType} from '../type/AddressType';
 
 export class AddressUser {
   id?: number = null;
@@ -10,6 +11,7 @@ export class AddressUser {
   apartment: AddressObj = new AddressObj();
   country: AddressObj = new AddressObj();
   zipCode?: AddressObj = new AddressObj();
+  type: AddressType;
 
 
   constructor(id?: number, country: AddressObj = new AddressObj(),  region: AddressObj = new AddressObj(),  city: AddressObj = new AddressObj(),

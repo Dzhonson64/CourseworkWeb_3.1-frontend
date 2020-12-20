@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AddressUser} from '../../../../../models/address/AddressUser';
 import {AddressObj} from '../../../../../models/address/AddressObj';
 import {Observable} from 'rxjs';
@@ -9,11 +9,11 @@ import {MatFormFieldControl} from '@angular/material/form-field';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import * as moment from 'moment';
 import {now} from 'moment/moment';
-import {SettingsComponent} from '../../../../profile/componets/settings/settings.component';
 import {GenderType} from '../../../../../models/type/GenderType';
 import {User} from '../../../../../models/User';
-import {AddressCompany} from '../../../../../models/address/AddressCompany';
-import {ComparePasswordsDirective} from '../../../../../directives/compare-passwords.directive';
+import {AuthService} from '../../../services/auth.service';
+import {AddressType} from '../../../../../models/type/AddressType';
+import {ActivatedRoute, Router} from '@angular/router';
 
 declare var $: any;
 
@@ -59,7 +59,6 @@ export class RegistrationComponent implements OnInit {
   birthdayUser: FormControl;
   genderUser: FormControl;
   phoneUser: FormControl;
-  snilsUser: FormControl;
   surnameUser: FormControl;
   patronymicUser: FormControl;
   nameUser: FormControl;
@@ -73,7 +72,9 @@ export class RegistrationComponent implements OnInit {
   filteredOptions: Observable<AddressObj[]>;
   public fiasObjects: Array<AddressObj> = new Array<AddressObj>();
 
-  constructor(private _adapter: DateAdapter<any>, private findAddressService: FindAddressService) {
+  constructor(private _adapter: DateAdapter<any>, private findAddressService: FindAddressService, private authService: AuthService,
+              private router: Router,
+              private _route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -134,7 +135,6 @@ export class RegistrationComponent implements OnInit {
     this.birthdayUser = new FormControl(moment(now()), Validators.required);
     this.genderUser = new FormControl(GenderType.MALE);
     this.phoneUser = new FormControl('', [Validators.required]);
-    this.snilsUser = new FormControl('', [Validators.required, Validators.maxLength(10)]);
     this.nameUser = new FormControl('', [Validators.required, Validators.maxLength(20)]);
     this.surnameUser = new FormControl('', [Validators.required, Validators.maxLength(20)]);
     this.patronymicUser = new FormControl('', [Validators.maxLength(20)]);
@@ -161,7 +161,6 @@ export class RegistrationComponent implements OnInit {
       birthdayUser: this.birthdayUser,
       genderUser: this.genderUser,
       phoneUser: this.phoneUser,
-      snilsUser: this.snilsUser,
       nameUser: this.nameUser,
       surnameUser: this.surnameUser,
       patronymicUser: this.patronymicUser,
@@ -240,9 +239,11 @@ export class RegistrationComponent implements OnInit {
     this.userData.name = this.nameUser.value;
     this.userData.postcode = this.zipUser.value;
     this.userData.phone = this.phoneUser.value;
-    this.userData.snils = this.snilsUser.value;
+    this.resAddress.type = AddressType.User;
     this.userData.address = this.resAddress;
-    console.log(this.userData);
+    this.authService.saveUser(this.userData).subscribe(value => {
+      this.router.navigate(["/login"])
+    })
     // console.log(this.regAddressUserForm.controls["countryUser"]);
     /* this.checkForm();
      this.authService.saveAddress(this.resAddress).subscribe(value => {

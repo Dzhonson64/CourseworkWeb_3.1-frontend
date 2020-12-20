@@ -35,6 +35,31 @@
               <mat-error
                 *ngIf="nameCompany.hasError('required')">{{getErrorMessageRequired('Название компании')}}</mat-error>
             </mat-form-field>
+            <mat-form-field appearance="fill" class="form-group">
+              <mat-label>Пароль</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" required formControlName="passwordCompany">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Скрыть пароль'"
+                      [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="passwordCompany.hasError('required')">{{getErrorMessageRequired('Пароль')}}</mat-error>
+              <mat-error *ngIf="passwordCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Пароль', 20)}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="form-group">
+              <mat-label>Подтвердите пароль</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" required formControlName="passwordConfirmCompany">
+
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Скрыть пароль'"
+                      [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+              </button>
+              <mat-error *ngIf="passwordConfirmCompany.hasError('required')">{{getErrorMessageRequired('Пароль')}}</mat-error>
+              <mat-error *ngIf="passwordConfirmCompany.hasError('maxlength')">{{getErrorMessageMaxLength('Пароль', 20)}}</mat-error>
+              <mat-error *ngIf="passwordConfirmCompany && passwordConfirmCompany.dirty"> Пароли не совпадает</mat-error>
+
+            </mat-form-field>
+
             <div class="address d-flex flex-column">
               <mat-label>Страна</mat-label>
               <mat-radio-group class="radio-group-country d-flex flex-column" formControlName="countryCompany">
@@ -179,6 +204,7 @@
 
 
             </div>
+            {{regCompanyForm.invalid}}
             <button type="submit" mat-flat-button color="primary" class="mt-4" [disabled]="regCompanyForm.invalid">
               Сохранить
             </button>

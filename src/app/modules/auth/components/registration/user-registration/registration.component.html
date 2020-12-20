@@ -88,12 +88,7 @@
                   <mat-error *ngIf="phoneUser.hasError('required')">{{getErrorMessageRequired('Телефон')}}</mat-error>
 
                 </mat-form-field>
-                <mat-form-field appearance="fill" class="form-group">
-                  <mat-label>СНИЛС</mat-label>
-                  <input matInput required formControlName="snilsUser" >
-                  <mat-error *ngIf="snilsUser.hasError('required')">{{getErrorMessageRequired('СНИЛС')}}</mat-error>
 
-                </mat-form-field>
               </form>
               <form [formGroup]="regAddressUserForm" novalidate>
                 <div class="address d-flex flex-column">
