@@ -5,7 +5,7 @@ import {AddressUser} from './address/AddressUser';
 export class User {
   id?: number = null;
   googleId?: string;
-  nickName: string;
+  username: string;
   status?: StatusActive;
   snils?: string;
   surname: string;
@@ -17,7 +17,7 @@ export class User {
   email: string;
   birthday: string;
   password: string;
-  gender: GenderType = GenderType.MALE;
+  male: GenderType = GenderType.MALE;
   address?: AddressUser = new AddressUser();
 
 
@@ -58,7 +58,7 @@ export class User {
 
 
 
-    this.nickName = nickName;
+    this.username = nickName;
     this.surname = surname;
     this.name = name;
     this.patronymic = patronymic;
@@ -66,7 +66,7 @@ export class User {
     this.email = email;
     this.birthday = birthday;
     this.password = password;
-    this.gender = gender;
+    this.male = gender;
     this.address = address;
   }
 
@@ -78,7 +78,7 @@ export class User {
     const newObj: User = new User(
       obj.id,
       obj.googleId,
-      obj.nickName,
+      obj.username,
       obj.snils,
       obj.surname,
       obj.name,
@@ -89,7 +89,7 @@ export class User {
       obj.email,
       obj.birthday,
       obj.password,
-      obj.gender,
+      obj.male,
       obj.address
     );
     return newObj;

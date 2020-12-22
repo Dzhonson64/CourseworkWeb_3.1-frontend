@@ -4,4 +4,5 @@ export class ProductDto {
   price: number;
   description: string;
   catalogId: number;
+  providerId :number;
 }

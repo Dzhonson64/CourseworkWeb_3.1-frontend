@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {ProfileService} from '../../../../profile/services/profile.service';
 import {CatalogTreeService} from '../../../../profile/services/catalog-tree.service';
+import {UserType} from '../../../../../models/type/UserType';
 
 @Component({
   selector: 'app-menu',
@@ -10,7 +11,11 @@ import {CatalogTreeService} from '../../../../profile/services/catalog-tree.serv
 export class MenuComponent implements OnInit {
   public drawer: any;
   private _isVisibleToggleMenu: boolean;
-
+  username: string;
+  userId: string;
+  type: string;
+  amountPurchase : number = 0;
+  typeUser = UserType;
   public selectedValue: string = 'Все категории';
 
 
@@ -21,10 +26,19 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.username = localStorage.getItem("name")
+    this.type = localStorage.getItem("type")
+    this.userId = localStorage.getItem("userId")
+    this.amountPurchase = Number(localStorage.getItem("amountPurchase"))
   }
 
-
+  logout() {
+    localStorage.removeItem("type")
+    localStorage.removeItem("name")
+    localStorage.removeItem("userId")
+    localStorage.removeItem("token")
+    this.ngOnInit()
+  }
   get isVisibleToggleMenu(): boolean {
     return this._isVisibleToggleMenu;
   }

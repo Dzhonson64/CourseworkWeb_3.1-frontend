@@ -35,6 +35,14 @@ export class AuthService {
     return this.http.post<User>("/api/courseworkWeb/auth/register/provider", providerDto);
   }
 
+  public loginProvider(providerDto: ProviderDto):Observable<ProviderDto>{
+    return this.http.post<ProviderDto>("/api/courseworkWeb/auth/login/provider", providerDto);
+  }
+
+  public loginUser(user: ProviderDto){
+    return this.http.post("/api/courseworkWeb/auth/login", user);
+  }
+
   get popUpSelectionMenu(): ElementRef {
     return this._popUpSelectionMenu;
   }

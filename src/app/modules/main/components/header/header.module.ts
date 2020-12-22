@@ -15,6 +15,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {RouterModule} from '@angular/router';
 import {ProfileService} from '../../../profile/services/profile.service';
 import { ChildMenuComponent } from '../layout/child-menu/child-menu.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { ChildMenuComponent } from '../layout/child-menu/child-menu.component';
     MatIconModule, MatToolbarModule,
     MatMenuModule, MatListModule,
     MatSidenavModule,
-    MatSelectModule, RouterModule
+    MatSelectModule, RouterModule, MatBadgeModule
   ],
   exports: [MainHeaderComponent, HeaderTopComponent, MenuComponent, ChildMenuComponent],
   providers: [ProfileService]

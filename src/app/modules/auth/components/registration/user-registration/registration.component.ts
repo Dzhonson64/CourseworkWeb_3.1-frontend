@@ -12,8 +12,9 @@ import {now} from 'moment/moment';
 import {GenderType} from '../../../../../models/type/GenderType';
 import {User} from '../../../../../models/User';
 import {AuthService} from '../../../services/auth.service';
-import {AddressType} from '../../../../../models/type/AddressType';
+import {UserType} from '../../../../../models/type/UserType';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 declare var $: any;
 
@@ -52,7 +53,7 @@ export class RegistrationComponent implements OnInit {
   zipUser: FormControl;
 
   regSiteDataUserForm: FormGroup;
-  nickNameUser: FormControl;
+  username: FormControl;
   passwordUser: FormControl;
   emailUser: FormControl;
   passwordConfirmUser: FormControl;
@@ -74,7 +75,7 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private _adapter: DateAdapter<any>, private findAddressService: FindAddressService, private authService: AuthService,
               private router: Router,
-              private _route: ActivatedRoute) {
+              private _route: ActivatedRoute, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -128,7 +129,7 @@ export class RegistrationComponent implements OnInit {
     this.zipUser = new FormControl('', [Validators.required, Validators.max(999999), Validators.min(100000)]);
 
 
-    this.nickNameUser = new FormControl('', [Validators.required, Validators.maxLength(15)]);
+    this.username = new FormControl('', [Validators.required, Validators.maxLength(15)]);
     this.passwordUser = new FormControl('', [Validators.required, Validators.maxLength(20)]);
     this.passwordConfirmUser = new FormControl('', [Validators.required, Validators.maxLength(20)]);
     this.emailUser = new FormControl('', [Validators.required, Validators.email]);
@@ -154,7 +155,7 @@ export class RegistrationComponent implements OnInit {
     });
 
     this.regSiteDataUserForm = new FormGroup({
-      nickNameUser: this.nickNameUser,
+      username: this.username,
       passwordUser: this.passwordUser,
       emailUser: this.emailUser,
       passwordConfirmUser: this.passwordConfirmUser,
@@ -229,21 +230,26 @@ export class RegistrationComponent implements OnInit {
 
   submit() {
     this.checkForm();
-    this.userData.gender = this.genderUser.value;
+    this.userData.male = this.genderUser.value;
     this.userData.email = this.emailUser.value;
     this.userData.birthday = this.birthdayUser.value;
     this.userData.password = this.passwordUser.value;
-    this.userData.nickName = this.nickNameUser.value;
+    this.userData.username = this.username.value;
     this.userData.surname = this.surnameUser.value;
     this.userData.patronymic = this.patronymicUser.value;
     this.userData.name = this.nameUser.value;
     this.userData.postcode = this.zipUser.value;
     this.userData.phone = this.phoneUser.value;
-    this.resAddress.type = AddressType.User;
+    this.resAddress.type = UserType.User;
     this.userData.address = this.resAddress;
+    console.log(this.userData)
     this.authService.saveUser(this.userData).subscribe(value => {
       this.router.navigate(["/login"])
-    })
+    },
+      error => {
+        this.openSnackBar(error.error.message, "Закрыть")
+      })
+
     // console.log(this.regAddressUserForm.controls["countryUser"]);
     /* this.checkForm();
      this.authService.saveAddress(this.resAddress).subscribe(value => {
@@ -252,7 +258,11 @@ export class RegistrationComponent implements OnInit {
 
   }
 
-
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
   clearOldData() {
     this.fiasObjects.forEach(value => {
       this.fiasObjects.shift();

@@ -101,6 +101,7 @@ this.saveProduct();
     product.price = this.priceProduct.value;
     product.description = this.descriptionProduct.value;
     product.catalogId = this.nameRootCatalog.value;
+    product.providerId = Number(localStorage.getItem("userId"));
     this.productService.saveProduct(product).subscribe(value => {
       let productPropertyList = [];
       for (let property of this.propertyList) {

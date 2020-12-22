@@ -25,6 +25,10 @@ import { PropertyProductComponent } from './componets/productCompany/components/
 import { ContainerPropertiesComponent } from './componets/productCompany/components/property/container-properties/container-properties.component';
 import { CompNewProductComponent } from './componets/productCompany/components/new-product/comp-new-product/comp-new-product.component';
 import { EdutProductComponent } from './componets/productCompany/components/new-product/edut-product/edut-product.component';
+import { UserTableComponent } from './componets/user-table/user-table.component';
+import {AuthGuard} from '../../guards/auth.guard';
+import { PurchaseComponent } from './componets/purchase/purchase.component';
+import { SalesComponent } from './componets/productCompany/components/sales/sales.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,10 @@ import { EdutProductComponent } from './componets/productCompany/components/new-
     PropertyProductComponent,
     ContainerPropertiesComponent,
     CompNewProductComponent,
-    EdutProductComponent
+    EdutProductComponent,
+    UserTableComponent,
+    PurchaseComponent,
+    SalesComponent
   ],
 
   imports: [
@@ -59,6 +66,7 @@ import { EdutProductComponent } from './componets/productCompany/components/new-
   ],
   providers: [
     ProfileService,
+    AuthGuard
     /*{ provide: LOCALE_ID, useValue: "ru-RU"},*/]
 })
 export class ProfileModule { }

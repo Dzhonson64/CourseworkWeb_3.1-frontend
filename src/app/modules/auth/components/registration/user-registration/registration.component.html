@@ -3,17 +3,27 @@
     <div class="d-flex justify-content-center">
       <div class="login-content">
         <div class="form-panel">
-          <div class="form-header">
-            Регистрация пользователя
-          </div>
+          <div class="form-panel">
+            <div class="d-flex justify-content-between">
+              <a routerLink="/login">
+                <button mat-stroked-button color="primary" title="Вернуться на Логин">
+                <span class="material-icons">
+                  arrow_back
+                </span>
+                </button>
+              </a>
+              <div class="form-header">
+                Регистрация пользователя
+              </div>
+            </div>
           <div class="form-content">
             <form (ngSubmit)="submit()">
               <form class="" [formGroup]="regSiteDataUserForm" novalidate >
                 <mat-form-field appearance="fill" class="form-group">
                   <mat-label>Введите никнейм</mat-label>
-                  <input matInput required formControlName="nickNameUser">
-                  <mat-error *ngIf="nickNameUser.hasError('required')">{{getErrorMessageRequired('Никнейм')}}</mat-error>
-                  <mat-error *ngIf="nickNameUser.hasError('maxlength')">{{getErrorMessageMaxLength('Никнейм', 15)}}</mat-error>
+                  <input matInput required formControlName="username">
+                  <mat-error *ngIf="username.hasError('required')">{{getErrorMessageRequired('Никнейм')}}</mat-error>
+                  <mat-error *ngIf="username.hasError('maxlength')">{{getErrorMessageMaxLength('Никнейм', 15)}}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="form-group">
                   <mat-label>Имя</mat-label>

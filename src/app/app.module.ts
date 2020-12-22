@@ -14,6 +14,8 @@ import { ProductItemComponent } from './modules/userProducts/product-item/produc
 import { CatalogItemComponent } from './modules/userProducts/catalog-item/catalog-item.component';
 import {MatFieldCommonModule} from './modules/common-modules/mat-field/mat-field-common.module';
 import {FormCommonModule} from './modules/common-modules/forms/form-common.module';
+import { BucketComponent } from './modules/bucket/bucket.component';
+import { BillComponent } from './modules/bill/bill.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +23,8 @@ import {FormCommonModule} from './modules/common-modules/forms/form-common.modul
     DialogOverviewComponent,
     ProductItemComponent,
     CatalogItemComponent,
+    BucketComponent,
+    BillComponent,
   ],
   imports: [
     BrowserModule,

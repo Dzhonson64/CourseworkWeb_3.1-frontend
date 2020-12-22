@@ -13,6 +13,9 @@ import {ProfileService} from '../../services/profile.service';
 import {User} from '../../../../models/User';
 import {StatusActive} from '../../../../models/type/StatusActive';
 import {GenderType} from '../../../../models/type/GenderType';
+import {UserType} from '../../../../models/type/UserType';
+import {AddressUser} from '../../../../models/address/AddressUser';
+import {AddressObj} from '../../../../models/address/AddressObj';
 
 @Component({
   selector: 'app-settings',
@@ -41,6 +44,7 @@ export class SettingsComponent implements OnInit {
   private _fileToUpload: File = null;
   private _pathImgFile: string;
   personalDataForm: FormGroup;
+  regAddressUserForm: FormGroup;
   userName: FormControl;
   userSurname: FormControl;
   userPatronymic: FormControl;
@@ -50,8 +54,17 @@ export class SettingsComponent implements OnInit {
   userPhone: FormControl;
   userPassword: FormControl;
   userGender: FormControl;
-  userSnils: FormControl;
-  filterType = 1;
+  money: FormControl;
+
+  regionUser: FormControl;
+  cityUser: FormControl;
+  districtUser: FormControl;
+  countryUser: FormControl;
+  streetUser: FormControl;
+  buildingUser: FormControl;
+  apartmentUser: FormControl;
+
+
   hide = true;
 
   userModel: User;
@@ -64,7 +77,24 @@ export class SettingsComponent implements OnInit {
     this._adapter.setLocale('ru');
     this.createFormControls();
     this.createForm();
-
+    this.profileService.getUser(Number(localStorage.getItem('userId'))).subscribe(value => {
+      console.log(value);
+      this.userName.setValue(value.name);
+      this.userPhone.setValue(value.phone);
+      this.userPatronymic.setValue(value.patronymic);
+      this.userNickname.setValue(value.username);
+      this.userEmail.setValue(value.email);
+      this.userSurname.setValue(value.surname);
+      this.userBirthday.setValue(value.birthday);
+      this.userGender.setValue(value.male);
+      this.regionUser.setValue(value.address.region.name);
+      this.cityUser.setValue(value.address.city.name);
+      this.countryUser.setValue(value.address.country.name);
+      this.districtUser.setValue(value.address.district.name);
+      this.streetUser.setValue(value.address.street.name);
+      this.buildingUser.setValue(value.address.building.name);
+      this.money.setValue(value.money);
+    });
     this.userName.valueChanges.subscribe(value => {
 
     });
@@ -83,7 +113,16 @@ export class SettingsComponent implements OnInit {
     ]);
     this.userBirthday = new FormControl(moment(now()));
     this.userGender = new FormControl(GenderType.MALE);
-    this.userSnils = new FormControl('', [Validators.required]);
+    this.money = new FormControl(0);
+
+
+    this.regionUser = new FormControl('', [Validators.required, Validators.maxLength(20)]);
+    this.countryUser = new FormControl('', [Validators.required, Validators.maxLength(20)]);
+    this.cityUser = new FormControl('', [Validators.required, Validators.maxLength(20)]);
+    this.districtUser = new FormControl('', [Validators.maxLength(15)]);
+    this.streetUser = new FormControl('', [Validators.required, Validators.maxLength(15)]);
+    this.apartmentUser = new FormControl('', [Validators.required, Validators.maxLength(5)]);
+    this.buildingUser = new FormControl('', [Validators.required, Validators.maxLength(10)]);
   }
 
   createForm() {
@@ -99,7 +138,18 @@ export class SettingsComponent implements OnInit {
       userPhone: this.userPhone,
       userPassword: this.userPassword,
       userGender: this.userGender,
-      userSnils: this.userSnils
+      money: this.money
+    });
+
+
+    this.regAddressUserForm = new FormGroup({
+      regionUser: this.regionUser,
+      cityUser: this.cityUser,
+      districtUser: this.districtUser,
+      streetUser: this.streetUser,
+      apartmentUser: this.apartmentUser,
+      countryUser: this.countryUser,
+      buildingUser: this.buildingUser
     });
   }
 
@@ -113,19 +163,46 @@ export class SettingsComponent implements OnInit {
   }
 
   submit() {
-    this.userModel = {
-      nickName: this.userNickname.value,
-      surname: this.userName.value,
-      name : this.userName.value,
-      patronymic: this.userPatronymic.value,
-      phone: this.userPhone.value,
-      birthday: this.userBirthday.value,
-      gender: this.userGender.value,
-      password: this.userPassword.value,
-      email: this.userEmail.value,
-      snils: this.userSnils.value
-    };
-    this.profileService.saveUserData(this.userModel).subscribe(value => {
+    let address = new AddressUser();
+
+    let re = new AddressObj();
+    re.name = this.regionUser.value;
+    address.region = re;
+
+    let re6 = new AddressObj();
+    re6.name = this.countryUser.value;
+    address.country = re6;
+
+    let re2 = new AddressObj();
+    re2.name = this.cityUser.value;
+    address.city = re2;
+
+    let re3 = new AddressObj();
+    re3.name = this.districtUser.value;
+    address.district = re3;
+
+    let re4 = new AddressObj();
+    re4.name = this.streetUser.value;
+    address.street =  re4;
+
+    let re5 = new AddressObj();
+    re5.name = this.buildingUser.value;
+    address.building = re5;
+
+    let user = new User();
+    user.username = this.userNickname.value;
+    user.surname = this.userName.value;
+    user.name = this.userName.value;
+    user.patronymic = this.userPatronymic.value;
+    user.phone = this.userPhone.value;
+    user.birthday = this.userBirthday.value;
+    user.email = this.userEmail.value;
+    user.address = address;
+    user.money = this.money.value;
+    user.id = Number(localStorage.getItem("userId"));
+
+console.log(user)
+    this.profileService.updateUser(user).subscribe(value => {
 
     });
   }
@@ -136,7 +213,7 @@ export class SettingsComponent implements OnInit {
     var blob = event.target.files[0].slice(0, event.target.files[0].size, 'image/png');
     this._fileToUpload = new File([blob], event.target.files[0].name, {type: 'image/png'});
     this._pathImgFile = URL.createObjectURL(this._fileToUpload);
-    this.profileService.uploadImage(this.fileToUpload, "/user/add/avatar").subscribe(value => {
+    this.profileService.uploadImage(this.fileToUpload, '/user/add/avatar').subscribe(value => {
 
     });
 

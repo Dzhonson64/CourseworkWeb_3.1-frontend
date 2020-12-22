@@ -1,4 +1,4 @@
-export enum AddressType{
+export enum UserType{
   User = "User",
   Provider = "Provider"
 }

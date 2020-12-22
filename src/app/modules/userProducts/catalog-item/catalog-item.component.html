@@ -1,8 +1,8 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-9">
-      <div *ngFor="let product of productList" class="">
-        <div class="col-md-3 d-flex justify-content-center product-item">
+      <div  class="row">
+        <div class="col-md-3 d-flex justify-content-center product-item mt-5" *ngFor="let product of productList">
           <a routerLink="{{product.id}}" class="d-flex flex-column align-items-center">
             <img src="api/courseworkWeb/products/{{product.id}}/image" alt="" class="img">
             <span class="name">{{product.name}}</span>
@@ -16,11 +16,10 @@
       <div class="card-filter">
         <div class="cards">
           <h5 class="mb-3">Сортировать по</h5>
-          <mat-radio-group aria-label="Select an option" class="d-flex flex-column" color="primary">
-            <mat-radio-button value="1" class="mt-1" [checked]="true">возрастанию цены</mat-radio-button>
+          <mat-radio-group aria-label="Select an option" class="d-flex flex-column" color="primary"  [formControl]="controlSort">
+            <mat-radio-button value="1" class="mt-1 " [checked]=true>возрастанию цены</mat-radio-button>
             <mat-radio-button value="2" class="mt-1">убыванию цены</mat-radio-button>
-            <mat-radio-button value="3" class="mt-1">популярности</mat-radio-button>
-            <mat-radio-button value="4" class="mt-1">названию</mat-radio-button>
+            <mat-radio-button value="3" class="mt-1">названию</mat-radio-button>
           </mat-radio-group>
         </div>
         <div class="cards mt-5">
@@ -30,20 +29,20 @@
             <div class="col-md-6">
               <mat-form-field class="price-diap">
                 <mat-label>От</mat-label>
-                <input matInput placeholder="От 100" value="0" type="number" min="0">
+                <input matInput placeholder="От 100" [formControl]="controlMin" type="number" min="{{minPrice}}" max="{{maxPrice}}">
               </mat-form-field>
             </div>
             <div class="col-md-6">
               <mat-form-field class="price-diap">
                 <mat-label>До</mat-label>
-                <input matInput placeholder="До 1000" min="0">
+                <input matInput placeholder="До 1000" [formControl]="controlMax" type="number" min="{{minPrice}}" max="{{maxPrice}}">
               </mat-form-field>
             </div>
 
 
           </form>
         </div>
-        <button mat-stroked-button color="primary" class="apply mt-5">Применить</button>
+        <button mat-stroked-button color="primary" class="apply mt-5" (click)="filter()">Применить</button>
       </div>
     </div>
   </div>

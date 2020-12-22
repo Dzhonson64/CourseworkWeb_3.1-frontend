@@ -1,79 +1,119 @@
-<div class="navbar-inner">
-    <div class="container">
-        <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-                <button mat-icon-button class="menu-burger" aria-label="Example icon-button with menu icon"
-                    (click)="drawer.toggle()" *ngIf="isVisibleToggleMenu">
-
-                    <mat-icon>menu</mat-icon>
-                </button>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div class="menu-content">
-                        <ul class="navbar-nav text-center ">
-                            <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-
-                                <a class="nav-link" routerLink="" routerLinkActive="active">
-                                    <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-                                </a>
-                            </li>
-
-                            <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-                                <a class="nav-link" routerLink="" routerLinkActive="">О нас</a>
-                            </li>
-                            <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-                                <a class="nav-link" routerLink="" routerLinkActive="">Новое поступление</a>
-                            </li>
-                            <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    Страницы
-                                </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" routerLink="" routerLinkActive="">ProductDto 1</a>
-                                    <a class="dropdown-item" routerLink="" routerLinkActive="">ProductDto 2</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" routerLink="" routerLinkActive="">Single ProductDto 1</a>
-                                    <a class="dropdown-item" routerLink="" routerLinkActive="">Single ProductDto 2</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" routerLink="" routerLinkActive="">Checkout Page</a>
-                                    <a class="dropdown-item" routerLink="" routerLinkActive="">Payment Page</a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" routerLink="/contact" routerLinkActive="active">Контакты</a>
-                            </li>
-
-                        </ul>
-
-
-                        <!-- <div class="agileits-navi_search">
-                            <form action="#" method="post">
-                                <select id="agileinfo-nav_search" name="agileinfo_search" class="border" required="">
-                                    <option value="">Все категории</option>
-                                    <option value="Televisions">Телевизоры</option>
-                                    <option value="Headphones">Наушники</option>
-                                    <option value="Computers">Компьютеры</option>
-                                </select>
-                            </form>
-                        </div> -->
-                    </div>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Panel color</mat-label>
-                        <mat-select [(ngModel)]="selectedValue" name="categories">
-                                <mat-option value="Televisions">Телевизоры</mat-option>
-                                <mat-option value="Headphones">Наушники</mat-option>
-                                <mat-option value="Computers">Компьютеры</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                </div>
-            </nav>
-        </div>
+<mat-toolbar>
+  <div class="container d-flex justify-content-between">
+    <div class="left">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+              (click)="drawer.toggle()" *ngIf="isVisibleToggleMenu">
+        <mat-icon>menu</mat-icon>
+      </button>
+        <span *ngIf="username && type?.toString() === typeUser?.User.toString()">{{username}}</span>
+        <span *ngIf="username && type?.toString() === typeUser?.Provider.toString()">Организация "{{username}}"</span>
     </div>
-</div>
+    <div class="right">
+      <span class="example-spacer"></span>
+      <a routerLink="" routerLinkActive="active">
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+        </button>
+      </a>
+      <button  mat-icon-button class="example-icon favorite-icon" [matMenuTriggerFor]="menu">
+              <span class="material-icons material-icons-round">
+                person
+                </span>
+
+      </button>
+
+      <button mat-icon-button class="example-icon favorite-icon" routerLink="user/{{userId}}/bucket" *ngIf="userId">
+              <span class="material-icons" >
+              shopping_cart
+              </span>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <a routerLink="/login" *ngIf="!username">
+          <button mat-menu-item>Войти/Зарегестрироваться</button>
+        </a>
+        <a routerLink="/me/settings">
+          <button mat-menu-item>Настройки</button>
+        </a>
+        <button mat-menu-item (click)="logout()" *ngIf="username">Выйти</button>
+      </mat-menu>
+    </div>
+
+
+  </div>
+
+</mat-toolbar>
+
+
+<!--<div class="navbar-inner">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">-->
+<!--                <button mat-icon-button class="menu-burger" aria-label="Example icon-button with menu icon"-->
+<!--                    (click)="drawer.toggle()" *ngIf="isVisibleToggleMenu">-->
+
+<!--                    <mat-icon>menu</mat-icon>-->
+<!--                </button>-->
+
+<!--                <button class="navbar-toggler" type="button" data-toggle="collapse"-->
+<!--                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"-->
+<!--                    aria-label="Toggle navigation">-->
+<!--                    <span class="navbar-toggler-icon"></span>-->
+<!--                </button>-->
+
+<!--                <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--                    <div class="menu-content">-->
+<!--                        <ul class="navbar-nav text-center ">-->
+<!--                            <li class="nav-item mr-lg-2 mb-lg-0 mb-2">-->
+
+<!--                                <a class="nav-link" routerLink="" routerLinkActive="active">-->
+<!--                                    <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>-->
+<!--                                </a>-->
+<!--                            </li>-->
+
+<!--                            <li class="nav-item mr-lg-2 mb-lg-0 mb-2">-->
+<!--                                <a class="nav-link" routerLink="" routerLinkActive="">О нас</a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item mr-lg-2 mb-lg-0 mb-2">-->
+<!--                                <a class="nav-link" routerLink="" routerLinkActive="">Новое поступление</a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">-->
+<!--                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"-->
+<!--                                    aria-haspopup="true" aria-expanded="false">-->
+<!--                                    Страницы-->
+<!--                                </a>-->
+<!--                                <div class="dropdown-menu">-->
+<!--                                    <a class="dropdown-item" routerLink="" routerLinkActive="">ProductDto 1</a>-->
+<!--                                    <a class="dropdown-item" routerLink="" routerLinkActive="">ProductDto 2</a>-->
+<!--                                    <div class="dropdown-divider"></div>-->
+<!--                                    <a class="dropdown-item" routerLink="" routerLinkActive="">Single ProductDto 1</a>-->
+<!--                                    <a class="dropdown-item" routerLink="" routerLinkActive="">Single ProductDto 2</a>-->
+<!--                                    <div class="dropdown-divider"></div>-->
+<!--                                    <a class="dropdown-item" routerLink="" routerLinkActive="">Checkout Page</a>-->
+<!--                                    <a class="dropdown-item" routerLink="" routerLinkActive="">Payment Page</a>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a class="nav-link" routerLink="/contact" routerLinkActive="active">Контакты</a>-->
+<!--                            </li>-->
+
+<!--                        </ul>-->
+
+
+<!--                        &lt;!&ndash; <div class="agileits-navi_search">-->
+<!--                            <form action="#" method="post">-->
+<!--                                <select id="agileinfo-nav_search" name="agileinfo_search" class="border" required="">-->
+<!--                                    <option value="">Все категории</option>-->
+<!--                                    <option value="Televisions">Телевизоры</option>-->
+<!--                                    <option value="Headphones">Наушники</option>-->
+<!--                                    <option value="Computers">Компьютеры</option>-->
+<!--                                </select>-->
+<!--                            </form>-->
+<!--                        </div> &ndash;&gt;-->
+<!--                    </div>-->
+<!--                    -->
+<!--                </div>-->
+<!--            </nav>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->

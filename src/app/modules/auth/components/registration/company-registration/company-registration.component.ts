@@ -8,9 +8,10 @@ import {FindAddressService} from '../../../../common-service/find-address.servic
 import {RootSuggestion} from '../../../../../models/organisation/RootSuggestion';
 import {Data} from '../../../../../models/organisation/Data';
 import {OrganisationType} from '../../../../../models/type/OrganisationType';
-import {AddressType} from '../../../../../models/type/AddressType';
+import {UserType} from '../../../../../models/type/UserType';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProviderDto} from '../../../../../models/ProviderDto';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 declare var $: any;
 const urlDaDataINN: string = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party';
@@ -47,7 +48,7 @@ export class CompanyRegistrationComponent implements OnInit {
   public fiasObjects: Array<AddressObj> = new Array<AddressObj>();
   innArr: Data[];
 
-  constructor(private authService: AuthService, private findAddressService: FindAddressService, private router: Router,
+  constructor(private authService: AuthService, private findAddressService: FindAddressService, private router: Router, private _snackBar: MatSnackBar,
   private _route: ActivatedRoute) {
     this.resAddress = new AddressCompany();
   }
@@ -204,9 +205,19 @@ let res = new RootSuggestion();
     company.password = this.passwordCompany.value;
     company.address = this.resAddress;
     this.authService.saveCompany(company).subscribe(value => {
-      this.router.navigate(["/login"])
-    })
 
+      this.router.navigate(["/login"])
+    },
+      error => {
+this.openSnackBar(error.error.message, "Закрыть")
+      })
+
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000,
+    });
   }
 
   private checkForm() {
