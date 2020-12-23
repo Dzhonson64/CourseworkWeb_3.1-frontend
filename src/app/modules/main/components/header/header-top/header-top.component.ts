@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {UserType} from '../../../../../models/type/UserType';
 
 @Component({
   selector: 'app-header-top',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderTopComponent implements OnInit {
 
-  constructor() { }
+  changesRef : ChangeDetectorRef;
+  constructor(private cdRef: ChangeDetectorRef) {
+    this.changesRef = cdRef;
+  }
 
   ngOnInit(): void {
+
   }
+
 
 }

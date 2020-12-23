@@ -5,23 +5,26 @@ import {AppComponent} from './app.component';
 import {MainModule} from './modules/main/main.module';
 import {AuthModule} from './modules/auth/auth.module';
 import {ProfileModule} from './modules/profile/profile.module';
-import {MainRoutingModule} from './modules/main/routing.module';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {HttpClientJsonpModule} from '@angular/common/http';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatListModule} from '@angular/material/list';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
-
+import { ComparePasswordsDirective } from './directives/compare-passwords.directive';
+import { DialogOverviewComponent } from './modules/common-modules/dialog-overview/dialog-overview.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import { ProductItemComponent } from './modules/userProducts/product-item/product-item.component';
+import { CatalogItemComponent } from './modules/userProducts/catalog-item/catalog-item.component';
+import {MatFieldCommonModule} from './modules/common-modules/mat-field/mat-field-common.module';
+import {FormCommonModule} from './modules/common-modules/forms/form-common.module';
+import { BucketComponent } from './modules/bucket/bucket.component';
+import { BillComponent } from './modules/bill/bill.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ComparePasswordsDirective,
+    DialogOverviewComponent,
+    ProductItemComponent,
+    CatalogItemComponent,
+    BucketComponent,
+    BillComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,11 @@ import {CommonModule} from '@angular/common';
     MainModule,
     AuthModule,
     ProfileModule,
-    CommonModule
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFieldCommonModule,
+    FormCommonModule
   ],
   providers: [],
   bootstrap: [AppComponent],

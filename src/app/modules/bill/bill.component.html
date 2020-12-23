@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Чек заказа</h1>
+<div mat-dialog-content class="content">
+  <div class="header d-flex flex-column align-items-center">
+    <h5>Магазин ООО «RusElectro»</h5>
+    <span class="mt-1">Номер чека {{getNumBill()}}</span>
+    <span class="mt-1">Дата заказа {{date}}</span>
+
+  </div>
+  <ul>
+    <li *ngFor="let elem of data" class="d-flex justify-content-between mt-1">
+      <div class="left">
+        <p>{{elem.product.name}} {{elem.amount}} шт.</p>
+      </div>
+      <div class="right">
+        <p>={{elem.product.price}} руб.</p>
+
+      </div>
+    </li>
+  </ul>
+  <div class="result mt-2">
+    <div class="result d-flex align-items-center justify-content-between mt-1">
+      <span class="title mr-5">Подытог</span>
+      <span> {{subtotal}} руб.</span>
+    </div>
+    <div class="result d-flex align-items-center justify-content-between mt-1">
+      <span class="title">Досставка</span>
+      <span> {{shipping}} руб.</span>
+    </div>
+    <div class="result d-flex align-items-center justify-content-between mt-1" >
+      <span class="title">Налог</span>
+      <span>{{taxes}}%</span>
+    </div>
+    <div class="result d-flex align-items-center justify-content-between mt-1">
+      <span class="title" style="font-weight: bold">ИТОГО</span>
+      <span style="font-weight: bold"> {{total}} руб.</span>
+    </div>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="close()">Close</button>
+</div>

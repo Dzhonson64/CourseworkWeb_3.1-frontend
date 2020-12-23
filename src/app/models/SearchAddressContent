@@ -1,0 +1,6 @@
+export class SearchAddressContent {
+  city?:string;
+  typeCity? :string;
+}
+
+

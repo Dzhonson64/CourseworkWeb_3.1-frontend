@@ -9,9 +9,19 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
-
-
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatTableModule} from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 @NgModule({
   declarations: [],
   imports: [
@@ -26,7 +36,20 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSidenavModule,
     MatSelectModule,
     MatInputModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatAutocompleteModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
+    MatTooltipModule,
+    MatTableModule,
+    MatTabsModule,
+    MatSliderModule,
+    MatCheckboxModule,
+    MatSnackBarModule,
+    MatBadgeModule,
+    MatSlideToggleModule
   ]
 })
 export class MatFieldCommonModule { }

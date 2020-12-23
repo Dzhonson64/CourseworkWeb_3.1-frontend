@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {MainRoutingModule} from './routing.module';
@@ -11,20 +11,20 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav';
 import {MatSelectModule} from '@angular/material/select';
 import {HeaderModule} from './components/header/header.module';
 import {HomeModule} from './components/home/home.module';
 import {FooterComponent} from './components/footer/footer.component';
 import {ContactComponent} from './components/contact/contact.component';
 import {AppRoutingModule} from '../../app-routing.module';
-import { LoginComponent } from '../auth/login/login.component';
+import { LoginComponent } from '../auth/components/login/login.component';
 import { MatInputModule } from '@angular/material/input';
-import { RegistrationComponent } from '../auth/registration/registration.component';
+import { RegistrationComponent } from '../auth/components/registration/user-registration/registration.component';
 import {MatFieldCommonModule} from '../common-modules/mat-field/mat-field-common.module';
 import {FormCommonModule} from '../common-modules/forms/form-common.module';
 @NgModule({
-  declarations: [LayoutComponent, FooterComponent, ContactComponent
+  declarations: [FooterComponent, ContactComponent, LayoutComponent
 
   ],
   imports: [
@@ -38,7 +38,10 @@ import {FormCommonModule} from '../common-modules/forms/form-common.module';
     FormCommonModule
   ],
   providers: [],
-  exports: [HeaderModule]
+  exports: [HeaderModule, HomeModule, FooterComponent, ContactComponent]
 })
 export class MainModule {
+
+
+
 }

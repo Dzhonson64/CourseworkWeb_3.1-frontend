@@ -1,0 +1,44 @@
+<div class="row block-left-menu h-100">
+  <div class="left-menu d-flex align-items-center flex-column">
+    <img src="#" alt="">
+    <button mat-stroked-button class="bnt-logout">Выйти</button>
+
+    <mat-selection-list #shoes [multiple]="false" class="slider-menu">
+      <a routerLink="settings" routerLinkActive="active">
+        <mat-list-option class="d-flex align-items-center" >
+          <i class="far fa-user"></i> <span>Мой профиль</span>
+        </mat-list-option>
+      </a>
+      <a  routerLink="products/purchases" routerLinkActive="active">
+        <mat-list-option class="d-flex align-items-center">
+          <i class="far fa-credit-card"></i> <span> Покупки </span>
+        </mat-list-option>
+      </a>
+      <a  routerLink="products/sales" routerLinkActive="active">
+        <mat-list-option class="d-flex align-items-center">
+          <i class="far fa-credit-card"></i> <span> Продажи </span>
+        </mat-list-option>
+      </a>
+      <a routerLink="products" routerLinkActive="active">
+        <mat-list-option class="d-flex align-items-center">
+          <i class="fas fa-cube"></i> <span>Товары</span>
+        </mat-list-option>
+      </a>
+      <a routerLink="products/config" routerLinkActive="active">
+        <mat-list-option class="d-flex align-items-center">
+          <i class="material-icons">category</i>
+          <span>Конфигурация системы товаров</span>
+        </mat-list-option>
+      </a>
+      <a routerLink="settings/users" routerLinkActive="active">
+        <mat-list-option class="d-flex align-items-center">
+          <i class="material-icons p-0">
+            supervisor_account
+          </i>
+          <span>Пользователи</span>
+        </mat-list-option>
+      </a>
+
+    </mat-selection-list>
+  </div>
+</div>

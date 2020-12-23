@@ -1,0 +1,40 @@
+<div class="settings">
+  <div class="container">
+    <div class="content">
+      <div class="row mb-5 p-3 d-flex justify-content-between">
+        <h3>Редактирование продукта</h3>
+        <button mat-stroked-button color="primary" (click)="goBack()">Вернуться к списку товаров</button>
+      </div>
+
+      <form class="content-block d-flex flex-column" [formGroup]="newProductFormGroup" novalidate
+            (ngSubmit)="submit()">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Название продукта</mat-label>
+          <input matInput  maxLength="20" formControlName="nameProduct">
+          <mat-hint align="end">{{nameProduct?.value?.length || 0}}/20</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Стоимость продукта</mat-label>
+          <input matInput type="number" maxLength="10" formControlName="priceProduct">
+          <mat-hint align="end">{{priceProduct?.value?.length || 0}}/20</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Описание</mat-label>
+          <textarea matInput placeholder="Ex. 100 Main St" formControlName="descriptionProduct">Описание</textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Выбранный каталог</mat-label>
+          <input matInput formControlName="nameRootCatalog">
+        </mat-form-field>
+        <div>
+          <template #container></template>
+        </div>
+
+        <button type="submit" mat-flat-button color="primary" [disabled]="newProductFormGroup.invalid">Сохранить
+        </button>
+      </form>
+
+    </div>
+  </div>
+</div>
