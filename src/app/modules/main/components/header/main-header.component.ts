@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MenuComponent } from './menu/menu.component';
+import { MenuComponent } from './toolbar/menu.component';
 declare var $: any;
 @Component({
   selector: 'app-main-header',

@@ -59,6 +59,7 @@ export class PropertyProductsComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
+    console.log(filterValue)
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -98,7 +99,7 @@ export class PropertyProductsComponent implements OnInit {
 
   save() {
     console.log(this.dataSource)
-
+    this.propertyProductService.amountProperty = 0;
     this.propertyProductService.savePropertyProduct().subscribe(value1 => {
       this.ngOnInit()
     });

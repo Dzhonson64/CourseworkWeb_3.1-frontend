@@ -5,7 +5,7 @@ import {RoutingModule} from './routing.module';
 import { ProfileLayoutComponent } from './componets/layout/profile-layout.component';
 import {RouterModule} from '@angular/router';
 import {HeaderModule} from '../main/components/header/header.module';
-import {MenuComponent} from '../main/components/header/menu/menu.component';
+import {MenuComponent} from '../main/components/header/toolbar/menu.component';
 import {ProfileService} from './services/profile.service';
 import {MatFieldCommonModule} from '../common-modules/mat-field/mat-field-common.module';
 import {FormCommonModule} from '../common-modules/forms/form-common.module';

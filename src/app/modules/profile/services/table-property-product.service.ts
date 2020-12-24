@@ -13,7 +13,7 @@ export class TablePropertyProductService {
   propertiesMap = new Map<number, PropertyProductComponent[]>();
   savedPropertyProductsDto:PropertyProductsDto[] = []
   containerPropertyMap = new Map<number, ContainerPropertiesComponent>();
-
+  amountProperty:number = 0;
   constructor(private http: HttpClient) {
   }
 

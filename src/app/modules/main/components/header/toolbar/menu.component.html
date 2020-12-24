@@ -1,11 +1,11 @@
-<mat-toolbar>
-  <div class="container d-flex justify-content-between">
-    <div class="left">
+<mat-toolbar color="primary">
+  <div class="container d-flex justify-content-between ">
+    <div class="left d-flex align-items-center">
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
               (click)="drawer.toggle()" *ngIf="isVisibleToggleMenu">
         <mat-icon>menu</mat-icon>
       </button>
-        <span *ngIf="username && type?.toString() === typeUser?.User.toString()">{{username}}</span>
+        <span *ngIf="username && type?.toString() === typeUser?.User.toString()">Ваш ник: {{username}}</span>
         <span *ngIf="username && type?.toString() === typeUser?.Provider.toString()">Организация "{{username}}"</span>
     </div>
     <div class="right">
@@ -49,10 +49,10 @@
 <!--    <div class="container">-->
 <!--        <div class="row">-->
 <!--            <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">-->
-<!--                <button mat-icon-button class="menu-burger" aria-label="Example icon-button with menu icon"-->
+<!--                <button mat-icon-button class="toolbar-burger" aria-label="Example icon-button with toolbar icon"-->
 <!--                    (click)="drawer.toggle()" *ngIf="isVisibleToggleMenu">-->
 
-<!--                    <mat-icon>menu</mat-icon>-->
+<!--                    <mat-icon>toolbar</mat-icon>-->
 <!--                </button>-->
 
 <!--                <button class="navbar-toggler" type="button" data-toggle="collapse"-->
@@ -62,7 +62,7 @@
 <!--                </button>-->
 
 <!--                <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-<!--                    <div class="menu-content">-->
+<!--                    <div class="toolbar-content">-->
 <!--                        <ul class="navbar-nav text-center ">-->
 <!--                            <li class="nav-item mr-lg-2 mb-lg-0 mb-2">-->
 
@@ -82,7 +82,7 @@
 <!--                                    aria-haspopup="true" aria-expanded="false">-->
 <!--                                    Страницы-->
 <!--                                </a>-->
-<!--                                <div class="dropdown-menu">-->
+<!--                                <div class="dropdown-toolbar">-->
 <!--                                    <a class="dropdown-item" routerLink="" routerLinkActive="">ProductDto 1</a>-->
 <!--                                    <a class="dropdown-item" routerLink="" routerLinkActive="">ProductDto 2</a>-->
 <!--                                    <div class="dropdown-divider"></div>-->

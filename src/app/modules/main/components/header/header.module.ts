@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MainHeaderComponent} from './main-header.component';
 import {HeaderTopComponent} from './header-top/header-top.component';
-import {MenuComponent} from './menu/menu.component';
+import {MenuComponent} from './toolbar/menu.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';

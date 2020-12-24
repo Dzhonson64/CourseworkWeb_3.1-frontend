@@ -9,10 +9,10 @@ export class TypeGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (localStorage.getItem("userId") == undefined || localStorage.getItem("userId") == null) {
-      return false
+    if (localStorage.getItem("type") == "User") {
+      return true
     }
-    return true;
+    return false;
   }
 
 }
