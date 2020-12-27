@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ProductService} from '../../../../../profile/services/product.service';
 import {ProductDto} from '../../../../../../models/ProductDto';
+import {MatTableDataSource} from '@angular/material/table';
+import {CatalogDto} from '../../../../../../models/CatalogDto';
 
 declare var $: any;
 
@@ -19,7 +21,11 @@ export class PopularProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // $(document).ready(function() {
+
+
+
+  // ngOnInit(): void {
+  //   // $(document).ready(function() {
     //   $('.your-class').slick({
     //     arrows: true
     //   });
@@ -27,24 +33,17 @@ export class PopularProductsComponent implements OnInit {
 
     this.productsService.getLastProducts().subscribe(value => {
       this.products = value;
+      console.log(value);
       this.productFirst = this.products[2];
-      console.log(this.products[1]);
+
     });
 
 
 
-    // $(document).ready(function() {
-    //   $('.sd').owlCarousel({
-    //     loop: true,
-    //     margin: 10,
-    //     nav: true,
-    //     dots: false,
-    //     items: 1,
-    //     navText: ['<i class="fas fa-arrow-left"></i>',
-    //       '<i class="fas fa-arrow-right"></i>'],
-    //   });
-    // });
+
+
   }
+
 
 
 }

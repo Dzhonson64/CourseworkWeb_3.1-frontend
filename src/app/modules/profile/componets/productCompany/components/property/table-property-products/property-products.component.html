@@ -15,6 +15,8 @@
       </mat-form-field>
       <button mat-flat-button color="primary" (click)="save()">Сохранить свойства товаров</button>
       <div class="add-product">
+
+
         <table mat-table [dataSource]="dataSource" class="product-table" multiTemplateDataRows>
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Название</th>
