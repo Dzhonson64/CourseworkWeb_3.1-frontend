@@ -69,6 +69,7 @@ export class CatalogTreeService {
       this.buildData(dto, node);
     }
     return this.saveCatalog(dto);
+    //return  null;
   }
 
 

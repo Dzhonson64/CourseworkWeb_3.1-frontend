@@ -2,3 +2,38 @@ h2 {
   text-align: center;
 }
 
+.comments{
+  background: rgb(63, 81, 181);
+  color: #fff;
+  padding-bottom: 100px;
+  padding-top: 100px;
+}
+
+.quoit{
+  color: #ff6e21;
+  background-color: #fff;
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+}
+
+.comments p{
+  font-size: 22px;
+  line-height: 41px;
+  font-weight: 600;
+  margin: 12px auto 38px;
+  color: #fff;
+  width: 67%;
+}
+
+.comments img {
+  display: inline-block;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+}
+

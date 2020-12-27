@@ -1,36 +1,35 @@
 <div class="row block-left-menu h-100">
   <div class="left-menu d-flex align-items-center flex-column">
-    <img src="#" alt="">
-    <button mat-stroked-button class="bnt-logout">Выйти</button>
+    <h4 style="font-weight: bold " class="mt-3">Меню</h4>
 
-    <mat-selection-list #shoes [multiple]="false" class="slider-menu">
-      <a routerLink="settings" routerLinkActive="active">
+    <mat-selection-list #shoes [multiple]="false" class="slider-menu" >
+      <a routerLink="settings" routerLinkActive="active"  *ngIf="type == t.User">
         <mat-list-option class="d-flex align-items-center" >
           <i class="far fa-user"></i> <span>Мой профиль</span>
         </mat-list-option>
       </a>
-      <a  routerLink="products/purchases" routerLinkActive="active">
+      <a  routerLink="products/purchases" routerLinkActive="active" *ngIf="type == t.User">
         <mat-list-option class="d-flex align-items-center">
           <i class="far fa-credit-card"></i> <span> Покупки </span>
         </mat-list-option>
       </a>
-      <a  routerLink="products/sales" routerLinkActive="active">
+      <a  routerLink="products/sales" routerLinkActive="active" *ngIf="type == t.Provider">
         <mat-list-option class="d-flex align-items-center">
           <i class="far fa-credit-card"></i> <span> Продажи </span>
         </mat-list-option>
       </a>
-      <a routerLink="products" routerLinkActive="active">
+      <a routerLink="products" routerLinkActive="active" *ngIf="type == t.Provider">
         <mat-list-option class="d-flex align-items-center">
           <i class="fas fa-cube"></i> <span>Товары</span>
         </mat-list-option>
       </a>
-      <a routerLink="products/config" routerLinkActive="active">
+      <a routerLink="products/config" routerLinkActive="active" *ngIf="type == t.User && this.isAdmin">
         <mat-list-option class="d-flex align-items-center">
           <i class="material-icons">category</i>
           <span>Конфигурация системы товаров</span>
         </mat-list-option>
       </a>
-      <a routerLink="settings/users" routerLinkActive="active">
+      <a routerLink="settings/users" routerLinkActive="active"  *ngIf="type == t.User && this.isAdmin">
         <mat-list-option class="d-flex align-items-center">
           <i class="material-icons p-0">
             supervisor_account

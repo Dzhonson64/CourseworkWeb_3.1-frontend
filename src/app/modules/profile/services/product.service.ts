@@ -78,4 +78,8 @@ export class ProductService {
   findAllByProvider(id: number): Observable<OrderResponseDto[]> {
     return this.http.get<OrderResponseDto[]>(`/api/courseworkWeb/order/sales/${id}`);
   }
+
+  getLastProducts(): Observable<ProductDto[]> {
+    return this.http.get<ProductDto[]>(`/api/courseworkWeb/products/last-products`);
+  }
 }
